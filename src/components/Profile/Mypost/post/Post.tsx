@@ -3,7 +3,7 @@ import s from './Post.module.css';
 
 type PostPropsType = {
   message: any
-  Count: number
+  Count: string
 }
 
 function Post(props:PostPropsType) {
