@@ -9,7 +9,7 @@ function App() {
     return (
         <div className='app-wrapper'>
             <Header />
-            <Navbar />
+            <Navbar /> //fffrefer
             <Profile /> //thhfghfg kjhkjhhkjh
         </div>
     );
