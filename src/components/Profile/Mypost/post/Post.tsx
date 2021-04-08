@@ -2,8 +2,8 @@ import React from 'react';
 import s from './Post.module.css';
 
 type PostPropsType = {
-  message: any
-  Count: string
+  message: string
+  Count: number
 }
 
 function Post(props:PostPropsType) {

@@ -1,14 +1,12 @@
 import React from 'react';
 import s from './Profile.module.css';
 import Myposts from "./Mypost/Myposts";
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 
 function Profile() {
     return <div>
-        <div><img
-            src='https://p4.wallpaperbetter.com/wallpaper/728/935/618/city-the-city-usa-los-angeles-wallpaper-preview.jpg'/>
-        </div>
-        <div>ava + description</div>
+        <ProfileInfo/>
         <Myposts/>
     </div>
 }
