@@ -1,18 +1,12 @@
 import React from 'react';
+import state from '../../../redux/state';
 import s from './Myposts.module.css';
 import Post from "./post/Post";
 
-export type postsType = {
-    id:number,
-    message: string,
-    count:number
-}
-export type PostsType = {
-    posts:Array<postsType>
-}
- function Posts(props:PostsType ) {
 
-    let postsElements = props.posts.map(p => <Post message={p.message} Count={p.count}/>)   // p = post если с сервера придут сообщения,
+ function Posts(props:) {
+
+    let postsElements = props.state.posts.map(p => <Post message={p.message} Count={p.count}/>)   // p = post если с сервера придут сообщения,
                                                                                      //  то наш код отрисует их
     return <div className={s.content}>
         <div className={s.postBlock}>
