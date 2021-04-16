@@ -1,11 +1,9 @@
 import React from 'react';
 import s from './../Dialogs.module.css';
+import {messagesType} from "../../../redux/state";
 
-type MessageType = {
-    message: string
-}
 
-function Message(props: MessageType) {
+function Message(props: messagesType) {
     return <div className={s.message}>{props.message}</div>
 }
 

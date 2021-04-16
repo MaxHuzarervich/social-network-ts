@@ -1,16 +1,13 @@
 import React from 'react';
 import s from './Post.module.css';
+import {postsType} from "../../../../redux/state";
 
-type PostPropsType = {
-    message: string
-    Count: number
-}
 
-function Post(props: PostPropsType) {
+function Post(props: postsType) {
     return <div className={s.item}>
         <img src='https://www.logodesign.net/logo/alt-5607ld.png?size=2&industry=gaming'/>
         {props.message}
-        <div><span>Like {props.Count}</span></div>
+        <div><span>Like {props.count}</span></div>
     </div>
 
 }
