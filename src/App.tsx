@@ -8,6 +8,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route} from "react-router-dom";
 import {appStateType} from './redux/state';
 
+
 type appPropsType = {
     state:appStateType
 }
@@ -18,10 +19,8 @@ function App(props:appPropsType) {
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs'
-                           render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
-                    <Route path='/profile'
-                           render={() => <Profile profilePage={props.state.profilePage}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.state.dialogsPage}/>}/>
+                    <Route path='/profile' render={() => <Profile profilePage={props.state.profilePage}/>}/>
                 </div>
 
             </div>

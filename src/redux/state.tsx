@@ -1,3 +1,4 @@
+import {renderTree} from "../render";
 
 export type postsType = {
     id: number,
@@ -10,7 +11,7 @@ export type dialogsType = {
 }
 export type messagesType = {
     id: number,
-    message: string
+    message: string,
 }
 export type messagesPageType = {
     messages: Array<messagesType>
@@ -21,7 +22,7 @@ export type profilePageType = {
 }
 export type appStateType = {
     profilePage: profilePageType,
-    dialogsPage: messagesPageType,
+    dialogsPage: messagesPageType
 }
 let state: appStateType = {
     profilePage: {
@@ -51,4 +52,15 @@ let state: appStateType = {
     }
 
 }
+export const addPost = (postText: string) => { debugger;                 //функция для создания нового поста
+    const newPost: postsType = {
+        id: new Date().getTime(),
+        message: postText,
+        count: 0
+    }
+    state.profilePage.posts.push(newPost);
+
+    renderTree(state);
+}
+
 export default state;
