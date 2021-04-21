@@ -20,7 +20,7 @@ function Posts(props: profilePropsType) {
         props.addPostCallback(props.message)
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeNewTextCallback(e.currentTarget.value);
+        props.changeNewTextCallback(e.currentTarget.value)
     }
 
     return <div className={s.content}>
@@ -28,7 +28,7 @@ function Posts(props: profilePropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea value={props.message} onChange={newTextChangeHandler}></textarea>
+                    <textarea value={props.message} onChange={newTextChangeHandler} />
                 </div>
                 <div>
                     <button onClick={addPost}>Add new message</button>
