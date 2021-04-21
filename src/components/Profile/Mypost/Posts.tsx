@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import state, {postsType} from '../../../redux/state';
 import s from './Myposts.module.css';
 import Post from "./post/Post";
@@ -8,24 +8,27 @@ type profilePropsType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
     addPostCallback: (postText: string) => void
+    changeNewTextCallback: (newText: string) => void
+    message: string
 }
 
 function Posts(props: profilePropsType) {
 
     let postsElements = props.profilePage.posts.map(p => <Post message={p.message} count={p.count} id={p.id}/>)
-    let postMessageRef = React.createRef <HTMLTextAreaElement>();  //createRef - ссылка на что-либо
     const addPost = () => {
         debugger;
-        if (postMessageRef.current) {
-            props.addPostCallback(postMessageRef.current.value)
-        }   //value textarea
+        props.addPostCallback(props.message)
     }
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.changeNewTextCallback(e.currentTarget.value);
+    }
+
     return <div className={s.content}>
         <div className={s.postBlock}>
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={postMessageRef}>{props.posts.map(p => <div key={p.id}>{p.message}</div>)}</textarea>
+                    <textarea value={props.message} onChange={newTextChangeHandler}></textarea>
                 </div>
                 <div>
                     <button onClick={addPost}>Add new message</button>

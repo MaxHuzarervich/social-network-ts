@@ -19,6 +19,7 @@ export type messagesPageType = {
 }
 export type profilePageType = {
     posts: Array<postsType>,
+    messageForNewPost: string
 }
 export type appStateType = {
     profilePage: profilePageType,
@@ -26,6 +27,7 @@ export type appStateType = {
 }
 let state: appStateType = {
     profilePage: {
+        messageForNewPost: '',
         posts: [
             {id: 1, message: 'Hi, how are you?', count: 15},
             {id: 2, message: 'My first post', count: 20},
@@ -52,6 +54,12 @@ let state: appStateType = {
     }
 
 }
+
+export const changeNewText = (newText: string) => {
+state.profilePage.messageForNewPost = newText;
+    renderTree(state);
+}
+
 export const addPost = (postText: string) => { debugger;                 //функция для создания нового поста
     const newPost: postsType = {
         id: new Date().getTime(),
