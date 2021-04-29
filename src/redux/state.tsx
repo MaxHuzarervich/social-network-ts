@@ -1,4 +1,11 @@
-import {renderTree} from "../render";
+let onChange = () => {
+    console.log('Hello')
+}
+
+export const subscribe = (callback: () => void) => {
+    debugger
+    onChange = callback;
+}
 
 export type postsType = {
     id: number,
@@ -56,19 +63,19 @@ let state: appStateType = {
 }
 
 export const changeNewText = (newText: string) => {
-state.profilePage.messageForNewPost = newText;
-    renderTree(state);
+    state.profilePage.messageForNewPost = newText;
+    onChange();
 }
 
-export const addPost = (postText: string) => { debugger;                 //функция для создания нового поста
+export const addPost = (postText: string) => {
+    debugger;                 //функция для создания нового поста
     const newPost: postsType = {
         id: new Date().getTime(),
         message: postText,
         count: 0
     }
     state.profilePage.posts.push(newPost);
-
-    renderTree(state);
+    onChange();
 }
 
 export default state;
