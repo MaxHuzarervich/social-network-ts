@@ -3,7 +3,6 @@ let onChange = () => {
 }
 
 export const subscribe = (callback: () => void) => {
-    debugger
     onChange = callback;
 }
 
