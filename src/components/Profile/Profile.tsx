@@ -1,23 +1,17 @@
 import React from 'react';
-import s from './Profile.module.css';
 import Posts from "./Mypost/Posts";
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import state, {changeNewText, profilePageType} from "../../redux/state";
-import {addPost} from "../../redux/state";
+import store, {profileType} from "../../redux/state";
 
-type profileType = {
-    profilePage: profilePageType
-}
 
 function Profile(props: profileType) {
-
     return <div>
         <ProfileInfo/>
         <Posts profilePage={props.profilePage}
-               addPostCallback={addPost}
+               addPostCallback={store.addPost.bind(store)}
                posts={props.profilePage.posts}
-               message={state.profilePage.messageForNewPost}
-               changeNewTextCallback={changeNewText}
+               message={store._state.profilePage.messageForNewPost}
+               changeNewTextCallback={store.changeNewText.bind(store)}
         />
     </div>
 }

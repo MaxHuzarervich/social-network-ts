@@ -1,9 +1,18 @@
-let onChange = () => {
-    console.log('Hello')
+
+export type appPropsType = {
+    store: appStateType
 }
 
-export const subscribe = (callback: () => void) => {
-    onChange = callback;
+export type profileType = {
+    profilePage: profilePageType
+}
+
+export type profilePropsType = {
+    profilePage: profilePageType,
+    posts: Array<postsType>,
+    addPostCallback: (postText: string) => void,
+    changeNewTextCallback: (newText: string) => void,
+    message: string
 }
 
 export type postsType = {
@@ -27,33 +36,21 @@ export type profilePageType = {
     posts: Array<postsType>,
     messageForNewPost: string
 }
-export const changeNewText = (newText: string) => {
-    state.profilePage.messageForNewPost = newText;
-    onChange();
-}
 
 export type appStateType = {
     profilePage: profilePageType,
     dialogsPage: messagesPageType
 }
 
-
-export const addPost = (postText: string) => {
-    //функция для создания нового поста
-    const newPost: postsType = {
-        id: new Date().getTime(),
-        message: postText,
-        count: 0
-    }
-    state.profilePage.posts.push(newPost);
-    onChange();
+export type storeType = {
+    _state: appStateType,
+    changeNewText:(newText:string) => void,
+    addPost:(postText: string) => void,
+    _onChange:() => void,
+    subscribe: (callback: () => void) => void,
+    getState: () => appStateType
 }
-
-type storeType = {
-    _state: appStateType
-}
-
-const store: storeType = {
+ const store: storeType = {
     _state: {
         profilePage: {
             messageForNewPost: '',
@@ -81,6 +78,34 @@ const store: storeType = {
                 {id: 6, name: 'Valera'}
             ]
         }
+
+    },
+    changeNewText(newText: string){
+        this._state.profilePage.messageForNewPost = newText;
+        this._onChange();
+    },
+    addPost(postText: string){
+
+        //функция для создания нового поста
+        const newPost: postsType = {
+            id: new Date().getTime(),
+            message: postText,
+            count: 0
+        }
+        this._state.profilePage.posts.push(newPost);
+        this._onChange();
+    },
+    _onChange(){
+        console.log('state change')
+    },
+    subscribe(callback){
+        this._onChange = callback;
+    },
+    getState(){
+        debugger
+        return this._state;
+    },
+    dispatch(){
 
     }
 }

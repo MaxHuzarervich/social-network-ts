@@ -9,7 +9,6 @@ function Post(props: postsType) {
         {props.message}
         <div><span>Like {props.count}</span></div>
     </div>
-
 }
 
 export default Post;
