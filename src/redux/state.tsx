@@ -1,4 +1,3 @@
-
 export type appPropsType = {
     store: appStateType
 }
@@ -12,7 +11,7 @@ export type profilePropsType = {
     posts: Array<postsType>,
     addPostCallback: (postText: string) => void,
     changeNewTextCallback: (newText: string) => void,
-    message: string
+    message: string,
 }
 
 export type postsType = {
@@ -34,7 +33,7 @@ export type messagesPageType = {
 }
 export type profilePageType = {
     posts: Array<postsType>,
-    messageForNewPost: string
+    messageForNewPost: string,
 }
 
 export type appStateType = {
@@ -42,15 +41,28 @@ export type appStateType = {
     dialogsPage: messagesPageType
 }
 
+type addPostActionType = {
+    type: 'ADD-POST',
+    postText: string
+}
+type changeNewTextActionType = {
+    type: 'CHANGE-NEW-TEXT',
+    newText: string
+}
+
+export type ActionsTypes = addPostActionType | changeNewTextActionType;
+
+
 export type storeType = {
     _state: appStateType,
-    changeNewText:(newText:string) => void,
-    addPost:(postText: string) => void,
-    _onChange:() => void,
+    changeNewText: (newText: string) => void,
+    addPost: (postText: string) => void,
+    _onChange: () => void,
     subscribe: (callback: () => void) => void,
-    getState: () => appStateType
+    getState: () => appStateType,
+    dispatch: (action: addPostActionType | changeNewTextActionType) => void
 }
- const store: storeType = {
+const store: storeType = {
     _state: {
         profilePage: {
             messageForNewPost: '',
@@ -80,11 +92,11 @@ export type storeType = {
         }
 
     },
-    changeNewText(newText: string){
+    changeNewText(newText: string) {
         this._state.profilePage.messageForNewPost = newText;
         this._onChange();
     },
-    addPost(postText: string){
+    addPost(postText: string) {
 
         //функция для создания нового поста
         const newPost: postsType = {
@@ -95,18 +107,28 @@ export type storeType = {
         this._state.profilePage.posts.push(newPost);
         this._onChange();
     },
-    _onChange(){
+    _onChange() {
         console.log('state change')
     },
-    subscribe(callback){
+    subscribe(callback) {
         this._onChange = callback;
     },
-    getState(){
+    getState() {
         debugger
         return this._state;
     },
-    dispatch(){
+    dispatch(action) { //{type:'ADD-POST'}              //чтобы вы не хотели поменять внутри store,используйте метод DISPATCH
+        if (action.type === 'ADD-POST') {
+            const newPost: postsType = {
+                id: new Date().getTime(),
+                message: action.postText,
+                count: 0
+            }
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
+            this._state.profilePage.messageForNewPost = action.newText;
+            this._onChange();
 
+        }
     }
 }
 

@@ -8,6 +8,7 @@ function Posts(props: profilePropsType) {
 
     let postsElements = props.profilePage.posts.map
     (p => <Post message={p.message} count={p.count} id={p.id}/>)
+
     const addPost = () => {
         props.addPostCallback(props.message)
     }
@@ -29,7 +30,7 @@ function Posts(props: profilePropsType) {
             </div>
             <div className={s.posts}>
                 {postsElements}
-            </div>
+             </div>
         </div>
     </div>
 }
