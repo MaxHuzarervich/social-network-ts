@@ -12,6 +12,7 @@ export type profilePropsType = {
     addPostCallback: (postText: string) => void,
     changeNewTextCallback: (newText: string) => void,
     message: string,
+    dispatch: (action:ActionsTypes) => void
 }
 
 export type postsType = {
@@ -97,7 +98,6 @@ const store: storeType = {
         this._onChange();
     },
     addPost(postText: string) {
-
         //функция для создания нового поста
         const newPost: postsType = {
             id: new Date().getTime(),
@@ -117,17 +117,19 @@ const store: storeType = {
         debugger
         return this._state;
     },
-    dispatch(action) { //{type:'ADD-POST'}              //чтобы вы не хотели поменять внутри store,используйте метод DISPATCH
+    dispatch(action) {
         if (action.type === 'ADD-POST') {
+            //функция для создания нового поста
             const newPost: postsType = {
                 id: new Date().getTime(),
                 message: action.postText,
                 count: 0
             }
+            this._state.profilePage.posts.push(newPost);
+            this._onChange();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
             this._onChange();
-
         }
     }
 }

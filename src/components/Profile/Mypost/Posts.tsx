@@ -10,7 +10,8 @@ function Posts(props: profilePropsType) {
     (p => <Post message={p.message} count={p.count} id={p.id}/>)
 
     const addPost = () => {
-        props.addPostCallback(props.message)
+        // props.addPostCallback(props.message)
+        props.dispatch({type:"ADD-POST", postText:props.message})
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.changeNewTextCallback(e.currentTarget.value)
