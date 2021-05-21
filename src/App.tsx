@@ -4,13 +4,14 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import {appPropsType} from './redux/state';
 
 
 
 const App = (props: appPropsType) => {
     return (
+        <BrowserRouter>
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
@@ -20,8 +21,8 @@ const App = (props: appPropsType) => {
                 <Route path='/profile'
                        render={() => <Profile profilePage={props.store.profilePage}/>}/>
             </div>
-
         </div>
+        </BrowserRouter>
     );
 }
 

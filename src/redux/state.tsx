@@ -1,5 +1,5 @@
 export type appPropsType = {
-    store: appStateType
+    store: rootStateType
 }
 
 export type profileType = {
@@ -18,7 +18,7 @@ export type profilePropsType = {
 export type postsType = {
     id: number,
     message: string,
-    count: number
+    likesCount: number
 }
 export type dialogsType = {
     id: number,
@@ -28,7 +28,7 @@ export type messagesType = {
     id: number,
     message: string,
 }
-export type messagesPageType = {
+export type dialogsPageType = {
     messages: Array<messagesType>
     dialogs: Array<dialogsType>
 }
@@ -37,9 +37,9 @@ export type profilePageType = {
     messageForNewPost: string,
 }
 
-export type appStateType = {
+export type rootStateType = {
     profilePage: profilePageType,
-    dialogsPage: messagesPageType
+    dialogsPage: dialogsPageType
 }
 
 type addPostActionType = {
@@ -55,12 +55,12 @@ export type ActionsTypes = addPostActionType | changeNewTextActionType;
 
 
 export type storeType = {
-    _state: appStateType,
+    _state: rootStateType,
     changeNewText: (newText: string) => void,
     addPost: (postText: string) => void,
     _onChange: () => void,
     subscribe: (callback: () => void) => void,
-    getState: () => appStateType,
+    getState: () => rootStateType,
     dispatch: (action: addPostActionType | changeNewTextActionType) => void
 }
 const store: storeType = {
@@ -68,10 +68,8 @@ const store: storeType = {
         profilePage: {
             messageForNewPost: '',
             posts: [
-                {id: 1, message: 'Hi, how are you?', count: 15},
-                {id: 2, message: 'My first post', count: 20},
-                {id: 3, message: 'Blabla', count: 11},
-                {id: 4, message: 'Dada', count: 12}
+                {id: 1, message: 'Hi, how are you?', likesCount: 15},
+                {id: 2, message: 'My first post', likesCount: 20},
             ]
         },
         dialogsPage: {
@@ -102,7 +100,7 @@ const store: storeType = {
         const newPost: postsType = {
             id: new Date().getTime(),
             message: postText,
-            count: 0
+            likesCount: 0
         }
         this._state.profilePage.posts.push(newPost);
         this._onChange();
@@ -123,7 +121,7 @@ const store: storeType = {
             const newPost: postsType = {
                 id: new Date().getTime(),
                 message: action.postText,
-                count: 0
+                likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
             this._onChange();

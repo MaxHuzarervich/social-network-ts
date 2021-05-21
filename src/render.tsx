@@ -9,9 +9,9 @@ export const renderTree = () => {
 
     ReactDOM.render(
         <React.StrictMode>
-            <BrowserRouter>
+
                 <App store={store.getState()}/>
-            </BrowserRouter>
+
         </React.StrictMode>,
         document.getElementById('root')
     );
