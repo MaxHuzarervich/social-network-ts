@@ -14,7 +14,8 @@ function Posts(props: profilePropsType) {
         props.dispatch({type:"ADD-POST", postText:props.message})
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeNewTextCallback(e.currentTarget.value)
+        // props.changeNewTextCallback(e.currentTarget.value)
+        props.dispatch({type:'CHANGE-NEW-TEXT', newText:props.message})
     }
 
     return <div className={s.content}>
