@@ -12,7 +12,7 @@ export type profilePropsType = {
     addPostCallback: (postText: string) => void,
     changeNewTextCallback: (newText: string) => void,
     message: string,
-    dispatch: (action:ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type postsType = {
