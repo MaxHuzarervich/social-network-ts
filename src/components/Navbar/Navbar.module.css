@@ -1,13 +1,16 @@
 .nav {
     grid-area: n;
-    background-color: #12091a;
+    background-color: #225b83;
     padding: 20px;
+    font-size: larger;
+    font-family: Aharoni;
 }
 .item a{
     color: white;
     text-decoration: none;
+    padding: 3%;
 }
 .item a.active {
-    color: #c86030;
+    color: #f3d73e;
 }
 

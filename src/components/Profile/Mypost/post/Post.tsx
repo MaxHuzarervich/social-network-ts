@@ -1,11 +1,13 @@
 import React from 'react';
 import s from './Post.module.css';
 import {postsType} from "../../../../redux/state";
+import {Avatar} from "@material-ui/core";
+
 
 
 function Post(props: postsType) {
     return <div className={s.item}>
-        <img src='https://www.logodesign.net/logo/alt-5607ld.png?size=2&industry=gaming'/>
+        <Avatar>H</Avatar>
         {props.message}
         <div><span>Like {props.likesCount}</span></div>
     </div>

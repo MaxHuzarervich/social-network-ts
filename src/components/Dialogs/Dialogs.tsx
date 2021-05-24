@@ -24,7 +24,7 @@ function Dialogs(props: dialogsPropsType) {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
 
-                {dialogsElements}
+                 {dialogsElements}
 
             </div>
             <div className={s.messages}>

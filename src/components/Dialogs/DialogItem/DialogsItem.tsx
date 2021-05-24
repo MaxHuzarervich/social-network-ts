@@ -7,7 +7,7 @@ import {dialogsType} from "../../../redux/state";
 function DialogItem(props: dialogsType) {
     let path = '/dialogs/ + props.id'
     return <div className={s.dialog + ' ' + s.active}>
-        <NavLink to={path}>{props.name} </NavLink>
+        <NavLink to={path}>{props.name}</NavLink>
     </div>
 }
 

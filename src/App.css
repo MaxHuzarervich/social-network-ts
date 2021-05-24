@@ -5,12 +5,13 @@
     grid-template-areas:
 'h h'
 'n c';
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
+    grid-template-rows: 10% 1fr;
+    grid-template-columns: 20% 10fr;
+    background-color: #225b83;
 }
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: #c86030;
+    background-color: #306eba;
 }
 
