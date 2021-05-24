@@ -6,17 +6,5 @@ const friendsData  = [
     {id:3, name: 'Fedor'}
 ]
 
-export type friendsPropsType = {
-    id:number,
-    name: string
-}
 
-export function Sidebar (props:friendsPropsType) {
 
-    let friends = friendsData.map(friendsData => <Sidebar name={friendsData.name} id={friendsData.id})
-    
-    return <div>
-        <h3>Friends</h3>
-        <span></span>
-    </div>
-}
