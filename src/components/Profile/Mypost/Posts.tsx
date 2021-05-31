@@ -18,7 +18,7 @@ function Posts(props: profilePropsType) {
         // props.addPostCallback(props.message)
         props.dispatch({type: "ADD-POST", postText: props.message})
     }
-    const newTextChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // props.changeNewTextCallback(e.currentTarget.value)
         props.dispatch({type: 'CHANGE-NEW-TEXT', newText: props.message})
     }
@@ -28,8 +28,10 @@ function Posts(props: profilePropsType) {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <TextField id="outlined-basic"  variant="outlined"
-                               value={props.message} onChange={newTextChangeHandler}/>
+                    <TextField id="outlined-basic"
+                               variant="outlined"
+                               // value={props.message}
+                               onChange={newTextChangeHandler}/>
                 </div>
                 <div>
                     <Button variant="contained" color="primary" onClick={addPost}>Send</Button>
