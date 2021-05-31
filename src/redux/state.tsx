@@ -1,4 +1,4 @@
-export type appPropsType = {
+    export type appPropsType = {
     store: rootStateType
 }
 
@@ -27,11 +27,6 @@ export type dialogsType = {
 export type messagesType = {
     id: number,
     message: string,
-}
-
-export type friendsPropsType = {
-    id:number,
-    name: string
 }
 
 export type dialogsPageType = {

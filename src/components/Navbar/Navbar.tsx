@@ -4,9 +4,7 @@ import {NavLink} from 'react-router-dom';
 
 
 function Navbar() {
-
-    return <div>
-        <nav className={s.nav}>
+    return <nav className={s.nav}>
             <div className={s.item}>
                 <NavLink to='/profile' activeClassName={s.active}>Profile</NavLink>
             </div>
@@ -20,10 +18,6 @@ function Navbar() {
             <div className={s.item}>
                 <NavLink to='/setting' activeClassName={s.active}>Setting</NavLink></div>
         </nav>
-         <span></span>
-    </div>
-
-
 
 }
 
