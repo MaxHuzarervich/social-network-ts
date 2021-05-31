@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {dialogsPageType, messagesType} from '../../redux/state';
+import {Button, TextField} from "@material-ui/core";
 
 type dialogsPropsType = {
     dialogsPage: dialogsPageType;
@@ -24,13 +25,25 @@ function Dialogs(props: dialogsPropsType) {
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
 
-                 {dialogsElements}
+                {dialogsElements}
 
             </div>
             <div className={s.messages}>
 
                 {messageElements}
 
+            </div>
+            <div>
+                <div className={s.textField}>
+                    <TextField id="outlined-basic"
+                               variant="outlined"
+                    />
+                </div>
+                <div>
+                    <Button variant="contained" color="primary">Send</Button>
+
+                    <Button variant="contained" color="secondary">Delete</Button>
+                </div>
             </div>
         </div>
     )
