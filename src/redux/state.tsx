@@ -99,7 +99,7 @@ const store: storeType = {
     addPost(postText: string) {
         //функция для создания нового поста
         const newPost: postsType = {
-            id: new Date().getTime(),
+            id: new Date().getTime(),                            //?????????????? id??????
             message: postText,
             likesCount: 0
         }

@@ -7,6 +7,12 @@ import {Button, TextField} from "@material-ui/core";
 
 function Posts(props: profilePropsType) {
 
+    // let postMessageRef = React.createRef<HTMLTextAreaElement>();  31 вып. типизация!!!5:30
+    //<textarea ref={postMessageRef}></textarea>
+    //const addPost = () => {
+    // alert(postMessageRef.current?.value)}
+
+
     //значение переменной postsElements будет равно промапленному массиву объектов posts
 
     let postsElements = props.profilePage.posts.map
