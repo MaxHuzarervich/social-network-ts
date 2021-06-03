@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {dialogsPageType, messagesType} from '../../redux/state';
+import {dialogsPageType} from '../../redux/state';
 import {Button, TextField} from "@material-ui/core";
 
 type dialogsPropsType = {

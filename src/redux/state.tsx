@@ -1,4 +1,4 @@
-    export type appPropsType = {
+export type appPropsType = {
     store: rootStateType
 }
 
@@ -99,12 +99,13 @@ const store: storeType = {
     addPost(postText: string) {
         //функция для создания нового поста
         const newPost: postsType = {
-            id: new Date().getTime(),                            //?????????????? id??????
+            id: new Date().getTime(),
             message: postText,
             likesCount: 0
         }
         this._state.profilePage.posts.push(newPost);
         this._onChange();
+        //  rerenderEntireTree()       ??????????????????????
     },
     _onChange() {
         console.log('state change')

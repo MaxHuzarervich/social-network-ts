@@ -8,18 +8,20 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {appPropsType} from './redux/state';
 
 
-
 const App = (props: appPropsType) => {
     return (
         <BrowserRouter>
-        <div className='app-wrapper'>
-            <Header/>
-            <Navbar/>
-            <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.store.dialogsPage}/>}/>
-                <Route path='/profile' render={() => <Profile profilePage={props.store.profilePage}/>}/>
+            <div className='app-wrapper'>
+                <Header/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+
+                    <Route path='/dialogs' render={() => <Dialogs dialogsPage={props.store.dialogsPage}/>}/>
+
+                    <Route path='/profile' render={() => <Profile profilePage={props.store.profilePage}/>}/>
+
+                </div>
             </div>
-        </div>
         </BrowserRouter>
     );
 }

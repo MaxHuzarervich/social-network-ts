@@ -10,13 +10,13 @@ function Posts(props: profilePropsType) {
     // let postMessageRef = React.createRef<HTMLTextAreaElement>();  31 вып. типизация!!!5:30
     //<textarea ref={postMessageRef}></textarea>
     //const addPost = () => {
-    // alert(postMessageRef.current?.value)}
+    // props.addPostCallback(postMessageRef.current?.value)}
 
 
     //значение переменной postsElements будет равно промапленному массиву объектов posts
 
     let postsElements = props.profilePage.posts.map
-    (posts => <Post message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
+    (posts => <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
 
     //функция добавления нового поста
 
@@ -24,10 +24,13 @@ function Posts(props: profilePropsType) {
         // props.addPostCallback(props.message)
         props.dispatch({type: "ADD-POST", postText: props.message})
     }
+
+
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         // props.changeNewTextCallback(e.currentTarget.value)
         props.dispatch({type: 'CHANGE-NEW-TEXT', newText: props.message})
     }
+
 
     return <div className={s.content}>
         <div className={s.postBlock}>
@@ -36,6 +39,7 @@ function Posts(props: profilePropsType) {
                 <div>
                     <TextField id="outlined-basic"
                                variant="outlined"
+
                                // value={props.message}
                                onChange={newTextChangeHandler}/>
                 </div>

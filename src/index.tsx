@@ -1,12 +1,12 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {renderTree} from "./render";
+import {rerenderEntireTree} from "./render";
 import store from "./redux/state";
 
 
-store.subscribe(renderTree);
-renderTree()
+store.subscribe(rerenderEntireTree);  //отрисовка после изменений
+rerenderEntireTree()                  //начальная отрисовка
 
 
 
