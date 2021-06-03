@@ -39,7 +39,6 @@ function Posts(props: profilePropsType) {
                 <div>
                     <TextField id="outlined-basic"
                                variant="outlined"
-
                                // value={props.message}
                                onChange={newTextChangeHandler}/>
                 </div>
