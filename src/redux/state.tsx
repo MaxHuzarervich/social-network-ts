@@ -1,3 +1,6 @@
+// let rerenderEntireTree = () => {
+//     console.log("let's go!!!")
+// }
 
 export type appPropsType = {
     store: rootStateType
@@ -61,22 +64,20 @@ export type storeType = {
     changeNewText: (newText: string) => void,
     addPost: (postText: string) => void,
     _onChange: () => void,
-    subscribe: (callback: () => void) => void,
+    subscribe: (observer: () => void) => void,
     getState: () => rootStateType,
     dispatch: (action: addPostActionType | changeNewTextActionType) => void
 }
 
 
-
-
 const store: storeType = {
     _state: {
         profilePage: {
-            messageForNewPost: '',
             posts: [
                 {id: 1, message: 'Hi, how are you?', likesCount: 15},
                 {id: 2, message: 'My first post', likesCount: 20},
-            ]
+            ],
+            messageForNewPost: ''
         },
         dialogsPage: {
             messages: [
@@ -98,43 +99,45 @@ const store: storeType = {
 
     },
     changeNewText(newText: string) {
+
         this._state.profilePage.messageForNewPost = newText;
         this._onChange();
     },
     addPost(postText: string) {
         //функция для создания нового поста
+
         const newPost: postsType = {
             id: new Date().getTime(),
             message: postText,
             likesCount: 0
         }
         this._state.profilePage.posts.push(newPost);
-        this._onChange();
+        this.getState();
     },
     _onChange() {
-        console.log('state change')
+        console.log("let's go!!!")
     },
-    subscribe(callback) {
-        this._onChange = callback;
+    subscribe(observer) {
+        this._onChange = observer;
     },
     getState() {
-        debugger
         return this._state;
     },
-    dispatch(action) {
+    dispatch(action: ActionsTypes) {
         if (action.type === 'ADD-POST') {
             //функция для создания нового поста
             const newPost: postsType = {
                 id: new Date().getTime(),
-                message: action.postText,
+                message: this._state.profilePage.messageForNewPost,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
-            this._onChange();
+            this._state.profilePage.messageForNewPost = '';
+            // this._onChange();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
-            this._onChange();
         }
+        this._onChange();
     }
 }
 

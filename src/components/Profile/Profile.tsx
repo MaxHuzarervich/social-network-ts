@@ -5,7 +5,7 @@ import store, {profileType} from "../../redux/state";
 
 
 function Profile(props: profileType) {
-    debugger
+
     return <div>
         <ProfileInfo/>
         <MyPosts profilePage={props.profilePage}
