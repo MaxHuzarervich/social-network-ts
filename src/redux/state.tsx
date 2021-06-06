@@ -1,4 +1,3 @@
-import {rerenderEntireTree} from "../render";
 
 export type appPropsType = {
     store: rootStateType
@@ -66,6 +65,10 @@ export type storeType = {
     getState: () => rootStateType,
     dispatch: (action: addPostActionType | changeNewTextActionType) => void
 }
+
+
+
+
 const store: storeType = {
     _state: {
         profilePage: {
@@ -96,7 +99,6 @@ const store: storeType = {
     },
     changeNewText(newText: string) {
         this._state.profilePage.messageForNewPost = newText;
-        rerenderEntireTree()
         this._onChange();
     },
     addPost(postText: string) {
@@ -108,7 +110,6 @@ const store: storeType = {
         }
         this._state.profilePage.posts.push(newPost);
         this._onChange();
-        //  rerenderEntireTree()       ??????????????????????
     },
     _onChange() {
         console.log('state change')
