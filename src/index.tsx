@@ -9,13 +9,16 @@ export const rerenderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
 
-            <App store={store.getState()}/>
+            <App store={store}
+                 // addPost={store.addPost.bind(store)}
+                 //     newTextChangeHandler={store.changeNewText.bind(store)}}
+            />
 
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
-
-store.subscribe(rerenderEntireTree);  //store позвони мне, когда что-то измениться
 rerenderEntireTree()
+store.subscribe(rerenderEntireTree);  //store позвони мне, когда что-то измениться
+
 

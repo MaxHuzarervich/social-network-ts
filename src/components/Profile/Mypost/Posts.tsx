@@ -15,7 +15,7 @@ function Posts(props: profilePropsType) {
     //функция добавления нового поста
 
     const addPost = () => {
-        debugger
+
         props.dispatch({type: "ADD-POST", postText: props.message})
     }
 

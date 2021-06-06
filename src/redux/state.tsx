@@ -2,12 +2,16 @@
 //     console.log("let's go!!!")
 // }
 
-export type appPropsType = {
-    store: rootStateType
+export type AppPropsType = {
+    store: storeType
 }
 
 export type profileType = {
-    profilePage: profilePageType
+    profilePage: profilePageType,
+    posts: Array<postsType>,
+    addPostCallback: (postText: string) => void,                             //повторяю типы что ниже в profilePropsType
+    changeNewTextCallback: (newText: string) => void,                         // чтобы заработал app
+    message: string
 }
 
 export type profilePropsType = {
@@ -63,7 +67,7 @@ export type storeType = {
     _state: rootStateType,
     changeNewText: (newText: string) => void,
     addPost: (postText: string) => void,
-    _onChange: () => void,
+    _callSubscriber: () => void,
     subscribe: (observer: () => void) => void,
     getState: () => rootStateType,
     dispatch: (action: addPostActionType | changeNewTextActionType) => void
@@ -98,14 +102,22 @@ const store: storeType = {
         }
 
     },
-    changeNewText(newText: string) {
 
-        this._state.profilePage.messageForNewPost = newText;
-        this._onChange();
+    subscribe(observer) {
+        this._callSubscriber = observer;
     },
+    getState() {
+debugger
+        return this._state;
+    },
+    changeNewText(newText: string) {
+        this._state.profilePage.messageForNewPost = newText;
+        this._callSubscriber();
+    },
+
     addPost(postText: string) {
         //функция для создания нового поста
-
+        debugger
         const newPost: postsType = {
             id: new Date().getTime(),
             message: postText,
@@ -114,30 +126,24 @@ const store: storeType = {
         this._state.profilePage.posts.push(newPost);
         this.getState();
     },
-    _onChange() {
-        console.log("let's go!!!")
-    },
-    subscribe(observer) {
-        this._onChange = observer;
-    },
-    getState() {
-        return this._state;
+    _callSubscriber() {
+        console.log('state changed!')
     },
     dispatch(action: ActionsTypes) {
         if (action.type === 'ADD-POST') {
             //функция для создания нового поста
             const newPost: postsType = {
-                id: new Date().getTime(),
+                id: 5,
                 message: this._state.profilePage.messageForNewPost,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.messageForNewPost = '';
-            // this._onChange();
+            this._callSubscriber();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
         }
-        this._onChange();
+        this._callSubscriber();
     }
 }
 
