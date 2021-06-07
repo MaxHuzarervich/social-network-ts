@@ -126,7 +126,7 @@ debugger
         this._state.profilePage.posts.push(newPost);
         this.getState();
     },
-    _callSubscriber() {
+    _callSubscriber() {                                //всё что с нижним подчеркиванием используем внутри
         console.log('state changed!')
     },
     dispatch(action: ActionsTypes) {
