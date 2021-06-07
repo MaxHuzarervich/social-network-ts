@@ -21,7 +21,7 @@ function Posts(props: profilePropsType) {
 
 
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'CHANGE-NEW-TEXT', newText: props.message})
+        props.dispatch({type: 'CHANGE-NEW-TEXT', newText: props.messageForNewPost})
     }
 
 
@@ -32,6 +32,7 @@ function Posts(props: profilePropsType) {
                 <div>
                     <TextField id="outlined-basic"
                                variant="outlined"
+                               value={props.messageForNewPost}
                                onChange={newTextChangeHandler}/>
                 </div>
                 <div>

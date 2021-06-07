@@ -3,15 +3,18 @@ import './index.css';
 import store from "./redux/state";
 import ReactDOM from "react-dom";
 import App from "./App";
+import {BrowserRouter} from "react-router-dom";
 
 export const rerenderEntireTree = () => {
 
     ReactDOM.render(
-        <React.StrictMode>
+        <BrowserRouter>
 
-            <App store={store} />
+            <App store={store}
+                 dispatch={store.dispatch.bind(store)}
+            />
 
-        </React.StrictMode>,
+        </BrowserRouter>,
         document.getElementById('root')
     );
 }

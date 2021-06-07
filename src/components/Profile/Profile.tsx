@@ -8,13 +8,10 @@ function Profile(props: profileType) {
 
     return <div>
         <ProfileInfo/>
-        <MyPosts profilePage={props.profilePage}
-                 addPostCallback={store.addPost.bind(store)}
-                 posts={props.profilePage.posts}
-                 message={store._state.profilePage.messageForNewPost}
-                 changeNewTextCallback={store.changeNewText.bind(store)}
-                 dispatch = {store.dispatch.bind(store)}
-        />
+        <MyPosts
+            posts={props.profilePage.posts}
+            dispatch={store.dispatch.bind(store)}
+            message={store._state.profilePage.messageForNewPost}/>
     </div>
 }
 

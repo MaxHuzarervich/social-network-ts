@@ -1,17 +1,13 @@
-// let rerenderEntireTree = () => {
-//     console.log("let's go!!!")
-// }
 
 export type AppPropsType = {
-    store: storeType
+    store: storeType,
+    dispatch:(action: ActionsTypes) => void
 }
 
 export type profileType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
-    addPostCallback: (postText: string) => void,                             //повторяю типы что ниже в profilePropsType
-    changeNewTextCallback: (newText: string) => void,                         // чтобы заработал app
-    message: string
+    dispatch:(action: ActionsTypes) => void
 }
 
 export type profilePropsType = {
@@ -20,7 +16,8 @@ export type profilePropsType = {
     addPostCallback: (postText: string) => void,
     changeNewTextCallback: (newText: string) => void,
     message: string,
-    dispatch: (action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void,
+    messageForNewPost: string
 }
 
 export type postsType = {
@@ -43,7 +40,7 @@ export type dialogsPageType = {
 }
 export type profilePageType = {
     posts: Array<postsType>,
-    messageForNewPost: string,
+    messageForNewPost: string
 }
 
 export type rootStateType = {
@@ -65,12 +62,12 @@ export type ActionsTypes = addPostActionType | changeNewTextActionType;
 
 export type storeType = {
     _state: rootStateType,
-    changeNewText: (newText: string) => void,
-    addPost: (postText: string) => void,
+    // changeNewText: (newText: string) => void,
+    // addPost: (postText: string) => void,
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void,
     getState: () => rootStateType,
-    dispatch: (action: addPostActionType | changeNewTextActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 
@@ -110,27 +107,9 @@ const store: storeType = {
         this._callSubscriber = observer;
     },
     getState() {                                      //subscribe,getState не меняют на state
-        debugger
         return this._state;
     },
 
-//-------------------------------------------------------------------
-    changeNewText(newText: string) {
-        this._state.profilePage.messageForNewPost = newText;
-        this._callSubscriber();
-    },
-
-    addPost(postText: string) {
-        //функция для создания нового поста
-        debugger
-        const newPost: postsType = {
-            id: new Date().getTime(),
-            message: postText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost);
-        this.getState();
-    },
 //-------------------------------------------------------------------
 
     dispatch(action: ActionsTypes) {
@@ -138,7 +117,7 @@ const store: storeType = {
             //функция для создания нового поста
             const newPost: postsType = {
                 id: 5,
-                message: this._state.profilePage.messageForNewPost,
+                message: action.postText,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
@@ -146,8 +125,8 @@ const store: storeType = {
             this._callSubscriber();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
+                this._callSubscriber();
         }
-        this._callSubscriber();
     }
 }
 
