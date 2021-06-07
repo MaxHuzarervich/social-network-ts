@@ -102,14 +102,19 @@ const store: storeType = {
         }
 
     },
-
-    subscribe(observer) {
+    _callSubscriber() {                                //всё что с нижним подчеркиванием используем внутри
+        console.log('state changed!')
+    },
+//-------------------------------------------------------------------
+    subscribe(observer) {                             //subscribe,getState не меняют на state
         this._callSubscriber = observer;
     },
-    getState() {
-debugger
+    getState() {                                      //subscribe,getState не меняют на state
+        debugger
         return this._state;
     },
+
+//-------------------------------------------------------------------
     changeNewText(newText: string) {
         this._state.profilePage.messageForNewPost = newText;
         this._callSubscriber();
@@ -126,9 +131,8 @@ debugger
         this._state.profilePage.posts.push(newPost);
         this.getState();
     },
-    _callSubscriber() {                                //всё что с нижним подчеркиванием используем внутри
-        console.log('state changed!')
-    },
+//-------------------------------------------------------------------
+
     dispatch(action: ActionsTypes) {
         if (action.type === 'ADD-POST') {
             //функция для создания нового поста
