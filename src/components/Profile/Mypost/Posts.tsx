@@ -15,8 +15,7 @@ function Posts(props: profilePropsType) {
     //функция добавления нового поста
 
     const addPost = () => {
-
-        props.dispatch({type: "ADD-POST", postText: props.message})
+        props.dispatch({type: "ADD-POST", postText: props.messageForNewPost})
     }
 
 
@@ -32,8 +31,9 @@ function Posts(props: profilePropsType) {
                 <div>
                     <TextField id="outlined-basic"
                                variant="outlined"
-                               value={props.messageForNewPost}
-                               onChange={newTextChangeHandler}/>
+                        // value={props.messageForNewPost}
+                               onChange={newTextChangeHandler}
+                    />
                 </div>
                 <div>
                     <Button variant="contained" color="primary" onClick={addPost}>Send</Button>

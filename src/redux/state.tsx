@@ -1,21 +1,20 @@
-
 export type AppPropsType = {
     store: storeType,
-    dispatch:(action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type profileType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
-    dispatch:(action: ActionsTypes) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 export type profilePropsType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
-    addPostCallback: (postText: string) => void,
-    changeNewTextCallback: (newText: string) => void,
-    message: string,
+    // addPostCallback: (postText: string) => void,
+    // changeNewTextCallback: (newText: string) => void,
+    // message: string,
     dispatch: (action: ActionsTypes) => void,
     messageForNewPost: string
 }
@@ -62,8 +61,6 @@ export type ActionsTypes = addPostActionType | changeNewTextActionType;
 
 export type storeType = {
     _state: rootStateType,
-    // changeNewText: (newText: string) => void,
-    // addPost: (postText: string) => void,
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void,
     getState: () => rootStateType,
@@ -113,19 +110,22 @@ const store: storeType = {
 //-------------------------------------------------------------------
 
     dispatch(action: ActionsTypes) {
+
         if (action.type === 'ADD-POST') {
             //функция для создания нового поста
             const newPost: postsType = {
-                id: 5,
+                id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
             this._state.profilePage.messageForNewPost = '';
+
             this._callSubscriber();
-        } else if (action.type === 'CHANGE-NEW-TEXT') {
+        }  else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
-                this._callSubscriber();
+            this._state.profilePage.messageForNewPost = '';
+            this._callSubscriber();
         }
     }
 }

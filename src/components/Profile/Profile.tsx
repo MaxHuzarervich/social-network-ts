@@ -9,9 +9,11 @@ function Profile(props: profileType) {
     return <div>
         <ProfileInfo/>
         <MyPosts
+            messageForNewPost={props.profilePage.messageForNewPost}
+            profilePage={props.profilePage}
             posts={props.profilePage.posts}
             dispatch={store.dispatch.bind(store)}
-            message={store._state.profilePage.messageForNewPost}/>
+        />
     </div>
 }
 
