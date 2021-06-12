@@ -122,7 +122,7 @@ const store: storeType = {
             this._state.profilePage.messageForNewPost = '';
 
             this._callSubscriber();
-        }  else if (action.type === 'CHANGE-NEW-TEXT') {
+        } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
             this._state.profilePage.messageForNewPost = '';
             this._callSubscriber();
