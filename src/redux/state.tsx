@@ -115,16 +115,15 @@ const store: storeType = {
             //функция для создания нового поста
             const newPost: postsType = {
                 id: new Date().getTime(),
-                message: action.postText,
+                message:action.postText,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.messageForNewPost = '';
-
+            // this._state.profilePage.messageForNewPost = '';
             this._callSubscriber();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
-            this._state.profilePage.messageForNewPost = '';
+            // this._state.profilePage.messageForNewPost = '';
             this._callSubscriber();
         }
     }

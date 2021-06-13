@@ -21,7 +21,7 @@ const App: React.FC<AppPropsType> = (props) => {
 
                 <Route path='/profile' render={() =>
                     <Profile
-                        dispatch={props.store.dispatch.bind(props.store)}
+                        dispatch={props.dispatch.bind(props.store)}
                         posts={state.profilePage.posts}
                         profilePage={state.profilePage}/>}/>
 
