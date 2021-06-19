@@ -1,5 +1,5 @@
 import React from 'react';
-import MyPosts from "./Mypost/Posts";
+import MyPosts from "./Mypost/MyPosts";
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import store, {profileType} from "../../redux/state";
 
@@ -12,7 +12,7 @@ function Profile(props: profileType) {
             messageForNewPost={props.profilePage.messageForNewPost}
             profilePage={props.profilePage}
             posts={props.profilePage.posts}
-            dispatch={store.dispatch.bind(store)}
+            dispatch={props.dispatch.bind(store)}
         />
     </div>
 }

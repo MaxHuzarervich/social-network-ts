@@ -1,8 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
 import {postsType} from "../../../../redux/state";
-import {Avatar, Icon} from "@material-ui/core";
-
+import {Avatar} from "@material-ui/core";
 
 
 function Post(props: postsType) {

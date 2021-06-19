@@ -12,9 +12,6 @@ export type profileType = {
 export type profilePropsType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
-    // addPostCallback: (postText: string) => void,
-    // changeNewTextCallback: (newText: string) => void,
-    // message: string,
     dispatch: (action: ActionsTypes) => void,
     messageForNewPost: string
 }
@@ -47,16 +44,9 @@ export type rootStateType = {
     dialogsPage: dialogsPageType
 }
 
-type addPostActionType = {
-    type: 'ADD-POST',
-    postText: string
-}
-type changeNewTextActionType = {
-    type: 'CHANGE-NEW-TEXT',
-    newText: string
-}
 
-export type ActionsTypes = addPostActionType | changeNewTextActionType;
+export type ActionsTypes =
+    ReturnType<typeof addPostAC> | ReturnType<typeof newTextChangeHandlerAC>;
 
 
 export type storeType = {
@@ -67,6 +57,20 @@ export type storeType = {
     dispatch: (action: ActionsTypes) => void
 }
 
+export const addPostAC =
+    (postText: string) => {
+        return {
+            type: 'ADD-POST',
+            postText: postText
+        } as const
+    }
+export const newTextChangeHandlerAC =
+    (newText: string) => {
+        return {
+            type: 'CHANGE-NEW-TEXT',
+            newText: newText
+        } as const
+    }
 
 const store: storeType = {
     _state: {
@@ -103,7 +107,7 @@ const store: storeType = {
     subscribe(observer) {                             //subscribe,getState не меняют на state
         this._callSubscriber = observer;
     },
-    getState() {                                      //subscribe,getState не меняют на state
+    getState() {
         return this._state;
     },
 
@@ -115,15 +119,13 @@ const store: storeType = {
             //функция для создания нового поста
             const newPost: postsType = {
                 id: new Date().getTime(),
-                message:action.postText,
+                message: action.postText,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
-            // this._state.profilePage.messageForNewPost = '';
             this._callSubscriber();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
-            // this._state.profilePage.messageForNewPost = '';
             this._callSubscriber();
         }
     }
