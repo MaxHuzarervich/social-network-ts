@@ -5,7 +5,7 @@ export type AppPropsType = {
 export type dialogsPropsType = {
     dialogsPage: dialogsPageType;
     dispatch: (action: ActionsTypes) => void
-    newMessageBody:string
+    newMessageBody: string
 }
 
 export type profileType = {
@@ -59,7 +59,7 @@ export type ActionsTypes =
 export type storeType = {
     _state: rootStateType,
     _callSubscriber: () => void,
-    subscribe: (observer: () => void) => void,
+    subscribe: (observer: () => void) => void,     //pattern
     getState: () => rootStateType,
     dispatch: (action: ActionsTypes) => void
 }
@@ -135,29 +135,34 @@ const store: storeType = {
 //-------------------------------------------------------------------
     dispatch(action: ActionsTypes) {
 
-        if (action.type === 'ADD-POST') {
-            //функция для создания нового поста
-            const newPost: postsType = {                                        //отправляем
-                id: new Date().getTime(),
-                message: action.postText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._callSubscriber();
-        } else if (action.type === 'CHANGE-NEW-TEXT') {                      //впечатываем
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._callSubscriber();
-            //--------------------------------------------------------------dialogs
-        } else if (action.type === 'SEND-MESSAGE') {
-            let bodyMessage: messagesType = {                        //отправляем
-                id: new Date().getTime(),
-                message: action.bodyText
-            }
-            this._state.dialogsPage.messages.push(bodyMessage);
-            this._callSubscriber();
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {      //впечатываем
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber();
+        switch (action.type) {
+            case 'ADD-POST':                                           //функция для создания нового поста
+                const newPost: postsType = {                                        //отправляем
+                    id: new Date().getTime(),
+                    message: action.postText,
+                    likesCount: 0
+                }
+                this._state.profilePage.posts.push(newPost);
+                this._callSubscriber();
+                break;
+            case 'CHANGE-NEW-TEXT':                                                 //впечатываем
+                this._state.profilePage.messageForNewPost = action.newText;
+                this._callSubscriber();
+                //--------------------------------------------------------------DIALOGS
+                break;
+            case 'SEND-MESSAGE':
+                let bodyMessage: messagesType = {                                  //отправляем
+                    id: new Date().getTime(),
+                    message: action.bodyText
+                }
+                this._state.dialogsPage.messages.push(bodyMessage);
+                this._state.dialogsPage.newMessageBody = '';
+                this._callSubscriber();
+                break;
+            case 'UPDATE-NEW-MESSAGE-BODY':                                       //впечатываем
+                this._state.dialogsPage.newMessageBody = action.body;
+                this._callSubscriber();
+                break;
         }
     }
 }

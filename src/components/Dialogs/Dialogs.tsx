@@ -7,7 +7,6 @@ import {Button, TextField} from "@material-ui/core";
 
 
 function Dialogs(props: dialogsPropsType) {
-
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
 
     let dialogsElements =
@@ -34,20 +33,19 @@ function Dialogs(props: dialogsPropsType) {
             <div className={s.messages}>
 
                 <div>{messageElements}</div>
-                <div>
-                    <div className={s.textField}>
-                        <TextField
-                            onChange={newMessageBody}
-                            id="outlined-basic"
-                            variant="outlined"
-                            placeholder={'Enter your message'}
-                        />
-                    </div>
-                    <div>
-                        <Button onClick={onSendMessageClick} variant="contained" color="primary">Send</Button>
 
-                        <Button variant="contained" color="secondary">Delete</Button>
-                    </div>
+                <div className={s.textField}>
+                    <TextField
+                        onChange={newMessageBody}
+                        id="outlined-basic"
+                        variant="outlined"
+                        placeholder={'Enter your message'}
+                    />
+                </div>
+                <div>
+                    <Button onClick={onSendMessageClick} variant="contained" color="primary">Send</Button>
+
+                    <Button variant="contained" color="secondary">Delete</Button>
                 </div>
             </div>
         </div>
