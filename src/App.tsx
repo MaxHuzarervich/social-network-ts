@@ -17,8 +17,10 @@ const App: React.FC<AppPropsType> = (props) => {
             <div className='app-wrapper-content'>
 
                 <Route path='/dialogs' render={() => <Dialogs //route следит за url,если совпадает c path
-                                                             // то отрисовывает--->
-                    dialogsPage={state.dialogsPage}/>}/>
+                    // то отрисовывает--->
+                    dialogsPage={state.dialogsPage}
+                    dispatch={props.dispatch.bind(props.store)}
+                newMessageBody={state.dialogsPage.newMessageBody}/>}/>
 
                 <Route path='/profile' render={() =>
                     <Profile

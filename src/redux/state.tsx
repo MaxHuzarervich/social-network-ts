@@ -2,6 +2,11 @@ export type AppPropsType = {
     store: storeType,
     dispatch: (action: ActionsTypes) => void
 }
+export type dialogsPropsType = {
+    dialogsPage: dialogsPageType;
+    dispatch: (action: ActionsTypes) => void
+    newMessageBody:string
+}
 
 export type profileType = {
     profilePage: profilePageType,
@@ -34,7 +39,6 @@ export type dialogsPageType = {
     messages: Array<messagesType>
     dialogs: Array<dialogsType>
     newMessageBody: string
-
 }
 export type profilePageType = {
     posts: Array<postsType>,
@@ -47,7 +51,10 @@ export type rootStateType = {
 }
 
 export type ActionsTypes =
-    ReturnType<typeof addPostAC> | ReturnType<typeof newTextChangeHandlerAC> | ReturnType<typeof updateNewMessageBodyCreator>
+    ReturnType<typeof addPostAC>
+    | ReturnType<typeof newTextChangeHandlerAC>
+    | ReturnType<typeof updateNewMessageBodyCreator>
+    | ReturnType<typeof sendMessageCreator>
 
 export type storeType = {
     _state: rootStateType,
@@ -76,14 +83,15 @@ export const updateNewMessageBodyCreator =
         return {
             type: 'UPDATE-NEW-MESSAGE-BODY',
             body: body
-        }
+        } as const
     }
-export const sendMessageCreator = (bodyText: string) => {
-    return {
-        type: 'SEND-MESSAGE',
-        bodyText:bodyText
+export const sendMessageCreator =
+    (bodyText: string) => {
+        return {
+            type: 'SEND-MESSAGE',
+            bodyText: bodyText
+        } as const
     }
-}
 
 const store: storeType = {
     _state: {
@@ -129,26 +137,25 @@ const store: storeType = {
 
         if (action.type === 'ADD-POST') {
             //функция для создания нового поста
-            const newPost: postsType = {
+            const newPost: postsType = {                                        //отправляем
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0
             }
             this._state.profilePage.posts.push(newPost);
             this._callSubscriber();
-        } else if (action.type === 'CHANGE-NEW-TEXT') {
+        } else if (action.type === 'CHANGE-NEW-TEXT') {                      //впечатываем
             this._state.profilePage.messageForNewPost = action.newText;
             this._callSubscriber();
             //--------------------------------------------------------------dialogs
-        }else if (action.type === 'SEND-MESSAGE') {
-            let bodyMessage: messagesType = {
+        } else if (action.type === 'SEND-MESSAGE') {
+            let bodyMessage: messagesType = {                        //отправляем
                 id: new Date().getTime(),
                 message: action.bodyText
             }
             this._state.dialogsPage.messages.push(bodyMessage);
             this._callSubscriber();
-        }
-        else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {      //впечатываем
             this._state.dialogsPage.newMessageBody = action.body;
             this._callSubscriber();
         }

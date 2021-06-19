@@ -1,13 +1,10 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {dialogsPageType} from '../../redux/state';
+import {dialogsPropsType, sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/state';
 import {Button, TextField} from "@material-ui/core";
 
-type dialogsPropsType = {
-    dialogsPage: dialogsPageType;
-}
 
 function Dialogs(props: dialogsPropsType) {
 
@@ -21,6 +18,12 @@ function Dialogs(props: dialogsPropsType) {
     let messageElements =
         props.dialogsPage.messages.map(messages => <Message message={messages.message} id={messages.id}/>)
 
+    const onSendMessageClick = () => {
+        props.dispatch(sendMessageCreator(props.newMessageBody))
+    }
+    const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
+    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -30,19 +33,21 @@ function Dialogs(props: dialogsPropsType) {
             </div>
             <div className={s.messages}>
 
-                {messageElements}
-
-            </div>
-            <div>
-                <div className={s.textField}>
-                    <TextField id="outlined-basic"
-                               variant="outlined"
-                    />
-                </div>
+                <div>{messageElements}</div>
                 <div>
-                    <Button variant="contained" color="primary">Send</Button>
+                    <div className={s.textField}>
+                        <TextField
+                            onChange={newMessageBody}
+                            id="outlined-basic"
+                            variant="outlined"
+                            placeholder={'Enter your message'}
+                        />
+                    </div>
+                    <div>
+                        <Button onClick={onSendMessageClick} variant="contained" color="primary">Send</Button>
 
-                    <Button variant="contained" color="secondary">Delete</Button>
+                        <Button variant="contained" color="secondary">Delete</Button>
+                    </div>
                 </div>
             </div>
         </div>
