@@ -33,6 +33,8 @@ export type messagesType = {
 export type dialogsPageType = {
     messages: Array<messagesType>
     dialogs: Array<dialogsType>
+    newMessageBody: string
+
 }
 export type profilePageType = {
     posts: Array<postsType>,
@@ -44,10 +46,8 @@ export type rootStateType = {
     dialogsPage: dialogsPageType
 }
 
-
 export type ActionsTypes =
-    ReturnType<typeof addPostAC> | ReturnType<typeof newTextChangeHandlerAC>;
-
+    ReturnType<typeof addPostAC> | ReturnType<typeof newTextChangeHandlerAC> | ReturnType<typeof updateNewMessageBodyCreator>
 
 export type storeType = {
     _state: rootStateType,
@@ -71,6 +71,19 @@ export const newTextChangeHandlerAC =
             newText: newText
         } as const
     }
+export const updateNewMessageBodyCreator =
+    (body: string) => {
+        return {
+            type: 'UPDATE-NEW-MESSAGE-BODY',
+            body: body
+        }
+    }
+export const sendMessageCreator = (bodyText: string) => {
+    return {
+        type: 'SEND-MESSAGE',
+        bodyText:bodyText
+    }
+}
 
 const store: storeType = {
     _state: {
@@ -96,7 +109,8 @@ const store: storeType = {
                 {id: 4, name: 'Sasha'},
                 {id: 5, name: 'Victor'},
                 {id: 6, name: 'Valera'}
-            ]
+            ],
+            newMessageBody: ''
         }
 
     },
@@ -110,9 +124,7 @@ const store: storeType = {
     getState() {
         return this._state;
     },
-
 //-------------------------------------------------------------------
-
     dispatch(action: ActionsTypes) {
 
         if (action.type === 'ADD-POST') {
@@ -126,6 +138,18 @@ const store: storeType = {
             this._callSubscriber();
         } else if (action.type === 'CHANGE-NEW-TEXT') {
             this._state.profilePage.messageForNewPost = action.newText;
+            this._callSubscriber();
+            //--------------------------------------------------------------dialogs
+        }else if (action.type === 'SEND-MESSAGE') {
+            let bodyMessage: messagesType = {
+                id: new Date().getTime(),
+                message: action.bodyText
+            }
+            this._state.dialogsPage.messages.push(bodyMessage);
+            this._callSubscriber();
+        }
+        else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+            this._state.dialogsPage.newMessageBody = action.body;
             this._callSubscriber();
         }
     }

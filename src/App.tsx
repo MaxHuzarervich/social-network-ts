@@ -16,7 +16,8 @@ const App: React.FC<AppPropsType> = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
 
-                <Route path='/dialogs' render={() => <Dialogs //route следит за url,если совпадает то отрисовывает--->
+                <Route path='/dialogs' render={() => <Dialogs //route следит за url,если совпадает c path
+                                                             // то отрисовывает--->
                     dialogsPage={state.dialogsPage}/>}/>
 
                 <Route path='/profile' render={() =>
