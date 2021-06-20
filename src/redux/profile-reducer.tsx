@@ -1,6 +1,6 @@
 import state, {messagesType, postsType} from "./state";
 
-const profileReducer = (state, action) => {
+export const profileReducer = (state, action) => {
     if (action.type === 'ADD-POST') {//функция для создания нового поста
         const newPost: postsType = {                                        //отправляем
             id: new Date().getTime(),

@@ -1,3 +1,5 @@
+import {profileReducer} from "./profile-reducer";
+
 export type AppPropsType = {
     store: storeType,
     dispatch: (action: ActionsTypes) => void
@@ -133,6 +135,8 @@ const store: storeType = {
     },
 //-------------------------------------------------------------------
     dispatch(action: ActionsTypes) {
+        //отдаем profilePage в reducer с action он его преобразовыает и возвращает новый profilePage
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
 
         if (action.type === 'ADD-POST') {//функция для создания нового поста
             const newPost: postsType = {                                        //отправляем

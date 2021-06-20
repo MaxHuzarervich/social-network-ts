@@ -1,6 +1,6 @@
 import state, {messagesType, postsType} from "./state";
 
-const dialogsReducer = (state, action) => {
+export const dialogsReducer = (state, action) => {
     if (action.type === 'SEND-MESSAGE') {
         let bodyMessage: messagesType = {                                  //отправляем
             id: new Date().getTime(),
