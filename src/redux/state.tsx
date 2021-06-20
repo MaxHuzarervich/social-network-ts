@@ -120,7 +120,6 @@ const store: storeType = {
             ],
             newMessageBody: ''
         }
-
     },
     _callSubscriber() {                                //всё что с нижним подчеркиванием используем внутри
         console.log('state changed!')

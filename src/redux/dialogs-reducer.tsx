@@ -1,6 +1,6 @@
 import state from "./state";
 
-const profileReducer = (state, action) => {
+const dialogsReducer = (state,action) => {
 
     return state;
 }
