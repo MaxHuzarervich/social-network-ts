@@ -134,34 +134,29 @@ const store: storeType = {
 //-------------------------------------------------------------------
     dispatch(action: ActionsTypes) {
 
-        switch (action.type) {
-            case 'ADD-POST':                                           //функция для создания нового поста
-                const newPost: postsType = {                                        //отправляем
-                    id: new Date().getTime(),
-                    message: action.postText,
-                    likesCount: 0
-                }
-                this._state.profilePage.posts.push(newPost);
-                this._callSubscriber();
-                break;
-            case 'CHANGE-NEW-TEXT':                                                 //впечатываем
-                this._state.profilePage.messageForNewPost = action.newText;
-                this._callSubscriber();
-                //--------------------------------------------------------------DIALOGS
-                break;
-            case 'SEND-MESSAGE':
-                let bodyMessage: messagesType = {                                  //отправляем
-                    id: new Date().getTime(),
-                    message: action.bodyText
-                }
-                this._state.dialogsPage.messages.push(bodyMessage);
-                this._state.dialogsPage.newMessageBody = '';
-                this._callSubscriber();
-                break;
-            case 'UPDATE-NEW-MESSAGE-BODY':                                       //впечатываем
-                this._state.dialogsPage.newMessageBody = action.body;
-                this._callSubscriber();
-                break;
+        if (action.type === 'ADD-POST') {//функция для создания нового поста
+            const newPost: postsType = {                                        //отправляем
+                id: new Date().getTime(),
+                message: action.postText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost);
+            this._callSubscriber();
+        } else if (action.type === 'CHANGE-NEW-TEXT') {//впечатываем
+            this._state.profilePage.messageForNewPost = action.newText;
+            this._callSubscriber();
+            //--------------------------------------------------------------DIALOGS
+        } else if (action.type === 'SEND-MESSAGE') {
+            let bodyMessage: messagesType = {                                  //отправляем
+                id: new Date().getTime(),
+                message: action.bodyText
+            }
+            this._state.dialogsPage.messages.push(bodyMessage);
+            this._state.dialogsPage.newMessageBody = '';
+            this._callSubscriber();
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {//впечатываем
+            this._state.dialogsPage.newMessageBody = action.body;
+            this._callSubscriber();
         }
     }
 }
