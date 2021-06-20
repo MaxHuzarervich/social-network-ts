@@ -1,4 +1,5 @@
 import {profileReducer} from "./profile-reducer";
+import {dialogsReducer} from "./dialogs-reducer";
 
 export type AppPropsType = {
     store: storeType,
@@ -137,31 +138,36 @@ const store: storeType = {
     dispatch(action: ActionsTypes) {
         //отдаем profilePage в reducer с action он его преобразовыает и возвращает новый profilePage
         this._state.profilePage = profileReducer(this._state.profilePage, action)
+        //отдаем dialogsPage в reducer с action он его преобразовыает и возвращает новый dialogsPage
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        //уведомили подписчика
+        this._callSubscriber();
 
-        if (action.type === 'ADD-POST') {//функция для создания нового поста
-            const newPost: postsType = {                                        //отправляем
-                id: new Date().getTime(),
-                message: action.postText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost);
-            this._callSubscriber();
-        } else if (action.type === 'CHANGE-NEW-TEXT') {//впечатываем
-            this._state.profilePage.messageForNewPost = action.newText;
-            this._callSubscriber();
-            //--------------------------------------------------------------DIALOGS
-        } else if (action.type === 'SEND-MESSAGE') {
-            let bodyMessage: messagesType = {                                  //отправляем
-                id: new Date().getTime(),
-                message: action.bodyText
-            }
-            this._state.dialogsPage.messages.push(bodyMessage);
-            this._state.dialogsPage.newMessageBody = '';
-            this._callSubscriber();
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {//впечатываем
-            this._state.dialogsPage.newMessageBody = action.body;
-            this._callSubscriber();
-        }
+
+        // if (action.type === 'ADD-POST') {                       //функция для создания нового поста
+        //     const newPost: postsType = {                                        //отправляем
+        //         id: new Date().getTime(),
+        //         message: action.postText,
+        //         likesCount: 0
+        //     }
+        //     this._state.profilePage.posts.push(newPost);
+        //     this._callSubscriber();
+        // } else if (action.type === 'CHANGE-NEW-TEXT') {//впечатываем
+        //     this._state.profilePage.messageForNewPost = action.newText;
+        //     this._callSubscriber();
+        //     //--------------------------------------------------------------DIALOGS
+        // } else if (action.type === 'SEND-MESSAGE') {
+        //     let bodyMessage: messagesType = {                                  //отправляем
+        //         id: new Date().getTime(),
+        //         message: action.bodyText
+        //     }
+        //     this._state.dialogsPage.messages.push(bodyMessage);
+        //     this._state.dialogsPage.newMessageBody = '';
+        //     this._callSubscriber();
+        // } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {//впечатываем
+        //     this._state.dialogsPage.newMessageBody = action.body;
+        //     this._callSubscriber();
+        // }
     }
 }
 

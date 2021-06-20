@@ -1,16 +1,20 @@
-import state, {messagesType, postsType} from "./state";
+import {messagesType} from "./state";
 
 export const dialogsReducer = (state, action) => {
-    if (action.type === 'SEND-MESSAGE') {
-        let bodyMessage: messagesType = {                                  //отправляем
-            id: new Date().getTime(),
-            message: action.bodyText
-        }
-        state.messages.push(bodyMessage);          //dialogsPage приходит в state
-        state.newMessageBody = '';
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {//впечатываем
-        state.newMessageBody = action.body;       //dialogsPage приходит в state
+    switch (action.type) {
+        case 'SEND-MESSAGE':
+            let bodyMessage: messagesType = {                                  //отправляем
+                id: new Date().getTime(),
+                message: action.bodyText
+            }
+            state.messages.push(bodyMessage);          //dialogsPage приходит в state
+            state.newMessageBody = '';
+            return state;
+        case 'UPDATE-NEW-MESSAGE-BODY': //впечатываем
+            state.newMessageBody = action.body;       //dialogsPage приходит в state
+            return state;
+        default:                                      //default line
+            return state;
     }
 
-    return state;
 }

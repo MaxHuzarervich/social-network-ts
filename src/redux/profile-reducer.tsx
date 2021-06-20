@@ -1,17 +1,20 @@
-import state, {messagesType, postsType} from "./state";
+import {postsType} from "./state";
 
 export const profileReducer = (state, action) => {
-    if (action.type === 'ADD-POST') {//функция для создания нового поста
-        const newPost: postsType = {                                        //отправляем
-            id: new Date().getTime(),
-            message: action.postText,
-            likesCount: 0
-        }
-        state.posts.push(newPost);   //profilePage приходит в state
-        state.messageForNewPost = '';
-    } else if (action.type === 'CHANGE-NEW-TEXT') {//впечатываем
-        state.messageForNewPost = action.newText;  //profilePage приходит в state
+    switch (action.type) {
+        case 'ADD-POST': //функция для создания нового поста
+            const newPost: postsType = {                                        //отправляем
+                id: new Date().getTime(),
+                message: action.postText,
+                likesCount: 0
+            }
+            state.posts.push(newPost);   //profilePage приходит в state
+            state.messageForNewPost = '';
+            return state;
+        case 'CHANGE-NEW-TEXT': //впечатываем
+            state.messageForNewPost = action.newText;  //profilePage приходит в state
+            return state;
+        default:                                       //default line
+            return state;
     }
-
-    return state;
 }
