@@ -1,7 +1,7 @@
 import React from 'react';
 import MyPosts from "./Mypost/MyPosts";
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import store, {profileType} from "../../redux/state";
+import store, {profileType} from "../../redux/store";
 
 
 function Profile(props: profileType) {

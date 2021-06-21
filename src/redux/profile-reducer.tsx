@@ -1,6 +1,13 @@
-import {postsType} from "./state";
+import {ActionsTypes, postsType, profilePageType} from "./store";
 
-export const profileReducer = (state, action) => {
+export type profilePropsType = {
+    profilePage: profilePageType,
+    posts: Array<postsType>,
+    dispatch: (action: ActionsTypes) => void,
+    messageForNewPost: string
+}
+
+export const profileReducer = (state:profilePageType,action:ActionsTypes) => {
     switch (action.type) {
         case 'ADD-POST': //функция для создания нового поста
             const newPost: postsType = {                                        //отправляем
@@ -18,3 +25,17 @@ export const profileReducer = (state, action) => {
             return state;
     }
 }
+export const addPostAC =
+    (postText: string) => {
+        return {
+            type: 'ADD-POST',
+            postText: postText
+        } as const
+    }
+export const newTextChangeHandlerAC =
+    (newText: string) => {
+        return {
+            type: 'CHANGE-NEW-TEXT',
+            newText: newText
+        } as const
+    }

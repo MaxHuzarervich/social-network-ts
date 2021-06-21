@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Post.module.css';
-import {postsType} from "../../../../redux/state";
+import {postsType} from "../../../../redux/store";
 import {Avatar} from "@material-ui/core";
 
 

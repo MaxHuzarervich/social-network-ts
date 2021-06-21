@@ -1,27 +1,15 @@
-import {profileReducer} from "./profile-reducer";
-import {dialogsReducer} from "./dialogs-reducer";
+import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 
 export type AppPropsType = {
     store: storeType,
     dispatch: (action: ActionsTypes) => void
-}
-export type dialogsPropsType = {
-    dialogsPage: dialogsPageType;
-    dispatch: (action: ActionsTypes) => void
-    newMessageBody: string
 }
 
 export type profileType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
     dispatch: (action: ActionsTypes) => void
-}
-
-export type profilePropsType = {
-    profilePage: profilePageType,
-    posts: Array<postsType>,
-    dispatch: (action: ActionsTypes) => void,
-    messageForNewPost: string
 }
 
 export type postsType = {
@@ -67,35 +55,6 @@ export type storeType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export const addPostAC =
-    (postText: string) => {
-        return {
-            type: 'ADD-POST',
-            postText: postText
-        } as const
-    }
-export const newTextChangeHandlerAC =
-    (newText: string) => {
-        return {
-            type: 'CHANGE-NEW-TEXT',
-            newText: newText
-        } as const
-    }
-export const updateNewMessageBodyCreator =
-    (body: string) => {
-        return {
-            type: 'UPDATE-NEW-MESSAGE-BODY',
-            body: body
-        } as const
-    }
-export const sendMessageCreator =
-    (bodyText: string) => {
-        return {
-            type: 'SEND-MESSAGE',
-            bodyText: bodyText
-        } as const
-    }
-
 const store: storeType = {
     _state: {
         profilePage: {
@@ -135,6 +94,7 @@ const store: storeType = {
         return this._state;
     },
 //-------------------------------------------------------------------
+    //каждую
     dispatch(action: ActionsTypes) {
         //отдаем profilePage в reducer с action он его преобразовыает и возвращает новый profilePage
         this._state.profilePage = profileReducer(this._state.profilePage, action)
@@ -142,32 +102,6 @@ const store: storeType = {
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         //уведомили подписчика
         this._callSubscriber();
-
-
-        // if (action.type === 'ADD-POST') {                       //функция для создания нового поста
-        //     const newPost: postsType = {                                        //отправляем
-        //         id: new Date().getTime(),
-        //         message: action.postText,
-        //         likesCount: 0
-        //     }
-        //     this._state.profilePage.posts.push(newPost);
-        //     this._callSubscriber();
-        // } else if (action.type === 'CHANGE-NEW-TEXT') {//впечатываем
-        //     this._state.profilePage.messageForNewPost = action.newText;
-        //     this._callSubscriber();
-        //     //--------------------------------------------------------------DIALOGS
-        // } else if (action.type === 'SEND-MESSAGE') {
-        //     let bodyMessage: messagesType = {                                  //отправляем
-        //         id: new Date().getTime(),
-        //         message: action.bodyText
-        //     }
-        //     this._state.dialogsPage.messages.push(bodyMessage);
-        //     this._state.dialogsPage.newMessageBody = '';
-        //     this._callSubscriber();
-        // } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {//впечатываем
-        //     this._state.dialogsPage.newMessageBody = action.body;
-        //     this._callSubscriber();
-        // }
     }
 }
 

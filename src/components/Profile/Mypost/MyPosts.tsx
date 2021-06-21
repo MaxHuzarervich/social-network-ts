@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {addPostAC, newTextChangeHandlerAC, profilePropsType} from '../../../redux/state';
+import {addPostAC, newTextChangeHandlerAC, profilePropsType} from '../../../redux/profile-reducer';
 import s from './Myposts.module.css';
 import Post from "./post/Post";
 import {Button, TextField} from "@material-ui/core";

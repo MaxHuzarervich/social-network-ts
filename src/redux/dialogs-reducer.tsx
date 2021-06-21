@@ -1,6 +1,12 @@
-import {messagesType} from "./state";
+import {ActionsTypes, dialogsPageType, messagesType} from "./store";
 
-export const dialogsReducer = (state, action) => {
+export type dialogsPropsType = {
+    dialogsPage: dialogsPageType;
+    dispatch: (action: ActionsTypes) => void
+    newMessageBody: string
+}
+
+export const dialogsReducer = (state:dialogsPageType, action:ActionsTypes) => {
     switch (action.type) {
         case 'SEND-MESSAGE':
             let bodyMessage: messagesType = {                                  //отправляем
@@ -16,5 +22,18 @@ export const dialogsReducer = (state, action) => {
         default:                                      //default line
             return state;
     }
-
 }
+export const updateNewMessageBodyCreator =
+    (body: string) => {
+        return {
+            type: 'UPDATE-NEW-MESSAGE-BODY',
+            body: body
+        } as const
+    }
+export const sendMessageCreator =
+    (bodyText: string) => {
+        return {
+            type: 'SEND-MESSAGE',
+            bodyText: bodyText
+        } as const
+    }
