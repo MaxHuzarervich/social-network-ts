@@ -81,7 +81,8 @@ const store: storeType = {
                 {id: 6, name: 'Valera'}
             ],
             newMessageBody: ''
-        }
+        },
+        // sideBar{}
     },
     _callSubscriber() {                                //всё что с нижним подчеркиванием используем внутри
         console.log('state changed!')
