@@ -20,7 +20,6 @@ export const rerenderEntireTree = () => {
 }
 rerenderEntireTree()
 store.subscribe(() => {
-    // let state = store.getState()
     rerenderEntireTree()
 });  //store позвони мне, когда что-то измениться
 
