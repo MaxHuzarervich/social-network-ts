@@ -5,8 +5,15 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
-import {AppPropsType} from './redux/store';
+import {AppStoreType} from "./redux/redux-store";
+import {ActionsTypes} from "./redux/store";
+// import {AppPropsType} from './redux/store';
 
+
+type AppPropsType = {
+    store: AppStoreType
+    dispatch: (action: ActionsTypes) => void
+}
 
 const App: React.FC<AppPropsType> = (props) => {
     const state = props.store.getState();

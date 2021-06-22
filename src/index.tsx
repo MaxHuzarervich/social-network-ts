@@ -8,8 +8,8 @@ import {BrowserRouter} from "react-router-dom";
 export const rerenderEntireTree = () => {
 
     ReactDOM.render(
-        <BrowserRouter>
 
+        <BrowserRouter>
             <App store={store}
                  dispatch={store.dispatch.bind(store)}
             />
@@ -19,6 +19,9 @@ export const rerenderEntireTree = () => {
     );
 }
 rerenderEntireTree()
-store.subscribe(rerenderEntireTree);  //store позвони мне, когда что-то измениться
+store.subscribe(() => {
+    // let state = store.getState()
+    rerenderEntireTree()
+});  //store позвони мне, когда что-то измениться
 
 
