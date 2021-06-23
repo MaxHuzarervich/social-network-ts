@@ -27,13 +27,16 @@ const App: React.FC<AppPropsType> = (props) => {
                     // то отрисовывает--->
                     dialogsPage={state.dialogsPage}
                     dispatch={props.dispatch.bind(props.store)}
-                newMessageBody={state.dialogsPage.newMessageBody}/>}/>
+                    newMessageBody={state.dialogsPage.newMessageBody}/>}/>
 
                 <Route path='/profile' render={() =>
                     <Profile
-                        dispatch={props.dispatch.bind(props.store)}
-                        posts={state.profilePage.posts}
-                        profilePage={state.profilePage}/>}/>
+                        store={props.store}
+                        // dispatch={props.dispatch.bind(props.store)}
+                        // posts={state.profilePage.posts}
+                        // profilePage={state.profilePage}
+                    />
+                }/>
 
             </div>
         </div>

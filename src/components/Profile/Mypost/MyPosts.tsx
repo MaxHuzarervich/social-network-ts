@@ -10,13 +10,13 @@ function MyPosts(props: profilePropsType) {
     let postsElements = props.profilePage.posts.map
     (posts => <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
     //функция добавления нового поста
-    const addPost = () => {
-        // props.addPost();
-        props.dispatch(addPostAC(props.messageForNewPost))
+    const onAddPost = () => {
+        props.addPost();
+        // props.dispatch(addPostAC(props.messageForNewPost))
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.updateNewPostText()
-        props.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
+        props.updateNewPostText(e);
+        // props.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
     }
     return <div className={s.content}>
         <div className={s.postBlock}>
@@ -29,7 +29,7 @@ function MyPosts(props: profilePropsType) {
                     />
                 </div>
                 <div>
-                    <Button variant="contained" color="primary" onClick={addPost}>Send</Button>
+                    <Button variant="contained" color="primary" onClick={onAddPost}>Send</Button>
                     <Button variant="contained" color="secondary">Delete</Button>
                 </div>
             </div>

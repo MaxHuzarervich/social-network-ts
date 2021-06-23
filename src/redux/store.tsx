@@ -10,6 +10,7 @@ export type profileType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
     dispatch: (action: ActionsTypes) => void
+    store:storeType
 }
 
 export type postsType = {
