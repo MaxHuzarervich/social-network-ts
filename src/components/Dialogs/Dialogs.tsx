@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {dialogsPropsType, sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
+import {dialogsPropsType, sendMessageCreator} from '../../redux/dialogs-reducer';
 import {Button, TextField} from "@material-ui/core";
 
 
@@ -18,10 +18,12 @@ function Dialogs(props: dialogsPropsType) {
         props.dialogsPage.messages.map(messages => <Message message={messages.message} id={messages.id}/>)
 
     const onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator(props.newMessageBody))
+        props.sendMessage();
     }
     const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
+        let body = e.target.value
+        props.updateNewMessageBody(body)
+        // props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
     }
     return (
         <div className={s.dialogs}>
@@ -32,7 +34,7 @@ function Dialogs(props: dialogsPropsType) {
             </div>
             <div className={s.messages}>
 
-                <div>{messageElements}</div>
+                    <div>{messageElements}</div>
 
                 <div className={s.textField}>
                     <TextField

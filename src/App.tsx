@@ -7,6 +7,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from "react-router-dom";
 import {AppStoreType} from "./redux/redux-store";
 import {ActionsTypes} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/Message/DialogsContainer";
 // import {AppPropsType} from './redux/store';
 
 
@@ -23,11 +24,9 @@ const App: React.FC<AppPropsType> = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
 
-                <Route path='/dialogs' render={() => <Dialogs //route следит за url,если совпадает c path
+                <Route path='/dialogs' render={() => <DialogsContainer //route следит за url,если совпадает c path
                     // то отрисовывает--->
-                    dialogsPage={state.dialogsPage}
-                    dispatch={props.dispatch.bind(props.store)}
-                    newMessageBody={state.dialogsPage.newMessageBody}/>}/>
+                    store={props.store}/>}/>
 
                 <Route path='/profile' render={() =>
                     <Profile

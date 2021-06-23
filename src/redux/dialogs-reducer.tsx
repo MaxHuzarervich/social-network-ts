@@ -4,6 +4,8 @@ export type dialogsPropsType = {
     dialogsPage: dialogsPageType;
     dispatch: (action: ActionsTypes) => void
     newMessageBody: string
+    updateNewMessageBody:(body:string)=>void
+    sendMessage:()=>void
 }
 
 let initialState = {
