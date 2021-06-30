@@ -12,6 +12,7 @@ let reducers = combineReducers({ //воспринимаем это как наш
 let store = createStore(reducers);
 export type AppStoreType = typeof store;
 export type AppStateType = ReturnType<typeof reducers>
+export type AppDispatchType = typeof store.dispatch
 
 
 export default store;

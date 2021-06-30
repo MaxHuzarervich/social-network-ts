@@ -19,6 +19,7 @@ export const rerenderEntireTree = () => {
     );
 }
 rerenderEntireTree()
+
 store.subscribe(() => {
     rerenderEntireTree()
 });  //store позвони мне, когда что-то измениться

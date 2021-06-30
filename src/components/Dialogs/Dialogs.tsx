@@ -5,8 +5,12 @@ import Message from "./Message/Message";
 import {dialogsPropsType} from '../../redux/dialogs-reducer';
 import {Button, TextField} from "@material-ui/core";
 
+//TODO: write props type like in myPosts
+type DialogsPropsType = {
+    sendMessage:
+}
 
-function Dialogs(props: dialogsPropsType) {
+function Dialogs(props: DialogsPropsType) {
 
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
 

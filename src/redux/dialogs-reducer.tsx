@@ -1,7 +1,8 @@
-import {ActionsTypes, dialogsPageType, messagesType, storeType} from "./store";
+import {storeType} from "./store";
+import {ActionsTypes, DialogsPageType, MessagesType} from "./types";
 
 export type dialogsPropsType = {
-    dialogsPage: dialogsPageType;
+    dialogsPage: DialogsPageType;
     dispatch: (action: ActionsTypes) => void
     newMessageBody: string
     updateNewMessageBody:(body:string)=>void
@@ -28,10 +29,10 @@ let initialState = {
     newMessageBody: ''
 }
 //если сюда не придёт state то state-ом будет initialState
-export const dialogsReducer = (state:dialogsPageType = initialState, action:ActionsTypes) => {
+export const dialogsReducer = (state:DialogsPageType = initialState, action:ActionsTypes) => {
     switch (action.type) {
         case 'SEND-MESSAGE':
-            let bodyMessage: messagesType = {                                  //отправляем
+            let bodyMessage: MessagesType = {                                  //отправляем
                 id: new Date().getTime(),
                 message: action.bodyText
             }

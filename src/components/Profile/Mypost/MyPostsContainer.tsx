@@ -1,28 +1,31 @@
 import React, {ChangeEvent} from 'react';
-import {addPostAC, newTextChangeHandlerAC, profilePropsType} from '../../../redux/profile-reducer';
+import {addPostAC, newTextChangeHandlerAC} from '../../../redux/profile-reducer';
 import MyPosts from "./MyPosts";
-import store from "../../../redux/store";
+import {AppStoreType} from "../../../redux/redux-store";
 
 
-export function MyPostsContainer(props: profilePropsType) {
+type MyPostsContainerPropsType = {
+    store: AppStoreType
+}
+
+export function MyPostsContainer(props: MyPostsContainerPropsType) {
     let state = props.store.getState();
-
-    // const way = props.store.dispatch
 
     //функция добавления нового поста
     const addPost = () => {
-        props.store.dispatch(addPostAC(props.messageForNewPost))
+        props.store.dispatch(addPostAC(state.profilePage.messageForNewPost))
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.store.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
     }
-    return (<MyPosts store={store}
-                     addPost={addPost}
-                     updateNewPostText={newTextChangeHandler}
-                     profilePage={props.profilePage}
-                     posts={state.profilePage.posts}
-                     dispatch={props.dispatch}
-                     messageForNewPost={state.profilePage.messageForNewPost}/>)
+    return (
+        <MyPosts
+            addPost={addPost}
+            updateNewPostText={newTextChangeHandler}
+            posts={state.profilePage.posts}
+            messageForNewPost={state.profilePage.messageForNewPost}
+        />
+    )
 }
 
 export default MyPostsContainer;

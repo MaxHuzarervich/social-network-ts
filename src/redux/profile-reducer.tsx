@@ -1,9 +1,10 @@
-import {ActionsTypes, postsType, profilePageType, storeType} from "./store";
+import {storeType} from "./store";
 import {ChangeEvent} from "react";
+import {ActionsTypes, PostsType, ProfilePageType} from "./types";
 
 export type profilePropsType = {
-    profilePage: profilePageType,
-    posts: Array<postsType>,
+    profilePage: ProfilePageType,
+    posts: Array<PostsType>,
     dispatch: (action: ActionsTypes) => void,
     messageForNewPost: string,
     addPost:()=>void
@@ -19,10 +20,10 @@ let initialState = {
     messageForNewPost: 'social-network'
 }
 //если сюда не придёт state то state-ом будет initialState
-export const profileReducer = (state:profilePageType = initialState ,action:ActionsTypes) => {
+export const profileReducer = (state:ProfilePageType = initialState , action:ActionsTypes) => {
     switch (action.type) {
         case 'ADD-POST': //функция для создания нового поста
-            const newPost: postsType = {                                        //отправляем
+            const newPost: PostsType = {                                        //отправляем
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0

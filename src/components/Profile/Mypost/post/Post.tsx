@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './Post.module.css';
-import {postsType} from "../../../../redux/store";
 import {Avatar} from "@material-ui/core";
+import {PostsType} from "../../../../redux/types";
 
 
-function Post(props: postsType) {
+function Post(props: PostsType) {
     return <div className={s.item}>
         <Avatar>post</Avatar>
         {props.message}

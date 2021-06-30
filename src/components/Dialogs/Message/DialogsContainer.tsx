@@ -1,10 +1,13 @@
 import React from 'react';
 import Dialogs from "../Dialogs";
-import {dialogsPropsType, sendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
-import store from "../../../redux/redux-store";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
+import store, {AppStoreType} from "../../../redux/redux-store";
 
+type DialogsContainerPropsType = {
+    store: AppStoreType
+}
 
-function DialogsContainer(props: dialogsPropsType) {
+function DialogsContainer(props: DialogsContainerPropsType) {
 
     let state = props.store.getState().dialogsPage
 

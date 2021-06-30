@@ -1,21 +1,18 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {profileType} from "../../redux/store";
 import MyPostsContainer from "./Mypost/MyPostsContainer";
+import {AppStoreType} from "../../redux/redux-store";
 
+type ProfilePropsType = {
+    store: AppStoreType
+}
 
-export function Profile(props: profileType) {
+export function Profile(props: ProfilePropsType) {
 
     return <div>
         <ProfileInfo/>
         <MyPostsContainer
-            updateNewPostText={}
-            addPost={}
             store={props.store}
-            messageForNewPost={props.profilePage.messageForNewPost}
-            profilePage={props.profilePage}
-            posts={props.profilePage.posts}
-            dispatch={props.dispatch.bind(props.store)}
         />
     </div>
 }

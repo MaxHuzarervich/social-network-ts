@@ -1,13 +1,20 @@
 import React, {ChangeEvent} from 'react';
-import {profilePropsType} from '../../../redux/profile-reducer';
 import s from './Myposts.module.css';
 import Post from "./post/Post";
 import {Button, TextField} from "@material-ui/core";
+import {PostsType} from "../../../redux/types";
+
+type MyPostsPropsType = {
+    posts: Array<PostsType>,
+    messageForNewPost: string,
+    addPost: () => void,
+    updateNewPostText: (e: ChangeEvent<HTMLTextAreaElement>) => void
+}
 
 
-function MyPosts(props: profilePropsType) {
+function MyPosts(props: MyPostsPropsType) {
     //значение переменной postsElements будет равно промапленному массиву объектов posts
-    let postsElements = props.profilePage.posts.map
+    let postsElements = props.posts.map
     (posts => <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
     //функция добавления нового поста
     const onAddPost = () => {
