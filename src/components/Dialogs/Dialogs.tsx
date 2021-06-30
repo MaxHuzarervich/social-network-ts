@@ -2,11 +2,12 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {dialogsPropsType, sendMessageCreator} from '../../redux/dialogs-reducer';
+import {dialogsPropsType} from '../../redux/dialogs-reducer';
 import {Button, TextField} from "@material-ui/core";
 
 
 function Dialogs(props: dialogsPropsType) {
+
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
 
     let dialogsElements =
@@ -23,7 +24,6 @@ function Dialogs(props: dialogsPropsType) {
     const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value
         props.updateNewMessageBody(body)
-        // props.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
     }
     return (
         <div className={s.dialogs}>
@@ -34,7 +34,7 @@ function Dialogs(props: dialogsPropsType) {
             </div>
             <div className={s.messages}>
 
-                    <div>{messageElements}</div>
+                <div>{messageElements}</div>
 
                 <div className={s.textField}>
                     <TextField

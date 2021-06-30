@@ -4,17 +4,16 @@ import MyPosts from "./MyPosts";
 import store from "../../../redux/store";
 
 
-function MyPostsContainer(props: profilePropsType) {
+export function MyPostsContainer(props: profilePropsType) {
     let state = props.store.getState();
 
+    // const way = props.store.dispatch
 
     //функция добавления нового поста
     const addPost = () => {
-        // props.addPost();
         props.store.dispatch(addPostAC(props.messageForNewPost))
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        // props.updateNewPostText()
         props.store.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
     }
     return (<MyPosts store={store}
