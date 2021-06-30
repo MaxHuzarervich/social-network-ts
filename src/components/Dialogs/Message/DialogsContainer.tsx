@@ -1,7 +1,7 @@
 import React from 'react';
 import Dialogs from "../Dialogs";
 import {dialogsPropsType, sendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
-import store from "../../../redux/store";
+import store from "../../../redux/redux-store";
 
 
 function DialogsContainer(props: dialogsPropsType) {

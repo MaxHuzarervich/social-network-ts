@@ -15,9 +15,9 @@ const App: React.FC<AppPropsType> = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-
+                {/*route следит за url,если он совпадает c path то отрисовывает--->*/}
                 <Route path='/dialogs' render={() =>
-                    <DialogsContainer //route следит за url,если он совпадает c path то отрисовывает--->
+                    <DialogsContainer
                     store={props.store}
                     newMessageBody={state.dialogsPage.newMessageBody}
                     dispatch={props.dispatch}

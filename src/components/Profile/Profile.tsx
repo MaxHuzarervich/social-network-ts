@@ -9,8 +9,8 @@ export function Profile(props: profileType) {
     return <div>
         <ProfileInfo/>
         <MyPostsContainer
-            updateNewPostText={e => {}}
-            addPost={() => {}}
+            updateNewPostText={}
+            addPost={}
             store={props.store}
             messageForNewPost={props.profilePage.messageForNewPost}
             profilePage={props.profilePage}
