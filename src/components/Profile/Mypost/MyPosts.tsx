@@ -19,11 +19,9 @@ function MyPosts(props: MyPostsPropsType) {
     //функция добавления нового поста
     const onAddPost = () => {
         props.addPost();
-        // props.dispatch(addPostAC(props.messageForNewPost))
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewPostText(e);
-        // props.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
     }
     return <div className={s.content}>
         <div className={s.postBlock}>

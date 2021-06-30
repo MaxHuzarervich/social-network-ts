@@ -1,14 +1,5 @@
-import {storeType} from "./store";
 import {ActionsTypes, DialogsPageType, MessagesType} from "./types";
 
-export type dialogsPropsType = {
-    dialogsPage: DialogsPageType;
-    dispatch: (action: ActionsTypes) => void
-    newMessageBody: string
-    updateNewMessageBody:(body:string)=>void
-    sendMessage:()=>void
-    store:storeType
-}
 
 let initialState = {
     messages: [

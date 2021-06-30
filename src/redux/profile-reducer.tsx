@@ -1,16 +1,6 @@
-import {storeType} from "./store";
-import {ChangeEvent} from "react";
 import {ActionsTypes, PostsType, ProfilePageType} from "./types";
 
-export type profilePropsType = {
-    profilePage: ProfilePageType,
-    posts: Array<PostsType>,
-    dispatch: (action: ActionsTypes) => void,
-    messageForNewPost: string,
-    addPost:()=>void
-    updateNewPostText:(e: ChangeEvent <HTMLTextAreaElement>) => void
-    store:storeType
-}
+
 //инициализационный state,который будет инициализировать эту подветку
 let initialState = {
     posts: [

@@ -2,12 +2,14 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {dialogsPropsType} from '../../redux/dialogs-reducer';
 import {Button, TextField} from "@material-ui/core";
+import {DialogsPageType} from "../../redux/types";
 
-//TODO: write props type like in myPosts
 type DialogsPropsType = {
-    sendMessage:
+    dialogsPage: DialogsPageType;
+    newMessageBody: string
+    updateNewMessageBody:(e: ChangeEvent<HTMLTextAreaElement>) => void
+    sendMessage:()=>void
 }
 
 function Dialogs(props: DialogsPropsType) {
@@ -26,8 +28,7 @@ function Dialogs(props: DialogsPropsType) {
         props.sendMessage();
     }
     const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let body = e.target.value
-        props.updateNewMessageBody(body)
+        props.updateNewMessageBody(e)
     }
     return (
         <div className={s.dialogs}>
