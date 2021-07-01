@@ -4,16 +4,17 @@ import store from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import App from "./App";
 import {BrowserRouter} from "react-router-dom";
+import StoreContext from "./StoreContext"
+
+
+//всем компонентам сидящим в App будет доступен Store благодаря provider --->
 
 export const rerenderEntireTree = () => {
-
     ReactDOM.render(
         <BrowserRouter>
-            <App
-                store={store}
-                dispatch={store.dispatch.bind(store)}
-            />
-
+            <StoreContext.Provider value={store}>
+                <App />
+            </StoreContext.Provider>
         </BrowserRouter>,
         document.getElementById('root')
     );

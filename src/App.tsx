@@ -22,14 +22,10 @@ const App: React.FC<AppPropsType> = (props) => {
             <div className='app-wrapper-content'>
                 {/*route следит за url,если он совпадает c path то отрисовывает--->*/}
                 <Route path='/dialogs' render={() =>
-                    <DialogsContainer
-                        store={props.store}
-                    />}
+                    <DialogsContainer/>}
                 />
                 <Route path='/profile' render={() =>
-                    <Profile
-                        store={props.store}
-                    />
+                    <Profile/>
                 }/>
 
             </div>
