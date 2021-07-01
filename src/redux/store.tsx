@@ -1,22 +1,3 @@
-import {ActionsTypes, DialogsPageType, ProfilePageType} from "./types";
-
-export type AppPropsType = {
-    store: storeType,
-    dispatch: (action: ActionsTypes) => void
-}
-
-export type rootStateType = {
-    profilePage: ProfilePageType,
-    dialogsPage: DialogsPageType
-}
-
-export type storeType = {
-    _state: rootStateType,
-    _callSubscriber: () => void,
-    subscribe: (observer: () => void) => void,     //pattern
-    getState: () => rootStateType,
-    dispatch: (action: ActionsTypes) => void
-}
 //
 // const store: storeType = {
 //     _state: {

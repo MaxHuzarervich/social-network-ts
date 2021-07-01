@@ -10,25 +10,25 @@ type MyPostsContainerPropsType = {
 }
 
 export function MyPostsContainer(props: MyPostsContainerPropsType) {
-    let state = props.store.getState();
-
-    //функция добавления нового поста
-    const addPost = () => {
-        props.store.dispatch(addPostAC(state.profilePage.messageForNewPost))
-    }
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.store.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
-    }
     return (   //Мы хотим чтобы наша презентационная компонента имела доступ к store!!!
         <StoreContext.Consumer>
-            {(store) =>  <MyPosts
-                addPost={addPost}
-                updateNewPostText={newTextChangeHandler}
-                posts={state.profilePage.posts}
-                messageForNewPost={state.profilePage.messageForNewPost}
-            />}
+            {(store) => {
+                let state = props.store.getState();
+                //функция добавления нового поста
+                const addPost = () => {
+                    props.store.dispatch(addPostAC(state.profilePage.messageForNewPost))
+                }
+                const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+                    props.store.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
+                }
+                return (
+                    <MyPosts
+                        addPost={addPost}
+                        updateNewPostText={newTextChangeHandler}
+                        posts={state.profilePage.posts}
+                        messageForNewPost={state.profilePage.messageForNewPost}
+                    />)
+            }}
         </StoreContext.Consumer>
     )
 }
-
-export default MyPostsContainer;

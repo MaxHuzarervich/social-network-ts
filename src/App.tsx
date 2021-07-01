@@ -25,7 +25,8 @@ const App: React.FC<AppPropsType> = (props) => {
                     <DialogsContainer/>}
                 />
                 <Route path='/profile' render={() =>
-                    <Profile/>
+                    <Profile
+                    />
                 }/>
 
             </div>
