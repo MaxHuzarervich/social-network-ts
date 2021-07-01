@@ -1,6 +1,11 @@
-import {ActionsTypes, PostsType, ProfilePageType} from "./types";
+import {ActionsTypes, postsType, profilePageType} from "./store";
 
-
+export type profilePropsType = {
+    profilePage: profilePageType,
+    posts: Array<postsType>,
+    dispatch: (action: ActionsTypes) => void,
+    messageForNewPost: string
+}
 //инициализационный state,который будет инициализировать эту подветку
 let initialState = {
     posts: [
@@ -10,10 +15,10 @@ let initialState = {
     messageForNewPost: 'social-network'
 }
 //если сюда не придёт state то state-ом будет initialState
-export const profileReducer = (state:ProfilePageType = initialState , action:ActionsTypes) => {
+export const profileReducer = (state:profilePageType = initialState ,action:ActionsTypes) => {
     switch (action.type) {
         case 'ADD-POST': //функция для создания нового поста
-            const newPost: PostsType = {                                        //отправляем
+            const newPost: postsType = {                                        //отправляем
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0

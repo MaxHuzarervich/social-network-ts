@@ -3,17 +3,16 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {Button, TextField} from "@material-ui/core";
-import {DialogsPageType} from "../../redux/types";
+import {dialogsPageType} from "../../redux/store";
+
 
 type DialogsPropsType = {
-    dialogsPage: DialogsPageType;
-    newMessageBody: string
-    updateNewMessageBody:(e: ChangeEvent<HTMLTextAreaElement>) => void
-    sendMessage:()=>void
+    sendMessage: () => void;
+    updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+    dialogsPage: dialogsPageType
 }
 
 function Dialogs(props: DialogsPropsType) {
-
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
 
     let dialogsElements =
@@ -25,7 +24,7 @@ function Dialogs(props: DialogsPropsType) {
         props.dialogsPage.messages.map(messages => <Message message={messages.message} id={messages.id}/>)
 
     const onSendMessageClick = () => {
-        props.sendMessage();
+        props.sendMessage()
     }
     const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e)

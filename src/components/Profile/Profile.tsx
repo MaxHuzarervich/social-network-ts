@@ -1,17 +1,20 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {MyPostsContainer} from "./Mypost/MyPostsContainer";
-import {AppStoreType} from "../../redux/redux-store";
+import {postsType, profilePageType, storeType} from "../../redux/store";
+import MyPostsContainer from "./Mypost/MyPostsContainer";
 
 type ProfilePropsType = {
-    store: AppStoreType
+    store: storeType;
+    profilePage: profilePageType,
+    posts: Array<postsType>,
 }
 
-export function Profile(props: ProfilePropsType) {
-
+function Profile(props: ProfilePropsType) {
     return <div>
         <ProfileInfo/>
-        <MyPostsContainer />
+        <MyPostsContainer
+            store={props.store}
+            messageForNewPost={props.profilePage.messageForNewPost}/>
     </div>
 }
 

@@ -1,36 +1,31 @@
 import React, {ChangeEvent} from 'react';
+import s from './Dialogs.module.css';
+import DialogItem from "./DialogItem/DialogsItem";
+import Message from "./Message/Message";
+import {dialogsPropsType, sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
+import {Button, TextField} from "@material-ui/core";
 import Dialogs from "./Dialogs";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
-import {AppStoreType} from "../../redux/redux-store";
-import StoreContext from "../../StoreContext";
+import {dialogsPageType, dialogsType, messagesType, storeType} from "../../redux/store";
+
 
 type DialogsContainerPropsType = {
-    store: AppStoreType
+    newMessageBody: string;
+    store: storeType;
+    dialogsPage: dialogsPageType
 }
 
 function DialogsContainer(props: DialogsContainerPropsType) {
-    return ( //Мы хотим чтобы наша презентационная компонента имела доступ к store!!! ----->
-        <StoreContext.Consumer>
-            {(store) => {
-                let state = props.store.getState().dialogsPage
 
-                const onSendMessageClick = () => {
-                    props.store.dispatch(sendMessageCreator(state.newMessageBody))
-                }
-                const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                    props.store.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
-                }
-                return (
-                    <Dialogs
-                        sendMessage={onSendMessageClick}
-                        updateNewMessageBody={newMessageBody}
-                        dialogsPage={state}
-                        newMessageBody={state.newMessageBody}
-                    />
-                )
-            }}
-
-        </StoreContext.Consumer>
+    const onSendMessageClick = () => {
+        props.store.dispatch(sendMessageCreator(props.newMessageBody))
+    }
+    const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.store.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
+    }
+    return (
+        <Dialogs dialogsPage={props.dialogsPage}
+                 updateNewMessageBody={newMessageBody}
+                 sendMessage={onSendMessageClick}/>
     )
 }
 

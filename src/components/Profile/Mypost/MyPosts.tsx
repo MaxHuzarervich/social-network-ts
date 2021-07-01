@@ -2,26 +2,26 @@ import React, {ChangeEvent} from 'react';
 import s from './Myposts.module.css';
 import Post from "./post/Post";
 import {Button, TextField} from "@material-ui/core";
-import {PostsType} from "../../../redux/types";
+import {postsType} from "../../../redux/store";
 
-type MyPostsPropsType = {
-    posts: Array<PostsType>,
-    messageForNewPost: string,
-    addPost: () => void,
-    updateNewPostText: (e: ChangeEvent<HTMLTextAreaElement>) => void
+
+export type MyPostsPropsType = {
+    updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+    addPost: () => void;
+    messageForNewPost: string;
+    posts: Array<postsType>
 }
-
 
 function MyPosts(props: MyPostsPropsType) {
     //значение переменной postsElements будет равно промапленному массиву объектов posts
     let postsElements = props.posts.map
     (posts => <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
     //функция добавления нового поста
-    const onAddPost = () => {
+    const addPost = () => {
         props.addPost();
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewPostText(e);
+        props.updateNewPost(e);
     }
     return <div className={s.content}>
         <div className={s.postBlock}>
@@ -34,7 +34,7 @@ function MyPosts(props: MyPostsPropsType) {
                     />
                 </div>
                 <div>
-                    <Button variant="contained" color="primary" onClick={onAddPost}>Send</Button>
+                    <Button variant="contained" color="primary" onClick={addPost}>Send</Button>
                     <Button variant="contained" color="secondary">Delete</Button>
                 </div>
             </div>
