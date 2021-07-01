@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from 'react';
-import Dialogs from "../Dialogs";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../../redux/dialogs-reducer";
-import {AppStoreType} from "../../../redux/redux-store";
+import Dialogs from "./Dialogs";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redux/dialogs-reducer";
+import {AppStoreType} from "../../redux/redux-store";
 
 type DialogsContainerPropsType = {
     store: AppStoreType
