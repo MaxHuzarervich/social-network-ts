@@ -7,6 +7,7 @@ import {Button, TextField} from "@material-ui/core";
 import Dialogs from "./Dialogs";
 import {dialogsPageType, dialogsType, messagesType, storeType} from "../../redux/store";
 import {StoreContext} from "../../StoreContext";
+import {connect} from "react-redux";
 
 
 type DialogsContainerPropsType = {
@@ -33,5 +34,10 @@ function DialogsContainer(props: DialogsContainerPropsType) {
         </StoreContext.Consumer>
     )
 }
+
+//Создаем контейнерную компоненту при помощи redux
+
+//Мы вызвали ф-цию connect, а она вернула нам другую ф-цию и мы вызываем ту ф-цию которую вернул нам предыдущий вызов
+const SuperDialogsContainer = connect()(Dialogs); //как бы законектили нашу презентационную компоненту Dialogs к store
 
 export default DialogsContainer;
