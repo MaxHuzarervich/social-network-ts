@@ -7,7 +7,7 @@ import {BrowserRouter} from "react-router-dom";
 import { Provider } from 'react-redux';
 
 export const rerenderEntireTree = () => {
-
+//Provider использует ContextAPI для того чтобы засунуть в context этот store чтобы до него достучаться
     ReactDOM.render(
         <BrowserRouter>
             <Provider store={store}>
