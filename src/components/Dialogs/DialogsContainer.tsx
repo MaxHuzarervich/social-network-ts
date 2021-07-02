@@ -6,6 +6,7 @@ import {dialogsPropsType, sendMessageCreator, updateNewMessageBodyCreator} from 
 import {Button, TextField} from "@material-ui/core";
 import Dialogs from "./Dialogs";
 import {dialogsPageType, dialogsType, messagesType, storeType} from "../../redux/store";
+import {StoreContext} from "../../StoreContext";
 
 
 type DialogsContainerPropsType = {
@@ -15,17 +16,21 @@ type DialogsContainerPropsType = {
 }
 
 function DialogsContainer(props: DialogsContainerPropsType) {
-
-    const onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator(props.newMessageBody))
-    }
-    const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.store.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
-    }
+    //Consumer как бы потребитель из store
     return (
-        <Dialogs dialogsPage={props.dialogsPage}
-                 updateNewMessageBody={newMessageBody}
-                 sendMessage={onSendMessageClick}/>
+        <StoreContext.Consumer>
+            {(store) => {
+                const onSendMessageClick = () => {
+                    store.dispatch(sendMessageCreator(props.newMessageBody))
+                }
+                const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+                    store.dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
+                }
+                return <Dialogs dialogsPage={props.dialogsPage}
+                                updateNewMessageBody={newMessageBody}
+                                sendMessage={onSendMessageClick}/>
+            }}
+        </StoreContext.Consumer>
     )
 }
 

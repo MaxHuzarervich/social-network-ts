@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {addPostAC, newTextChangeHandlerAC} from '../../../redux/profile-reducer';
 import MyPosts from "./MyPosts";
 import {storeType} from "../../../redux/store";
+import {StoreContext} from "../../../StoreContext";
 
 
 type MyPostsContainerPropsType = {
@@ -10,20 +11,26 @@ type MyPostsContainerPropsType = {
 }
 
 function MyPostsContainer(props: MyPostsContainerPropsType) {
-    let state = props.store.getState();
-    //функция добавления нового поста
-    const onAddPost = () => {
-        props.store.dispatch(addPostAC(props.messageForNewPost))
-    }
-    const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.store.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
-    }
+    //Consumer как бы потребитель из store
     return (
-        <MyPosts updateNewPost={newTextChangeHandler}
-                 addPost={onAddPost}
-                 posts={state.profilePage.posts}
-                 messageForNewPost={state.profilePage.messageForNewPost}
-        />
+        <StoreContext.Consumer>{
+            (store) => {
+                let state = props.store.getState();
+                //функция добавления нового поста
+                const onAddPost = () => {
+                    store.dispatch(addPostAC(props.messageForNewPost))
+                }
+                const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+                    store.dispatch(newTextChangeHandlerAC(e.currentTarget.value))
+                }
+                return <MyPosts updateNewPost={newTextChangeHandler}
+                                addPost={onAddPost}
+                                posts={state.profilePage.posts}
+                                messageForNewPost={state.profilePage.messageForNewPost}
+                />
+            }
+        }
+        </StoreContext.Consumer>
     )
 }
 

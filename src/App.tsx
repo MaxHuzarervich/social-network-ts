@@ -14,7 +14,7 @@ type AppPropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-const App: React.FC<AppPropsType> = (props) => {
+const App = (props: AppPropsType) => {
 
     return (
         <div className='app-wrapper'>

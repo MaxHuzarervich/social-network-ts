@@ -1,11 +1,6 @@
 import {ActionsTypes, postsType, profilePageType} from "./store";
 
-export type profilePropsType = {
-    profilePage: profilePageType,
-    posts: Array<postsType>,
-    dispatch: (action: ActionsTypes) => void,
-    messageForNewPost: string
-}
+
 //инициализационный state,который будет инициализировать эту подветку
 let initialState = {
     posts: [
