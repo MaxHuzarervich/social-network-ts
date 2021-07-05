@@ -2,15 +2,8 @@ import React, {ChangeEvent} from 'react';
 import s from './Myposts.module.css';
 import Post from "./post/Post";
 import {Button, TextField} from "@material-ui/core";
-import {postsType} from "../../../redux/store";
+import {MyPostsPropsType} from "./MyPostsContainer";
 
-
-export type MyPostsPropsType = {
-    updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-    addPost: () => void;
-    messageForNewPost: string;
-    posts: Array<postsType>
-}
 
 function MyPosts(props: MyPostsPropsType) {
     //значение переменной postsElements будет равно промапленному массиву объектов posts

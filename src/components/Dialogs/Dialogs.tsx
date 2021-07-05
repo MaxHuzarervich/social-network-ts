@@ -3,14 +3,8 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {Button, TextField} from "@material-ui/core";
-import {dialogsPageType} from "../../redux/store";
+import {DialogsPropsType} from "./DialogsContainer";
 
-
-type DialogsPropsType = {
-    sendMessage: () => void;
-    updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-    dialogsPage: dialogsPageType
-}
 
 function Dialogs(props: DialogsPropsType) {
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
@@ -26,7 +20,7 @@ function Dialogs(props: DialogsPropsType) {
     const onSendMessageClick = () => {
         props.sendMessage()
     }
-    const newMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const updateNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e)
     }
     return (
@@ -42,7 +36,7 @@ function Dialogs(props: DialogsPropsType) {
 
                 <div className={s.textField}>
                     <TextField
-                        onChange={newMessageBody}
+                        onChange={updateNewMessageBody}
                         id="outlined-basic"
                         variant="outlined"
                         placeholder={'Enter your message'}

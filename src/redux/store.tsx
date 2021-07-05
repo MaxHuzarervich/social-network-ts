@@ -12,22 +12,23 @@ export type profileType = {
     posts: Array<postsType>,
     // dispatch: (action: ActionsTypes) => void
 }
-
-export type postsType = {
+type postsType = {
     id: number,
     message: string,
     likesCount: number
 }
-export type dialogsType = {
+
+type dialogsType = {
     id: number,
     name: string
 }
-export type messagesType = {
+
+type messagesType = {
     id: number,
     message: string,
 }
 
-export type dialogsPageType = {
+ type dialogsPageType = {
     messages: Array<messagesType>
     dialogs: Array<dialogsType>
     newMessageBody: string
@@ -42,7 +43,7 @@ export type rootStateType = {
     dialogsPage: dialogsPageType
 }
 
-export type ActionsTypes =
+type ActionsTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof updateNewMessageBodyCreator>

@@ -1,29 +1,35 @@
 import React, {ChangeEvent} from 'react';
-import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
+import {InitialStateDialogsType, sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
 import Dialogs from "./Dialogs";
-import {dialogsPageType, storeType} from "../../redux/store";
 import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
 
-type DialogsContainerPropsType = {
-    newMessageBody: string;
-    store: storeType;
-    dialogsPage: dialogsPageType
+export type MapStateToPropsType = {
+    dialogsPage: InitialStateDialogsType,
+    newMessageBody: string
 }
+export type MapDispatchToPropsType = {
+    updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void,
+    sendMessage: (props: MapStateToPropsType) => void
+}
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 //пропсы для презентационной компоненты Dialogs
-let mapStateToProps = (state) => {             //смысл ф-ции превратить часть стейта в пропсы
+let mapStateToProps = (state: AppStateType): MapStateToPropsType => {     //смысл ф-ции превратить часть стейта в пропсы
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        newMessageBody: state.dialogsPage.newMessageBody
     }
 }
 //двумя ф-циями ниже мы настраиваем наш connect
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
         },
-        sendMessage: (props: DialogsContainerPropsType) => {
+        sendMessage: (props: MapStateToPropsType) => {
             dispatch(sendMessageCreator(props.newMessageBody))
         }
     }

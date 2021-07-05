@@ -1,12 +1,22 @@
-import {ActionsTypes, dialogsPageType, messagesType} from "./store";
+import {ActionsTypes} from "./redux-store";
 
-export type dialogsPropsType = {
-    dialogsPage: dialogsPageType;
-    dispatch: (action: ActionsTypes) => void
+export type NamesType = {
+    id: number,
+    name: string
+}
+
+export type MessagesType = {
+    id: number,
+    message: string,
+}
+
+export type InitialStateDialogsType = {
+    messages: Array<MessagesType>
+    dialogs: Array<NamesType>
     newMessageBody: string
 }
 
-let initialState = {
+const initialState: InitialStateDialogsType = {
     messages: [
         {id: 1, message: 'hi'},
         {id: 2, message: 'How is your it-kamasutra?'},
@@ -25,10 +35,10 @@ let initialState = {
     newMessageBody: ''
 }
 //если сюда не придёт state то state-ом будет initialState
-export const dialogsReducer = (state:dialogsPageType = initialState, action:ActionsTypes) => {
+export const dialogsReducer = (state: InitialStateDialogsType = initialState, action: ActionsTypes): InitialStateDialogsType => {
     switch (action.type) {
         case 'SEND-MESSAGE':
-            let bodyMessage: messagesType = {                                  //отправляем
+            let bodyMessage: MessagesType = {                                  //отправляем
                 id: new Date().getTime(),
                 message: action.bodyText
             }
