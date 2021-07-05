@@ -23,18 +23,21 @@ let initialState: initialStateType = {
 //если сюда не придёт state то state-ом будет initialState
 export const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
-        case 'ADD-POST': //функция для создания нового поста
+        case 'ADD-POST': {//функция для создания нового поста
             const newPost: postType = {                                        //отправляем
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0
             }
-            state.posts.push(newPost);   //profilePage приходит в state
-            state.messageForNewPost = '';
-            return state;
-        case 'CHANGE-NEW-TEXT': //впечатываем
-            state.messageForNewPost = action.newText;  //profilePage приходит в state
-            return state;
+            let stateCopy = {...state}; //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
+            stateCopy.posts = [...state.posts] // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
+            stateCopy.posts.push(newPost);   //profilePage приходит в state
+            stateCopy.messageForNewPost = '';
+            return stateCopy;}
+        case 'CHANGE-NEW-TEXT': {//впечатываем
+            let stateCopy = {...state}//делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
+            stateCopy.messageForNewPost = action.newText;  //profilePage приходит в state
+            return stateCopy;}
         default:                                       //default line
             return state;
     }

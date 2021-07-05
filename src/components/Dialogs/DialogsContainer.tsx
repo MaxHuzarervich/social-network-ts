@@ -44,3 +44,5 @@ const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs); 
 // Отрисовывается компонента Dialogs и в нее засовываются данные из объектов которые возвращаются этими двумя ф-циями.
 // Connect возвращает нам новую контейнерную компоненту
 export default DialogsContainer;
+
+//connect use subscribe!!!!!!!

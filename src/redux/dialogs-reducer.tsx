@@ -36,18 +36,26 @@ const initialState: InitialStateDialogsType = {
 }
 //если сюда не придёт state то state-ом будет initialState
 export const dialogsReducer = (state: InitialStateDialogsType = initialState, action: ActionsTypes): InitialStateDialogsType => {
+
+    let stateCopy = { ...state, //хочу скопировать все значения из старого,но messages хочу создать новую
+    messages: [...state.messages]
+    }
+
     switch (action.type) {
         case 'SEND-MESSAGE':
             let bodyMessage: MessagesType = {                                  //отправляем
                 id: new Date().getTime(),
                 message: action.bodyText
             }
+            let stateCopy1 = {...state}
+            stateCopy1.messages = [...state.messages]
+            stateCopy1.messages.push(bodyMessage);          //dialogsPage приходит в state
             state.newMessageBody = '';
-            state.messages.push(bodyMessage);          //dialogsPage приходит в state
-            return state;
+            return stateCopy1;
         case 'UPDATE-NEW-MESSAGE-BODY': //впечатываем
-            state.newMessageBody = action.body;       //dialogsPage приходит в state
-            return state;
+            let stateCopy2 = {...state}
+            stateCopy2.newMessageBody = action.body;       //dialogsPage приходит в state
+            return stateCopy2;
         default:                                      //default line
             return state;
     }
