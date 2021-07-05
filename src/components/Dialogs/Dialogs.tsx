@@ -9,13 +9,13 @@ import {DialogsPropsType} from "./DialogsContainer";
 function Dialogs(props: DialogsPropsType) {
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
 
-    let dialogsElements =
-        props.dialogsPage.dialogs.map(dialogs => <DialogItem name={dialogs.name} id={dialogs.id}/>)
+    let dialogsElements =                     //key id элемента из которого мы получаем jsx элемент!!!
+        props.dialogsPage.dialogs.map(dialogs => <DialogItem name={dialogs.name} key={dialogs.id} id={dialogs.id}/>)
 
     //значение переменной messageElements будет равно промапленному массиву объектов messages
 
     let messageElements =
-        props.dialogsPage.messages.map(messages => <Message message={messages.message} id={messages.id}/>)
+        props.dialogsPage.messages.map(messages => <Message message={messages.message} key={messages.id} id={messages.id}/>)
 
     const onSendMessageClick = () => {
         props.sendMessage(props.newMessageBody)
@@ -36,6 +36,7 @@ function Dialogs(props: DialogsPropsType) {
 
                 <div className={s.textField}>
                     <TextField
+                        value={props.newMessageBody}
                         onChange={updateNewMessageBody}
                         id="outlined-basic"
                         variant="outlined"

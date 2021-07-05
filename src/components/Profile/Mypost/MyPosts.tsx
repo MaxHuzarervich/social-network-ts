@@ -24,6 +24,7 @@ function MyPosts(props: MyPostsPropsType) {
                     <TextField id="outlined-basic"
                                variant="outlined"
                                onChange={newTextChangeHandler}
+                               value={props.messageForNewPost}
                     />
                 </div>
                 <div>

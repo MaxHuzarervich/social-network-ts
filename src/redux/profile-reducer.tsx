@@ -28,16 +28,19 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0
+            };
+            return  {
+                ...state,          //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
+                posts: [...state.posts, newPost], // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
+                messageForNewPost: ''
+            };
+        }
+        case'CHANGE-NEW-TEXT': {//впечатываем
+            return {
+                ...state,//делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
+                messageForNewPost: action.newText
             }
-            let stateCopy = {...state}; //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
-            stateCopy.posts = [...state.posts] // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
-            stateCopy.posts.push(newPost);   //profilePage приходит в state
-            stateCopy.messageForNewPost = '';
-            return stateCopy;}
-        case 'CHANGE-NEW-TEXT': {//впечатываем
-            let stateCopy = {...state}//делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
-            stateCopy.messageForNewPost = action.newText;  //profilePage приходит в state
-            return stateCopy;}
+        }
         default:                                       //default line
             return state;
     }
