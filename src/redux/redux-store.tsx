@@ -21,7 +21,7 @@ export type AppStateType = ReturnType <typeof rootReducer>; //typeof типиз�
 
 export let store = createStore(rootReducer);
 
+
 // export type AppStateType = ReturnType<typeof reducers>
 
 
-export default store;

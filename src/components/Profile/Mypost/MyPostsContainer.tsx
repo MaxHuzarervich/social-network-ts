@@ -15,6 +15,8 @@ export type MapStateToProps = initialStateType
 
 export type MyPostsPropsType = MapStateToProps & MapDispatchToPropsType
 
+//каждый раз когда в стейте происходят изменения запускается MapStateToProps,
+//и формируется новый объект, и сравниваются внутренности старого и нового объекта
 let MapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         posts: state.profilePage.posts,
