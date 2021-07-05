@@ -18,7 +18,7 @@ function Dialogs(props: DialogsPropsType) {
         props.dialogsPage.messages.map(messages => <Message message={messages.message} id={messages.id}/>)
 
     const onSendMessageClick = () => {
-        props.sendMessage()
+        props.sendMessage(props.newMessageBody)
     }
     const updateNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e)

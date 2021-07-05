@@ -7,12 +7,12 @@ import {Dispatch} from "redux";
 
 
 export type MapStateToPropsType = {
-    dialogsPage: InitialStateDialogsType,
-    newMessageBody: string
+    dialogsPage:InitialStateDialogsType,
+    newMessageBody:string
 }
 export type MapDispatchToPropsType = {
     updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void,
-    sendMessage: (props: MapStateToPropsType) => void
+    sendMessage: (newMessageBody:string) => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -29,8 +29,8 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
         },
-        sendMessage: (props: MapStateToPropsType) => {
-            dispatch(sendMessageCreator(props.newMessageBody))
+        sendMessage: (newMessageBody) => {
+            dispatch(sendMessageCreator(newMessageBody))
         }
     }
 }

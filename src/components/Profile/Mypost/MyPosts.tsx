@@ -11,7 +11,7 @@ function MyPosts(props: MyPostsPropsType) {
     (posts => <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
     //функция добавления нового поста
     const addPost = () => {
-        props.addPost();
+        props.addPost(props.messageForNewPost)
     }
     const newTextChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewPost(e);

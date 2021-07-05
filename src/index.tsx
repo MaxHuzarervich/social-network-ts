@@ -10,8 +10,8 @@ export const rerenderEntireTree = () => {
 //Provider использует ContextAPI для того чтобы засунуть в context этот store чтобы до него достучаться
     ReactDOM.render(
         <BrowserRouter>
-            <Provider store={store}>
-                <App store={store} dispatch={store.dispatch.bind(store)} />
+            <Provider  store={store}>
+                <App />
             </Provider>
         </BrowserRouter>,
         document.getElementById('root')

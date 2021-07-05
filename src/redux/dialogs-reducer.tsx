@@ -42,8 +42,8 @@ export const dialogsReducer = (state: InitialStateDialogsType = initialState, ac
                 id: new Date().getTime(),
                 message: action.bodyText
             }
-            state.messages.push(bodyMessage);          //dialogsPage приходит в state
             state.newMessageBody = '';
+            state.messages.push(bodyMessage);          //dialogsPage приходит в state
             return state;
         case 'UPDATE-NEW-MESSAGE-BODY': //впечатываем
             state.newMessageBody = action.body;       //dialogsPage приходит в state

@@ -1,13 +1,11 @@
 import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 
-
-export type AppPropsType = {
-    store: storeType,
+ type AppPropsType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type profileType = {
+type profileType = {
     profilePage: profilePageType,
     posts: Array<postsType>,
     // dispatch: (action: ActionsTypes) => void
@@ -33,12 +31,12 @@ type messagesType = {
     dialogs: Array<dialogsType>
     newMessageBody: string
 }
-export type profilePageType = {
+type profilePageType = {
     posts: Array<postsType>,
     messageForNewPost: string
 }
 
-export type rootStateType = {
+type rootStateType = {
     profilePage: profilePageType,
     dialogsPage: dialogsPageType
 }
@@ -49,7 +47,7 @@ type ActionsTypes =
     | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof sendMessageCreator>
 
-export type storeType = {
+ type storeType = {
     _state: rootStateType,
     _callSubscriber: () => void,
     subscribe: (observer: () => void) => void,     //pattern
@@ -107,5 +105,3 @@ const store: storeType = {
         this._callSubscriber();
     }
 }
-
-export default store;

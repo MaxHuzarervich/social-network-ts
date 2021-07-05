@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {addPostAC, InitialStateProfileType, newTextChangeHandlerAC} from '../../../redux/profile-reducer';
+import {addPostAC, initialStateType, newTextChangeHandlerAC} from '../../../redux/profile-reducer';
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
@@ -7,13 +7,15 @@ import {Dispatch} from "redux";
 
 
 
-type MapDispatchToPropsType = {
-    addPost: (props: InitialStateProfileType) => void
+export type MapDispatchToPropsType = {
+    addPost: (messageForNewPost:string) => void
     updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
-export type MyPostsPropsType = InitialStateProfileType & MapDispatchToPropsType
+export type MapStateToProps = initialStateType
 
-let MapStateToProps = (state: AppStateType): InitialStateProfileType => {
+export type MyPostsPropsType = MapStateToProps & MapDispatchToPropsType
+
+let MapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         posts: state.profilePage.posts,
         messageForNewPost: state.profilePage.messageForNewPost  //первый объект достает данные из стейта и передает их в пропсы
@@ -21,8 +23,8 @@ let MapStateToProps = (state: AppStateType): InitialStateProfileType => {
 }
 let MapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        addPost: (props: InitialStateProfileType) => {
-            dispatch(addPostAC(props.messageForNewPost))
+        addPost: (messageForNewPost) => {
+            dispatch(addPostAC(messageForNewPost))
         },
         updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => {
             dispatch(newTextChangeHandlerAC(e.currentTarget.value))

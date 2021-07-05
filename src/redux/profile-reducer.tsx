@@ -1,19 +1,19 @@
 import {ActionsTypes} from "./redux-store";
 
-
-export type postsType = {
+export type postType = {
     id: number,
     message: string,
     likesCount: number
 }
 
-export type InitialStateProfileType = {
-    posts:Array<postsType>,
-    messageForNewPost:string
+export type initialStateType = {
+    posts: Array<postType>
+    messageForNewPost: string
 }
 
+
 //инициализационный state,который будет инициализировать эту подветку
-let initialState:InitialStateProfileType = {
+let initialState: initialStateType = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
         {id: 2, message: 'My first post', likesCount: 20},
@@ -21,10 +21,10 @@ let initialState:InitialStateProfileType = {
     messageForNewPost: ''
 }
 //если сюда не придёт state то state-ом будет initialState
-export const profileReducer = (state:InitialStateProfileType = initialState ,action:ActionsTypes):InitialStateProfileType => {
+export const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
         case 'ADD-POST': //функция для создания нового поста
-            const newPost: postsType = {                                        //отправляем
+            const newPost: postType = {                                        //отправляем
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 0
