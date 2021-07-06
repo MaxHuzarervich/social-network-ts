@@ -1,61 +1,61 @@
 import {ActionsTypes} from "./redux-store";
 
-export type postType = {
+export type usersType = {
     id: number,
-    message: string,
-    likesCount: number
+    followed: boolean,
+    fullName: string,
+    status: string,
+    location: string,
+    country: string
 }
 
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW'
+
 export type initialStateType = {
-    posts: Array<postType>
-    messageForNewPost: string
+    users: Array<usersType>
 }
 
 
 //инициализационный state,который будет инициализировать эту подветку
 let initialState: initialStateType = {
-    posts: [
-        {id: 1, message: 'Hi, how are you?', likesCount: 15},
-        {id: 2, message: 'My first post', likesCount: 20},
-    ],
-    messageForNewPost: ''
+    users: [
+        {id: 1, followed: true, fullName: 'Angelo', status: 'I am programmer', location: 'Sacramento', country: 'USA'},
+        {id: 2, followed: false, fullName: 'Ivan', status: 'I am music editor', location: 'Moscow', country: 'Russia'},
+        {id: 3, followed: true, fullName: 'John', status: 'I am superhero!', location: 'Sydney', country: 'Australia'},
+    ]
 }
 //если сюда не придёт state то state-ом будет initialState
-export const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
+export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
-        case 'ADD-POST': {//функция для создания нового поста
-            const newPost: postType = {                                        //отправляем
-                id: new Date().getTime(),
-                message: action.postText,
-                likesCount: 0
-            };
-            return  {
-                ...state,          //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
-                posts: [...state.posts, newPost], // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
-                messageForNewPost: ''
-            };
-        }
-        case'CHANGE-NEW-TEXT': {//впечатываем
-            return {
-                ...state,//делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
-                messageForNewPost: action.newText
-            }
-        }
+        case FOLLOW:
+            let stateCopy = {
+                ...state,  //пробегаемся по массиву users,map создает новый массив элементами которого будут все те же users
+                users: state.users.map(u => {
+                    if(u.id === action.userID){//если id этого пробегаемого user равен id который нужно follow,
+                        // а он сидит в action.userID
+                       return {...u, followed:true} //то нужно вернуть его копию,с противоположным followed
+                    }
+                    return  u})//если id не совпадают то возращаем тот же объект
+            }               //раз меняем что-то в массиве, нужно сделать также его копию
+        case UNFOLLOW:
+
         default:                                       //default line
             return state;
     }
 }
-export const addPostAC =
-    (postText: string) => {
+
+export const followAC =
+    (userID: number) => {
         return {
-            type: 'ADD-POST',
-            postText: postText
+            type: FOLLOW,
+            userID: userID
         } as const
     }
-export const newTextChangeHandlerAC =
-    (newText: string) => {
+export const unfollowAC =
+    (userID: number) => {
         return {
-            type: 'CHANGE-NEW-TEXT',
-            newText: newText
+            type: UNFOLLOW,
+            userID: userID
         } as const
     }

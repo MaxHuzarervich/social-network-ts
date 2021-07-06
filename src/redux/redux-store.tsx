@@ -1,6 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
+import {followAC, unfollowAC} from "./users-reducer";
 
 
 export type ActionsTypes =
@@ -8,6 +9,8 @@ export type ActionsTypes =
     | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof followAC>
+    | ReturnType<typeof unfollowAC>
 
 //rootReducers возвращает state всего нашего приложения
 export let rootReducer = combineReducers({ //воспринимаем это как наш state
