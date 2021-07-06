@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from "redux";
 import {addPostAC, newTextChangeHandlerAC, profileReducer} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
-import {followAC, unfollowAC} from "./users-reducer";
+import {followAC, setUsersAC, unfollowAC, usersReducer} from "./users-reducer";
 
 
 export type ActionsTypes =
@@ -11,12 +11,14 @@ export type ActionsTypes =
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof followAC>
     | ReturnType<typeof unfollowAC>
+    | ReturnType<typeof setUsersAC>
 
 //rootReducers возвращает state всего нашего приложения
 export let rootReducer = combineReducers({ //воспринимаем это как наш state
     profilePage: profileReducer,      //создаем объекты у которых есть св-ва и значения
-    dialogsPage: dialogsReducer
-    //sideBar:sideBarReducer
+    dialogsPage: dialogsReducer,
+    //sideBar:sideBarReducer,
+    usersPage: usersReducer
 })
 
 export type AppStateType = ReturnType <typeof rootReducer>; //typeof типизирует автоматически ф-цию,
