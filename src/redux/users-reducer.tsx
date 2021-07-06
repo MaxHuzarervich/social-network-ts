@@ -26,7 +26,7 @@ let initialState: initialStateType = {
     users: [
         {
             id: 1,
-            photoUrl:'https://ru.files.fm/u/xrgdrrxdj',
+            photoUrl:'https://files.fm/thumb_show.php?i=w972bbxwg',
             followed: true,
             fullName: 'Angelo',
             status: 'I am programmer',
@@ -34,7 +34,7 @@ let initialState: initialStateType = {
         },
         {
             id: 2,
-            photoUrl:'https://ru.files.fm/u/xrgdrrxdj',
+            photoUrl:'https://files.fm/thumb_show.php?i=w972bbxwg',
             followed: false,
             fullName: 'Ivan',
             status: 'I am music editor',
@@ -42,7 +42,7 @@ let initialState: initialStateType = {
         },
         {
             id: 3,
-            photoUrl:'https://ru.files.fm/u/xrgdrrxdj',
+            photoUrl:'https://files.fm/thumb_show.php?i=w972bbxwg',
             followed: true,
             fullName: 'John',
             status: 'I am superhero!',

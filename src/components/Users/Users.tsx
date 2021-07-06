@@ -1,5 +1,6 @@
 import React from "react";
 import {initialStateType} from "../../redux/users-reducer";
+import s from "Users.module.css";
 
 export let Users = (props:initialStateType) => {
     // для каждого пользователя вернуть <div>
@@ -7,10 +8,11 @@ export let Users = (props:initialStateType) => {
         {props.users.map(u => <div key={u.id}>
         <span>
             <div>
-                <img src={u.photoUrl}/>
+                <img src={u.photoUrl} className={s.UsersPhoto}/>
             </div>
             <div>
-                <button>Follow</button>
+                {u.followed ? <button onClick={()=>{props.unfollow(u.id)}}>Unfollow</button> :
+                              <button onClick={()=>{props.follow(u.id)}}>Follow</button>}
             </div>
         </span>
         <span>
