@@ -16,10 +16,12 @@ const App = () => {
             <div className='app-wrapper-content'>
 
                 <Route path='/dialogs' render={() =>
-                    <DialogsContainer />}/>
+                    <DialogsContainer/>}/>
 
                 <Route path='/profile' render={() =>
-                    <Profile />}/>
+                    <Profile/>}/>
+                <Route path='/users' render={() =>
+                    <div></div>} />
 
             </div>
         </div>
