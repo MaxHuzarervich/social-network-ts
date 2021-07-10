@@ -84,7 +84,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
     }
 }
 
-export const followAC = (userID: number) => {
+export const followAC = (userID: number) => {              //чистая ф-ция возвращающая action
     return {type: FOLLOW, userID: userID} as const
 }
 export const unfollowAC = (userID: number) => {

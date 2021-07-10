@@ -14,7 +14,8 @@ let MapDispatchToProps = (dispatch: Dispatch) => {
     return {
         follow: (userID: number) => {
             dispatch(followAC(userID))             //мы диспатчим результат работы action creator-а
-        },
+        },                                         //reducer этот action обрабатывает, стейт меняется и
+                                                   // происходит перерисовка
         unfollow: (userID: number) => {
             dispatch(unfollowAC(userID))
         },
