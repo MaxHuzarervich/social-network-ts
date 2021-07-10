@@ -24,5 +24,5 @@ let MapDispatchToProps = (dispatch: Dispatch) => {
         }
     }
 }
-
+//создаем контейнерную компоненту при помощи ф-ции connect
 export const UsersContainer = connect(MapStateToProps, MapDispatchToProps)(Users)

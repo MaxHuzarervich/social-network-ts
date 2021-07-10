@@ -2,7 +2,7 @@ import {ActionsTypes} from "./redux-store";
 
 export type usersType = {
     id: number,
-    photoUrl:string,
+    photoUrl: string,
     followed: boolean,
     fullName: string,
     status: string,
@@ -26,7 +26,7 @@ let initialState: initialStateType = {
     users: [
         {
             id: 1,
-            photoUrl:'https://files.fm/thumb_show.php?i=w972bbxwg',
+            photoUrl: 'https://files.fm/thumb_show.php?i=w972bbxwg',
             followed: true,
             fullName: 'Angelo',
             status: 'I am programmer',
@@ -34,7 +34,7 @@ let initialState: initialStateType = {
         },
         {
             id: 2,
-            photoUrl:'https://files.fm/thumb_show.php?i=w972bbxwg',
+            photoUrl: 'https://files.fm/thumb_show.php?i=w972bbxwg',
             followed: false,
             fullName: 'Ivan',
             status: 'I am music editor',
@@ -42,7 +42,7 @@ let initialState: initialStateType = {
         },
         {
             id: 3,
-            photoUrl:'https://files.fm/thumb_show.php?i=w972bbxwg',
+            photoUrl: 'https://files.fm/thumb_show.php?i=w972bbxwg',
             followed: true,
             fullName: 'John',
             status: 'I am superhero!',
@@ -56,7 +56,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
         case FOLLOW:
             return {
                 ...state,  //пробегаемся по массиву users,map создает новый массив элементами которого будут все те же users
-                users: state.users.map(u => {
+                users: state.users.map(u => { //map возвращает новый массив на основе старого
                     if (u.id === action.userID) {//если id этого пробегаемого user равен id который нужно follow,
                         // а он сидит в action.userID
                         return {...u, followed: true} //то нужно вернуть его копию,с противоположным followed
@@ -85,11 +85,11 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
 }
 
 export const followAC = (userID: number) => {              //чистая ф-ция возвращающая action
-    return {type: FOLLOW, userID: userID} as const
-}
+    return {type: FOLLOW, userID} as const
+}                         //user которого нужно follow
 export const unfollowAC = (userID: number) => {
-    return {type: UNFOLLOW, userID: userID} as const
-}
+    return {type: UNFOLLOW, userID} as const
+}                         //user которого нужно unfollow
 export const setUsersAC = (users: Array<usersType>) => {
-    return {type: SET_USERS, users: users} as const
+    return {type: SET_USERS, users} as const
 }
