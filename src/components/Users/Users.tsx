@@ -5,6 +5,9 @@ import './Users.module.css';
 
 export let Users = (props: UsersPropsType) => {
     if (props.usersPage.users.length === 0) {
+
+
+
         props.setUser([
             {
                 id: 1,
