@@ -3,14 +3,24 @@ import {Users} from "./Users";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
-import {followAC, setUsersAC, unfollowAC, usersType} from "../../redux/users-reducer";
+import {followAC, initialStateType, setUsersAC, unfollowAC, userType} from "../../redux/users-reducer";
 
-let MapStateToProps = (state: AppStateType) => {
+type MapStatePropsType = {
+    usersPage: initialStateType
+}
+type MapDispatchPropsType = {
+    follow: (userID: number) => void,
+    unfollow: (userID: number) => void,
+    setUser: (users: Array<userType>) => void
+}
+export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
+
+let MapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
-        users: state.usersPage.users
+        usersPage: state.usersPage
     }
 }
-let MapDispatchToProps = (dispatch: Dispatch) => {
+let MapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
     return {
         follow: (userID: number) => {
             dispatch(followAC(userID))             //мы диспатчим результат работы action creator-а
@@ -19,7 +29,7 @@ let MapDispatchToProps = (dispatch: Dispatch) => {
         unfollow: (userID: number) => {
             dispatch(unfollowAC(userID))
         },
-        setUser: (users:Array<usersType>) => {
+        setUser: (users: Array<userType>) => {
             dispatch(setUsersAC(users))
         }
     }

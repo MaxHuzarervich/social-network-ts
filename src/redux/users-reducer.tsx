@@ -1,6 +1,6 @@
 import {ActionsTypes} from "./redux-store";
 
-export type usersType = {
+export type userType = {
     id: number,
     photoUrl: string,
     followed: boolean,
@@ -16,39 +16,14 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS'
 
-export type initialStateType = {
-    users: Array<usersType>
-}
 
+export type initialStateType = {
+    users: Array<userType>
+};
 
 //инициализационный state,который будет инициализировать эту подветку
 let initialState: initialStateType = {
-    users: [
-        {
-            id: 1,
-            photoUrl: 'https://files.fm/thumb_show.php?i=w972bbxwg',
-            followed: true,
-            fullName: 'Angelo',
-            status: 'I am programmer',
-            location: {city: 'Sacramento', country: 'USA'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://files.fm/thumb_show.php?i=w972bbxwg',
-            followed: false,
-            fullName: 'Ivan',
-            status: 'I am music editor',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://files.fm/thumb_show.php?i=w972bbxwg',
-            followed: true,
-            fullName: 'John',
-            status: 'I am superhero!',
-            location: {city: 'Sydney', country: 'Australia'}
-        },
-    ]
+    users: []
 }
 //если сюда не придёт state то state-ом будет initialState
 export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -90,6 +65,6 @@ export const followAC = (userID: number) => {              //чистая ф-ц�
 export const unfollowAC = (userID: number) => {
     return {type: UNFOLLOW, userID} as const
 }                         //user которого нужно unfollow
-export const setUsersAC = (users: Array<usersType>) => {
+export const setUsersAC = (users: Array<userType>) => {
     return {type: SET_USERS, users} as const
 }
