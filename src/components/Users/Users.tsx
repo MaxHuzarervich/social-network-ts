@@ -8,7 +8,7 @@ import userPhoto from '../../assets/images/user.png'
 
 export let Users = (props: UsersPropsType) => {
     if (props.usersPage.users.length === 0) {
-        debugger       //когда выполнишь запрос, выполни затем воооооот этот вот коллбек(response - ответ)
+        debugger       //когда выполнишь запрос, выполни затем воооооот этот вот коллбек(response-ответ)
         axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response=> {
 
             props.setUser(response.data.items)
