@@ -15,7 +15,8 @@ function Dialogs(props: DialogsPropsType) {
     //значение переменной messageElements будет равно промапленному массиву объектов messages
 
     let messageElements =
-        props.dialogsPage.messages.map(messages => <Message message={messages.message} key={messages.id} id={messages.id}/>)
+        props.dialogsPage.messages.map(messages => <Message message={messages.message} key={messages.id}
+                                                            id={messages.id}/>)
 
     const onSendMessageClick = () => {
         props.sendMessage(props.newMessageBody)

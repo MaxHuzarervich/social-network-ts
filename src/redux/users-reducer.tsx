@@ -20,20 +20,21 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 
 export type initialStateType = {
     users: Array<userType>,
-    pageSize:number,
-    totalUsersCount:number,
+    pageSize: number,
+    totalUsersCount: number,
     currentPage: number
 };
 
 //инициализационный state,который будет инициализировать эту подветку
 let initialState: initialStateType = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 19,
+    pageSize: 10,
+    totalUsersCount: 0,
     currentPage: 1
 }
 //если сюда не придёт state то state-ом будет initialState
@@ -62,11 +63,15 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
                 )
             }
         case SET_USERS: {            //берем из стейта старых юзеров,и дописываем к ним юзеров из экшена
-            return {...state, users: [...state.users, ...action.users]}//склеиваем 2-а массива тот который
+            return {...state, users: action.users}//склеиваем 2-а массива тот который
             // был в стейте и тот который пришел в экшене
         }
         case SET_CURRENT_PAGE: {
-            return { ...state,currentPage: action.currentPage}
+            return {...state, currentPage: action.currentPage}
+        }
+        case SET_TOTAL_USERS_COUNT: {
+            return {...state, totalUsersCount: action.count} //делаем копию стейта и подменяем
+            // то св-во которое нужно подменить в этой копии
         }
         default:                                       //default line
             return state;
@@ -80,6 +85,11 @@ export const unfollowAC = (userID: number) => {
     return {type: UNFOLLOW, userID} as const
 }                         //user которого нужно unfollow
 export const setUsersAC = (users: Array<userType>) => {
-    return {type: SET_USERS, users} as const
+    return {type: SET_USERS, users} as const                //засетать всех юзров
 }
-export const setCurrentPageAC = ()
+export const setCurrentPageAC = (currentPage: number) => {          //изменить текущую страничку
+    return {type: SET_CURRENT_PAGE, currentPage} as const
+}
+export const setUsersTotalCountAC = (totalUsersCount: number) => {   //установить общее кол-во пользователей
+    return {type: SET_TOTAL_USERS_COUNT, count: totalUsersCount} as const
+}
