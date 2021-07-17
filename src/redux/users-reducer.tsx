@@ -22,12 +22,18 @@ const SET_USERS = 'SET_USERS'
 
 
 export type initialStateType = {
-    users: Array<userType>
+    users: Array<userType>,
+    pageSize:number,
+    totalUsersCount:number,
+    currentPage: number
 };
 
 //инициализационный state,который будет инициализировать эту подветку
 let initialState: initialStateType = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 19,
+    currentPage: 1
 }
 //если сюда не придёт state то state-ом будет initialState
 export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {

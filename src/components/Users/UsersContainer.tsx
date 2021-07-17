@@ -6,7 +6,7 @@ import {Dispatch} from "redux";
 import {followAC, initialStateType, setUsersAC, unfollowAC, userType} from "../../redux/users-reducer";
 
 type MapStatePropsType = {
-    usersPage: initialStateType
+    usersPage: initialStateType,
 }
 type MapDispatchPropsType = {
     follow: (userID: number) => void,
@@ -17,7 +17,10 @@ export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
 let MapStateToProps = (state: AppStateType):MapStatePropsType => {
     return {
-        usersPage: state.usersPage
+        usersPage: state.usersPage,
+        pageSize: state.usersPage.pageSize,
+        totalUsersCount:state.usersPage.totalUsersCount,
+        currentPage: state.usersPage.currentPage
     }
 }
 let MapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {

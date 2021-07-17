@@ -1,9 +1,10 @@
 import React from "react";
 import {Button} from "@material-ui/core";
-import './Users.module.css';
+import s from "./Users.module.css";
 import axios from 'axios';
 import userPhoto from '../../assets/images/user.png'
 import {UsersPropsType} from "./UsersContainer";
+
 
 
 export class Users extends React.Component<UsersPropsType, any>{
@@ -19,12 +20,24 @@ export class Users extends React.Component<UsersPropsType, any>{
         });
     }
 
-
     render() {
+                         //округляем кол-во страниц в большую сторону т.к. при делении может получиться нецелое число
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
+        let pages = [];
+        for (let i = 1; i <= pagesCount; i++){
+            pages.push(i);
+        }
+
+
         return <div className='User-Img'>
+            <div>
+                {pages.map(p => {
+                   return <span className={this.props.currentPage === p && s.selectedPage}>{p}</span>
+                })}
+            </div>
             {this.props.usersPage.users.map(u => <div key={u.id}>
                 <div>
-                    <div>
+                    <div className={s.UserImg}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto}/>
                     </div>
                     <div>
