@@ -18,7 +18,8 @@ export type userType = {
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
-const SET_USERS = 'SET_USERS'
+const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 
 
 export type initialStateType = {
@@ -64,6 +65,9 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
             return {...state, users: [...state.users, ...action.users]}//склеиваем 2-а массива тот который
             // был в стейте и тот который пришел в экшене
         }
+        case SET_CURRENT_PAGE: {
+            return { ...state,currentPage: action.currentPage}
+        }
         default:                                       //default line
             return state;
     }
@@ -78,3 +82,4 @@ export const unfollowAC = (userID: number) => {
 export const setUsersAC = (users: Array<userType>) => {
     return {type: SET_USERS, users} as const
 }
+export const setCurrentPageAC = ()

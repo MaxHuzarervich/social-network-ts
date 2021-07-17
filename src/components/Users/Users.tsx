@@ -14,7 +14,8 @@ export class Users extends React.Component<UsersPropsType, any>{
     }
     componentDidMount() {
         //когда выполнишь запрос, выполни затем вот этот коллбек(response-ответ)
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}')
+            .then(response => {
             debugger
             this.props.setUser(response.data.items)
         });
@@ -32,7 +33,8 @@ export class Users extends React.Component<UsersPropsType, any>{
         return <div className='User-Img'>
             <div>
                 {pages.map(p => {
-                   return <span className={this.props.currentPage === p && s.selectedPage}>{p}</span>
+                   return <span className={this.props.currentPage === p && s.selectedPage}
+                   onClick={() => {this.props.setCurrentPage(p)}}>{p}</span>//'p' по которому мы итерируемся будет теекущей страничкой
                 })}
             </div>
             {this.props.usersPage.users.map(u => <div key={u.id}>
