@@ -27,7 +27,8 @@ export type initialStateType = {
     users: Array<userType>,
     pageSize: number,
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 };
 
 //инициализационный state,который будет инициализировать эту подветку
@@ -35,7 +36,8 @@ let initialState: initialStateType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: false
 }
 //если сюда не придёт state то state-ом будет initialState
 export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -62,11 +64,11 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
                     }
                 )
             }
-        case SET_USERS: {            //берем из стейта старых юзеров,и дописываем к ним юзеров из экшена
-            return {...state, users: action.users}//склеиваем 2-а массива тот который
-            // был в стейте и тот который пришел в экшене
+        case SET_USERS: {
+            return {...state, users: action.users}
+
         }
-        case SET_CURRENT_PAGE: {
+        case SET_CURRENT_PAGE: { //меняем currentPage на тот что сидит в action
             return {...state, currentPage: action.currentPage}
         }
         case SET_TOTAL_USERS_COUNT: {

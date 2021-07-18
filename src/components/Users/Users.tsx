@@ -7,7 +7,7 @@ import userPhoto from '../../assets/images/user.png'
 export let Users = (props: UsersPropsType) => {
     //округляем кол-во страниц в большую сторону т.к. при делении может получиться нецелое число
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize) //кол-во страниц
 
     let pages = [];
 
@@ -18,8 +18,8 @@ export let Users = (props: UsersPropsType) => {
     return <div>
         <div>
             {pages.map(p => {
-                return <span className={props.currentPage === p ? s.selectedPage : undefined}
-                             onClick={() => {
+                return <span className={props.currentPage === p ? s.selectedPage : ''}
+                             onClick={(event) => {
                                  props.setCurrentPage(p)
                              }}>{p}</span>//'p' по которому мы итерируемся будет текущей страничкой
             })}

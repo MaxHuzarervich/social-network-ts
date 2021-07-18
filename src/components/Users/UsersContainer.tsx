@@ -16,9 +16,9 @@ import {Users} from "./Users";
 
 export class UsersContainer extends React.Component<UsersPropsType, any> {
 
-    constructor(props: UsersPropsType) {
-        super(props);
-    }
+    // constructor(props: UsersPropsType) {
+    //     super(props);
+    // }
 
     componentDidMount() {
         //когда выполнишь запрос, выполни затем вот этот коллбек(response-ответ)
@@ -31,24 +31,28 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
                 this.props.setUser(response.data.items)
             });
     }
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
-        return <Users totalUsersCount={this.props.totalUsersCount}
-                      pageSize={this.props.pageSize}
-                      currentPage={this.props.currentPage}
-                      follow={this.props.follow}
-                      unfollow={this.props.unfollow}
-                      usersPage={this.props.usersPage}
-                      setCurrentPage={this.props.setCurrentPage}
-                      setUser={this.props.setUser}
-                      setTotalUsersCount={this.props.setTotalUsersCount}
+        return <>
+            {this.props.isFetching ? <img/> : null}
+            <Users totalUsersCount={this.props.totalUsersCount}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+                   usersPage={this.props.usersPage}
+                   setCurrentPage={this.props.setCurrentPage}
+                   setUser={this.props.setUser}
+                   setTotalUsersCount={this.props.setTotalUsersCount}
+                   isFetching={this.props.isFetching}
 
-        />
+            />
+        </>
     }
 }
 
@@ -56,7 +60,8 @@ type MapStatePropsType = {
     usersPage: initialStateType,
     pageSize: number,
     totalUsersCount: number,
-    currentPage: number
+    currentPage: number,
+    isFetching: boolean
 }
 type MapDispatchPropsType = {
     follow: (userID: number) => void,
@@ -72,7 +77,8 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
         usersPage: state.usersPage,
         pageSize: state.usersPage.pageSize,               //кол-во пользователей на странице
         totalUsersCount: state.usersPage.totalUsersCount, //общее кол-во пользователей
-        currentPage: state.usersPage.currentPage          //текущая страница
+        currentPage: state.usersPage.currentPage,         //текущая страница
+        isFetching: state.usersPage.isFetching
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
 let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
