@@ -7,12 +7,14 @@ import {
     initialStateType,
     setCurrentPageAC,
     setUsersAC,
-    setUsersTotalCountAC,
+    setUsersTotalCountAC, toggleIsFetchingAC,
     unfollowAC,
     userType
 } from "../../redux/users-reducer";
 import axios from "axios";
 import {Users} from "./Users";
+import preloader from '../../assets/images/preloader.gif'
+import {Preloader} from "../common/Preloader/Preloader";
 
 export class UsersContainer extends React.Component<UsersPropsType, any> {
 
@@ -21,9 +23,11 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
     // }
 
     componentDidMount() {
+        this.props.toggleIsFetching(true); //запрос пошел
         //когда выполнишь запрос, выполни затем вот этот коллбек(response-ответ)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
                 this.props.setUser(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
             });
@@ -31,15 +35,17 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
+                this.props.toggleIsFetching(false);
                 this.props.setUser(response.data.items)
             });
     }
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
         return <>
-            {this.props.isFetching ? <img/> : null}
+            {this.props.isFetching ? <Preloader /> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
@@ -50,6 +56,7 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
                    setUser={this.props.setUser}
                    setTotalUsersCount={this.props.setTotalUsersCount}
                    isFetching={this.props.isFetching}
+                   toggleIsFetching={this.props.toggleIsFetching}
 
             />
         </>
@@ -68,7 +75,8 @@ type MapDispatchPropsType = {
     unfollow: (userID: number) => void,
     setUser: (users: Array<userType>) => void,
     setCurrentPage: (pageNumber: number) => void,
-    setTotalUsersCount: (totalCount: number) => void
+    setTotalUsersCount: (totalCount: number) => void,
+    toggleIsFetching: (isFetching: boolean) => void
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
@@ -92,12 +100,15 @@ let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
         },
         setUser: (users: Array<userType>) => {
             dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (pageNumber: number) => {
-            dispatch(setCurrentPageAC(pageNumber))
+        },                                                //создаем здесь коллбеки которые попадут в пропсы
+        setCurrentPage: (pageNumber: number) => {         //если компонента тебя вызовет просто задиспатч экшн
+            dispatch(setCurrentPageAC(pageNumber))        //мы диспатчим вызов экшн креатора!!!
         },
         setTotalUsersCount: (totalCount: number) => {
             dispatch(setUsersTotalCountAC(totalCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }

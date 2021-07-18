@@ -21,6 +21,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 
 export type initialStateType = {
@@ -75,6 +76,9 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
             return {...state, totalUsersCount: action.count} //делаем копию стейта и подменяем
             // то св-во которое нужно подменить в этой копии
         }
+        case TOGGLE_IS_FETCHING: {
+            return {...state, isFetching: action.isFetching} //теперь можно задеспатчить экшн создав экшнкреатор
+        }
         default:                                       //default line
             return state;
     }
@@ -94,4 +98,8 @@ export const setCurrentPageAC = (currentPage: number) => {          //измен
 }
 export const setUsersTotalCountAC = (totalUsersCount: number) => {   //установить общее кол-во пользователей
     return {type: SET_TOTAL_USERS_COUNT, count: totalUsersCount} as const
+}
+export const toggleIsFetchingAC = (isFetching:boolean) => {
+    return {type: TOGGLE_IS_FETCHING, isFetching} as const  //экшн-это объект у которго есть тип
+                                                        // и св-во которое нужно редьюсеру для для обработки этого экшена
 }
