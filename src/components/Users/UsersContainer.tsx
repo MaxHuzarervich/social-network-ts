@@ -3,12 +3,12 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {
-    followAC,
+    follow,
     initialStateType,
-    setCurrentPageAC,
-    setUsersAC,
-    setUsersTotalCountAC, toggleIsFetchingAC,
-    unfollowAC,
+    setCurrentPage,
+    setUsers,
+    setUsersTotalCount, toggleIsFetching,
+    unfollow,
     userType
 } from "../../redux/users-reducer";
 import axios from "axios";
@@ -45,7 +45,7 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
         return <>
-            {this.props.isFetching ? <Preloader /> : null}
+            {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
                    currentPage={this.props.currentPage}
@@ -89,28 +89,31 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
         isFetching: state.usersPage.isFetching
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
-let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userID: number) => {
-            dispatch(followAC(userID))             //мы диспатчим результат работы action creator-а
-        },                                         //reducer этот action обрабатывает, стейт меняется и
-                                                   // происходит перерисовка
-        unfollow: (userID: number) => {
-            dispatch(unfollowAC(userID))
-        },
-        setUser: (users: Array<userType>) => {
-            dispatch(setUsersAC(users))
-        },                                                //создаем здесь коллбеки которые попадут в пропсы
-        setCurrentPage: (pageNumber: number) => {         //если компонента тебя вызовет просто задиспатч экшн
-            dispatch(setCurrentPageAC(pageNumber))        //мы диспатчим вызов экшн креатора!!!
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setUsersTotalCountAC(totalCount))
-        },
-        toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
-}
+// let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+//     return {
+//         follow: (userID: number) => {
+//             dispatch(followAC(userID))             //мы диспатчим результат работы action creator-а
+//         },                                         //reducer этот action обрабатывает, стейт меняется и
+//                                                    // происходит перерисовка
+//         unfollow: (userID: number) => {
+//             dispatch(unfollowAC(userID))
+//         },
+//         setUser: (users: Array<userType>) => {
+//             dispatch(setUsersAC(users))
+//         },                                                //создаем здесь коллбеки которые попадут в пропсы
+//         setCurrentPage: (pageNumber: number) => {         //если компонента тебя вызовет просто задиспатч экшн
+//             dispatch(setCurrentPageAC(pageNumber))        //мы диспатчим вызов экшн креатора!!!
+//         },
+//         setTotalUsersCount: (totalCount: number) => {
+//             dispatch(setUsersTotalCountAC(totalCount))
+//         },
+//         toggleIsFetching: (isFetching: boolean) => {
+//             dispatch(toggleIsFetchingAC(isFetching))
+//         }
+//     }
+// }
 //создаем контейнерную компоненту при помощи ф-ции connect
-export default connect(MapStateToProps, MapDispatchToProps)(UsersContainer)
+export default connect(MapStateToProps, {
+    follow, unfollow, setUsers, setCurrentPage, setUsersTotalCount,
+    toggleIsFetching
+})(UsersContainer)
