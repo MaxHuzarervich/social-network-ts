@@ -2,7 +2,7 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import {Button} from "@material-ui/core";
 import s from "./Users.module.css";
-import userPhoto from '../../assets/images/user.png'
+import user from '../../assets/images/user.png'
 
 export let Users = (props: UsersPropsType) => {
     //округляем кол-во страниц в большую сторону т.к. при делении может получиться нецелое число
@@ -20,7 +20,7 @@ export let Users = (props: UsersPropsType) => {
             {pages.map(p => {
                 return <span className={props.currentPage === p ? s.selectedPage : ''}
                              onClick={(event) => {
-                                 props.setCurrentPage(p)
+                                 props.onPageChanged(p)
                              }}>{p}</span>//'p' по которому мы итерируемся будет текущей страничкой
             })}
         </div>

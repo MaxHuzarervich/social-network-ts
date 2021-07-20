@@ -1,19 +1,18 @@
 import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
 import {
     follow,
     initialStateType,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount, toggleIsFetching,
+    setUsersTotalCount,
+    toggleIsFetching,
     unfollow,
     userType
 } from "../../redux/users-reducer";
 import axios from "axios";
 import {Users} from "./Users";
-import preloader from '../../assets/images/preloader.gif'
 import {Preloader} from "../common/Preloader/Preloader";
 
 export class UsersContainer extends React.Component<UsersPropsType, any> {
@@ -57,6 +56,7 @@ export class UsersContainer extends React.Component<UsersPropsType, any> {
                    setTotalUsersCount={this.props.setTotalUsersCount}
                    isFetching={this.props.isFetching}
                    toggleIsFetching={this.props.toggleIsFetching}
+                   onPageChanged={this.props.onPageChanged}
 
             />
         </>
@@ -76,8 +76,9 @@ type MapDispatchPropsType = {
     setUser: (users: Array<userType>) => void,
     setCurrentPage: (pageNumber: number) => void,
     setTotalUsersCount: (totalCount: number) => void,
-    toggleIsFetching: (isFetching: boolean) => void
-}
+    toggleIsFetching: (isFetching: boolean) => void,
+    onPageChanged:(pageNumber: number) => void }
+
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType
 
 let MapStateToProps = (state: AppStateType): MapStatePropsType => {
@@ -113,7 +114,7 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
 //     }
 // }
 //создаем контейнерную компоненту при помощи ф-ции connect
-export default connect(MapStateToProps, {
+export const UserContainer2 = connect(MapStateToProps, {
     follow, unfollow, setUsers, setCurrentPage, setUsersTotalCount,
     toggleIsFetching
 })(UsersContainer)
