@@ -2,9 +2,11 @@ import React from "react";
 import {UsersPropsType} from "./UsersContainer";
 import {Button} from "@material-ui/core";
 import s from "./Users.module.css";
-import user from '../../assets/images/user.png'
+import user from '../../assets/images/user.gif'
+
 
 export let Users = (props: UsersPropsType) => {
+
     //округляем кол-во страниц в большую сторону т.к. при делении может получиться нецелое число
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize) //кол-во страниц
@@ -27,7 +29,7 @@ export let Users = (props: UsersPropsType) => {
         {props.usersPage.users.map(u => <div key={u.id}>
             <div>
                 <div className={s.UserImg}>
-                    {/*<img src={u.photos.small != null ? u.photos.small : userPhoto}/>*/}
+                    <img src={u.photos.small != null ? u.photos.small : user}/>
                 </div>
                 <div>
                     {u.followed ? <Button color={'default'} onClick={() => {

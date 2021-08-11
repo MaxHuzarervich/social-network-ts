@@ -84,22 +84,22 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
     }
 }
 
-export const follow = (userID: number) => {              //чистая ф-ция возвращающая action
+export const followAC = (userID: number) => {              //чистая ф-ция возвращающая action
     return {type: FOLLOW, userID} as const
 }                         //user которого нужно follow
-export const unfollow = (userID: number) => {
+export const unfollowAC = (userID: number) => {
     return {type: UNFOLLOW, userID} as const
 }                         //user которого нужно unfollow
-export const setUsers = (users: Array<userType>) => {
+export const setUsersAC = (users: Array<userType>) => {
     return {type: SET_USERS, users} as const                //засетать всех юзров
 }
-export const setCurrentPage = (currentPage: number) => {          //изменить текущую страничку
+export const setCurrentPageAC = (currentPage: number) => {          //изменить текущую страничку
     return {type: SET_CURRENT_PAGE, currentPage} as const
 }
-export const setUsersTotalCount = (totalUsersCount: number) => {   //установить общее кол-во пользователей
+export const setUsersTotalCountAC = (totalUsersCount: number) => {   //установить общее кол-во пользователей
     return {type: SET_TOTAL_USERS_COUNT, count: totalUsersCount} as const
 }
-export const toggleIsFetching = (isFetching:boolean) => {
+export const toggleIsFetchingAC = (isFetching:boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const  //экшн-это объект у которго есть тип
                                                         // и св-во которое нужно редьюсеру для для обработки этого экшена
 }

@@ -21,6 +21,7 @@ let initialState: initialStateType = {
     messageForNewPost: ''
 }
 //если сюда не придёт state то state-ом будет initialState
+
 export const profileReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
         case 'ADD-POST': {//функция для создания нового поста

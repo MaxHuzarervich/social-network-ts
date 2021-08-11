@@ -55,7 +55,7 @@ type ActionsTypes =
     dispatch: (action: ActionsTypes) => void
 }
 
-const store: storeType = {
+ const store: storeType = {
     _state: {
         profilePage: {
             posts: [
