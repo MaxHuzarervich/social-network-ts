@@ -23,7 +23,7 @@ const App = () => {
                     <Profile/>}/>
 
                 <Route path='/users' render={() =>
-                    <UserContainer />}/>
+                    <UserContainer  onPageChanged={pageNumber => {}}/>}/>
 
             </div>
         </div>
