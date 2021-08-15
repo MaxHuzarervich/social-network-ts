@@ -1,12 +1,12 @@
 import React from "react";
-import {UsersPropsType} from "./UsersContainer";
+import {UsersContainerPropsType} from "./UsersContainer";
 import {Button} from "@material-ui/core";
 import s from "./Users.module.css";
 import user from '../../assets/images/user.jpg'
 import { NavLink } from "react-router-dom";
 
 
-export let Users = (props: UsersPropsType) => {
+export let Users = (props: UsersContainerPropsType) => {
 
     //округляем кол-во страниц в большую сторону т.к. при делении может получиться нецелое число
 
@@ -18,7 +18,7 @@ export let Users = (props: UsersPropsType) => {
         pages.push(i);
     }
 
-    return <div>
+    return <div>    
         <div>
             {pages.map(p => {
                 return <span className={props.currentPage === p ? s.selectedPage : ''}

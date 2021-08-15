@@ -17,7 +17,7 @@ import {Preloader} from "../common/Preloader/Preloader";
 
 //контейнерная классовая компонента, которая делает запрос на сервер!
 
-export class UsersContainer extends React.Component<UsersPropsType, any> {
+export class UsersContainer extends React.Component<UsersContainerPropsType, any> {
 
     //componentDidMount - метод жизненного цикла!
     componentDidMount() {
@@ -90,10 +90,9 @@ export type FunctionsForUsersComponentPropsType = {
     onPageChanged: (pageNumber: number) => void
 }
 
-export type UsersPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
+export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
 // &
 // MapDispatchPropsType
-
 let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: state.usersPage,
@@ -103,7 +102,6 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
         isFetching: state.usersPage.isFetching
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
-
 // let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 //     return {
 //         follow: (userID: number) => {
@@ -128,7 +126,6 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
 //
 //     }
 // }
-
 //создаем контейнерную компоненту при помощи ф-ции connect
 export default connect(MapStateToProps,
     {
