@@ -76,7 +76,7 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 newText: newText
             } as const
         }
-    export const setUserProfile = (profile: any) => {
+    export const setUserProfileAC = (profile: any) => {
         return {
             type: SET_USER_PROFILE,
             profile: profile

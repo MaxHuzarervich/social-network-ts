@@ -1,10 +1,10 @@
 import React from 'react';
 import s from './ProfileInfo.module.css';
-import {MapStateToPropsType} from "../ProfileContainer";
+import {OwnPropsType} from "../ProfileContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
 
 
-function ProfileInfo(props: MapStateToPropsType) {
+function ProfileInfo(props: OwnPropsType) {
     if(!props.profile){
         return <Preloader />
     }
