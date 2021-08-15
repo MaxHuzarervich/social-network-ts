@@ -52,7 +52,7 @@ export const profileReducer = (state: initialStateType = initialState, action: A
         case SET_USER_PROFILE: {
             return {
                 ...state,
-                profile: action.profile
+                profile: action.profile   //копия стейта, в которой меняем профайл на профайл который сидит в экшн
             }
         }
         default: {                                      //default line
@@ -76,9 +76,10 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 newText: newText
             } as const
         }
-    export const setUserProfileAC = (profile: any) => {
+    export const setUserProfile = (profile: any) => {
         return {
             type: SET_USER_PROFILE,
             profile: profile
-        }
+        } as const
     }
+//экшн - объект у котрого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт

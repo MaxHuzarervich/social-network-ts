@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {setUserProfileAC} from "../../redux/profile-reducer";
+import {setUserProfile} from "../../redux/profile-reducer";
 
 
 export type MapStateToPropsType = {
@@ -42,7 +42,7 @@ export class ProfileContainer extends React.Component <PropsType, any> {
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
             .then(response => {
-                this.props.setUserProfile(response.data);
+                this.props.setUserProfile(response.data); //берем наш объект и сетаем его в редьюсер
                 debugger
             })
     }
@@ -57,4 +57,4 @@ let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile
 })
 //--------------------------------------------------------------------------
-export default connect(MapStateToProps, {setUserProfile: setUserProfileAC})(ProfileContainer)
+export default connect(MapStateToProps, {setUserProfile: setUserProfile})(ProfileContainer)
