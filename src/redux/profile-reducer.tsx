@@ -1,5 +1,4 @@
 import {ActionsTypes} from "./redux-store";
-import {MapStateToPropsType} from "../components/Profile/ProfileContainer";
 
 export type postType = {
     id: number,
@@ -10,7 +9,28 @@ export type postType = {
 export type initialStateType = {
     posts: Array<postType>
     messageForNewPost: string
-    profile: MapStateToPropsType
+    profile: ProfileType
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: {
+        github: string
+        vk: string
+        facebook: string
+        instagram: string
+        twitter: string
+        website: string
+        youtube: string
+        mainLink: string
+    }
+    photos: {
+        small: string
+        large: string
+    }
 }
 
 const ADD_POST = 'ADD-POST'
@@ -25,7 +45,7 @@ let initialState: initialStateType = {
         {id: 2, message: 'My first post', likesCount: 20},
     ],
     messageForNewPost: 'Social Network',
-    profile: null
+    profile: {} as ProfileType
 }
 //если сюда не придёт state то state-ом будет initialState
 
@@ -55,6 +75,7 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 profile: action.profile   //копия стейта, в которой меняем профайл на профайл который сидит в экшн
             }
         }
+
         default: {                                      //default line
             return state;
         }

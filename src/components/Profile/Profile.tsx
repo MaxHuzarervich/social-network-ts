@@ -1,12 +1,11 @@
 import React from 'react';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import MyPostsContainer from "./Mypost/MyPostsContainer";
-import {OwnPropsType} from "./ProfileContainer";
+import {PropsType} from "./ProfileContainer";
 
-
-function Profile(props: OwnPropsType) {
+function Profile(props: PropsType) {
     return <div>
-        <ProfileInfo profile = {props.profile} />
+        <ProfileInfo setUserProfile={props.setUserProfile} profile = {props.profile} />
         <MyPostsContainer />
     </div>
 }

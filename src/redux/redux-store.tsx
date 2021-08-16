@@ -10,6 +10,7 @@ import {
     unfollow,
     usersReducer
 } from "./users-reducer";
+import {authReducer, setUserDataAC} from "./auth-reducer";
 
 
 export type ActionsTypes =
@@ -24,13 +25,15 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfileAC>
+    // | ReturnType<typeof setUserDataAC>;
 
 //rootReducers возвращает state всего нашего приложения
 export let rootReducer = combineReducers({ //воспринимаем это как наш state
     profilePage: profileReducer,      //создаем объекты у которых есть св-ва и значения
     dialogsPage: dialogsReducer,
     //sideBar:sideBarReducer,
-    usersPage: usersReducer
+    usersPage: usersReducer,
+    auth: authReducer
 })
 
 export type AppStateType = ReturnType <typeof rootReducer>; //typeof типизирует автоматически ф-цию,

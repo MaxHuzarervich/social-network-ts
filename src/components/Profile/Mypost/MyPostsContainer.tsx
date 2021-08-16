@@ -11,7 +11,10 @@ export type MapDispatchToPropsType = {
     addPost: (messageForNewPost:string) => void
     updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
-export type MapStateToProps = initialStateType
+export type MapStateToProps = {
+    posts: any //
+    messageForNewPost: any //
+}
 
 export type MyPostsPropsType = MapStateToProps & MapDispatchToPropsType
 

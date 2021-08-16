@@ -5,7 +5,7 @@ import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+import {ProfileContainerS} from "./components/Profile/ProfileContainer";
 
 
 const App = () => {
@@ -19,8 +19,8 @@ const App = () => {
                 <Route path='/dialogs' render={() =>
                     <DialogsContainer/>}/>
 
-                <Route path='/profile/userId?' render={() =>
-                    <ProfileContainer/>}/>
+                <Route path='/profile/:userId?' render={() =>
+                    <ProfileContainerS/>}/>
 
                 <Route path='/users' render={() =>
                     <UserContainer  onPageChanged={pageNumber => {}}/>}/>

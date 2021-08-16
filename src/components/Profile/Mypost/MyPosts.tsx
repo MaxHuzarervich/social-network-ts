@@ -7,8 +7,16 @@ import {MyPostsPropsType} from "./MyPostsContainer";
 
 function MyPosts(props: MyPostsPropsType) {
     //значение переменной postsElements будет равно промапленному массиву объектов posts
-    let postsElements = props.posts.map
-    (posts => <Post key={posts.id} message={posts.message} likesCount={posts.likesCount} id={posts.id}/>)
+    let postsElements = props.posts.map((posts: any) => {
+        return (
+            <Post
+                key={posts.id}
+                message={posts.message}
+                likesCount={posts.likesCount}
+                id={posts.id}
+            />
+        )
+    })
     //функция добавления нового поста
     const addPost = () => {
         props.addPost(props.messageForNewPost)

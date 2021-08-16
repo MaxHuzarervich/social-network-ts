@@ -3,3 +3,6 @@
     background-color: #306eba;
 }
 .header img{width:10%}
+.loginBlock{
+    float: right;
+}

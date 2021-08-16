@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {ComponentType} from 'react';
 import Profile from "./Profile";
 import axios from "axios";
-import {connect} from "react-redux";
+import {connect, ConnectedComponent} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {setUserProfileAC} from "../../redux/profile-reducer";
+import {ProfileType, setUserProfileAC} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter } from 'react-router-dom';
 
 
@@ -12,31 +12,11 @@ export type PathParamsType = {             //типизация того что 
 }
 
 export type MapStateToPropsType = {
-    profile: any
-        // {
-    //     userId: number
-    //     lookingForAJob: boolean
-    //     lookingForAJobDescription: string
-    //     fullName: string
-    //     contacts: {
-    //         github: string
-    //         vk: string
-    //         facebook: string
-    //         instagram: string
-    //         twitter: string
-    //         website: string
-    //         youtube: string
-    //         mainLink: string
-    //     }
-    //     photos: {
-    //         small: string
-    //         large: string
-    //     }
-    // }
+    profile: ProfileType
 }
 
 export type MapDispatchToPropsType = {
-    setUserProfile: (profile: any) => void
+    setUserProfile: (profile: ProfileType) => void
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -45,10 +25,9 @@ export type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 //всё (пропсы), что приходит в контейнерную компоненту мы обязаны передать в презентационную
 
-export class ProfileContainer extends React.Component <PropsType, any> {
-
+class ProfileContainer extends React.Component <PropsType> {
     componentDidMount() {
-
+        debugger
         let userId = this.props.match.params.userId;
 
         if(!userId){
@@ -58,12 +37,11 @@ export class ProfileContainer extends React.Component <PropsType, any> {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then(response => {
                 this.props.setUserProfile(response.data); //берем наш объект profile и сетаем его в редьюсер
-                debugger
             })
     }
 
     render() {
-        return <Profile  profile={this.props.profile} setUserProfile={this.props.setUserProfile}/>
+        return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
 
@@ -73,7 +51,9 @@ export let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 //--------------------------------------------------------------------------
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer) //закинет данные в компоненту профайл из url
+const WithUrlDataContainerComponent = withRouter(ProfileContainer) //закинет данные в компоненту профайл из url
 
 //--------------------------------------------------------------------------
-export default connect(MapStateToProps, {setUserProfile: setUserProfileAC})(ProfileContainer)
+export const ProfileContainerS:  ConnectedComponent<typeof ProfileContainer, any> = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(
+    MapStateToProps, {setUserProfile: setUserProfileAC}
+    )(WithUrlDataContainerComponent)
