@@ -6,7 +6,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {dataType, setAuthUserData} from "../../redux/auth-reducer";
 
 export type MapStateToPropsType = {
-    data: dataType
+    login: string | null
     isAuth: boolean
 }
 export type MapDispatchToPropsType = {
@@ -29,15 +29,14 @@ class HeaderContainer extends React.Component <headerContainerPropsType, any> {
     }
 
     render() {
-        // return <Header {...this.props}  />
         return <Header {...this.props}/>
     }
 }
 
-const MapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return
-    {
-        isAuth: state.auth.isAuth; login: state.auth.data.login
-    }
-}
+const MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    isAuth: state.auth.isAuth,
+    login: state.auth.login
+})
+
+
 export default connect(MapStateToProps, {setAuthUserData})(HeaderContainer)

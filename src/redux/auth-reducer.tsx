@@ -9,7 +9,9 @@ export type dataType = {
 }
 
 export type InitialStateType = {
-    data: dataType,
+    id: number | null
+    email: string | null
+    login: string | null
     isAuth: boolean
 };
 
@@ -25,7 +27,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     switch (action.type) {
         case SET_USER_DATA:
             debugger
-            return {...state, data: action.data, isAuth: true} //если пришли пользовательские данные isAuth:true
+            return {...state, ...action.data, isAuth: true} //если пришли пользовательские данные isAuth:true
         default:
             return state;
 
