@@ -23,7 +23,8 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
     componentDidMount() {
         this.props.toggleIsFetching(true); //запрос пошел
         //когда выполнишь запрос, выполни затем вот этот коллбек(response-ответ)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
                 this.props.setUsers(response.data.items);
@@ -34,7 +35,8 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
     onPageChanged = (pageNumber: number) => {   //эту ф-цию я не передаю в mapDispatchToProps,передаю просто через пропсы
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            {withCredentials: true})
             .then(response => {
                 this.props.toggleIsFetching(false);
                 this.props.setUsers(response.data.items)
@@ -119,7 +121,7 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
 //создаем контейнерную компоненту при помощи ф-ции connect
 export default connect(MapStateToProps,
     {
-        follow,
+        follow,                      //connect автоматически за нас создал эти коллбек ф-ции
         unfollow,
         setUsers,
         setCurrentPage,
