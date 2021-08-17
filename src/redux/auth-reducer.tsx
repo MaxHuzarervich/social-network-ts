@@ -1,31 +1,37 @@
 import {ActionsTypes} from "./redux-store";
 
-const SET_USER_DATA = 'SET-USER-DATA';
+const SET_USER_DATA = 'SET_USER_DATA';
 
+export type dataType = {
+    id: number | null
+    email: string | null
+    login: string | null
+}
 
-export type initialStateType = {
-    userId: number | null,
-    email: string | null,
-    login: string | null,
+export type InitialStateType = {
+    data: dataType,
+    isAuth: boolean
 };
 
-//инициализационный state,который будет инициализировать эту подветку
-let initialState: initialStateType = {
-    userId: null,
+let initialState: InitialStateType = {
+    id: null,
     email: null,
     login: null,
+    isAuth: false //незалогинен
 }
-//если сюда не придёт state то state-ом будет initialState
-export const authReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
+
+//все данные которые нужны редьюсеру для преобразования стейта приходят в экшене
+export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        // case SET_USER_DATA:
-        //     return {
-        //         ...state,
-        //         ...action.data
-        //     }
+        case SET_USER_DATA:
+            debugger
+            return {...state, data: action.data, isAuth: true} //если пришли пользовательские данные isAuth:true
         default:
             return state;
+
     }
 }
 
-export const setUserDataAC = (data: initialStateType) => ({type: SET_USER_DATA, data})
+export const setAuthUserData = (data: dataType) => {
+    return {type: SET_USER_DATA, data: data} as const
+}

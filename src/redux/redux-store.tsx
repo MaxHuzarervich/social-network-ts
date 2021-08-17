@@ -10,7 +10,7 @@ import {
     unfollow,
     usersReducer
 } from "./users-reducer";
-import {authReducer, setUserDataAC} from "./auth-reducer";
+import {authReducer, setAuthUserData} from "./auth-reducer";
 
 
 export type ActionsTypes =
@@ -25,7 +25,7 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfileAC>
-    // | ReturnType<typeof setUserDataAC>;
+    | ReturnType<typeof setAuthUserData>;
 
 //rootReducers возвращает state всего нашего приложения
 export let rootReducer = combineReducers({ //воспринимаем это как наш state
@@ -40,7 +40,6 @@ export type AppStateType = ReturnType <typeof rootReducer>; //typeof типиз�
 // а ф-ция что-то возвращает. А мы говорим дай нам возвращаемый тип!
 
 export let store = createStore(rootReducer);
-
 
 // export type AppStateType = ReturnType<typeof reducers>
 

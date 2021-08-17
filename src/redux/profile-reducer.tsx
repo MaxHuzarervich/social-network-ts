@@ -83,24 +83,24 @@ export const profileReducer = (state: initialStateType = initialState, action: A
 }
 
 
-    export const addPostAC =
-        (postText: string) => {
-            return {
-                type: ADD_POST,
-                postText: postText
-            } as const
-        }
-    export const newTextChangeHandlerAC =
-        (newText: string) => {
-            return {
-                type: CHANGE_NEW_TEXT,
-                newText: newText
-            } as const
-        }
-    export const setUserProfileAC = (profile: any) => {
+export const addPostAC =
+    (postText: string) => {
         return {
-            type: SET_USER_PROFILE,
-            profile: profile
+            type: ADD_POST,
+            postText: postText
         } as const
     }
+export const newTextChangeHandlerAC =
+    (newText: string) => {
+        return {
+            type: CHANGE_NEW_TEXT,
+            newText: newText
+        } as const
+    }
+export const setUserProfileAC = (profile: ProfileType) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile: profile
+    } as const
+}
 //экшн - объект у котрого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт

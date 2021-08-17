@@ -70,15 +70,6 @@ type MapStatePropsType = {
     currentPage: number,
     isFetching: boolean
 }
-// type MapDispatchPropsType = {
-//     follow: (userID: number) => void,
-//     unfollow: (userID: number) => void,
-//     setUser: (users: Array<userType>) => void,
-//     setCurrentPage: (pageNumber: number) => void,
-//     setTotalUsersCount: (totalCount: number) => void,
-//     toggleIsFetching: (isFetching: boolean) => void,
-//     onPageChanged: (pageNumber: number) => void
-// }
 
 export type FunctionsForUsersComponentPropsType = {
     follow: (userID: number) => void,
@@ -91,8 +82,7 @@ export type FunctionsForUsersComponentPropsType = {
 }
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
-// &
-// MapDispatchPropsType
+
 let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: state.usersPage,
