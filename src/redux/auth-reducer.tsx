@@ -26,7 +26,6 @@ let initialState: InitialStateType = {
 export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-            debugger
             return {...state, ...action.data, isAuth: true} //если пришли пользовательские данные isAuth:true
         default:
             return state;

@@ -11,10 +11,9 @@ import {
     unfollow,
     userType
 } from "../../redux/users-reducer";
-import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
+import {usersAPI} from "../../api/api";
 
 //контейнерная классовая компонента, которая делает запрос на сервер!
 
@@ -25,19 +24,19 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
         this.props.toggleIsFetching(true); //запрос пошел
 
         //когда пользователи получатся продолжим обрабатывать ответ в then
-        getUsers(this.props.currentPage, this.props.pageSize).then(response => {
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
-            this.props.setUsers(response.data.items);
-            this.props.setUsersTotalCount(response.data.totalCount);
+            this.props.setUsers(data.items);
+            this.props.setUsersTotalCount(data.totalCount);
         });
     }
 
     onPageChanged = (pageNumber: number) => {   //эту ф-цию я не передаю в mapDispatchToProps,передаю просто через пропсы
         this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true);
-        getUsers(pageNumber, this.props.pageSize).then(response => {
+        this.props.toggleIsFetching(true); //крутилка
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
             this.props.toggleIsFetching(false);
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(data.items)
         });
     }
 

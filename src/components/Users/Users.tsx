@@ -30,7 +30,7 @@ export let Users = (props: UsersContainerPropsType) => {
         </div>
 
         {props.usersPage.users.map(u => <div key={u.id}>
-            <div className={s.user}>
+            <div className={s.user}>/
                 <div>
                     <div className={s.UserImg}>
                         <NavLink to={'/profile/' + u.id}>Avatar should be here</NavLink>
