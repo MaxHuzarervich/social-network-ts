@@ -14,6 +14,7 @@ import {
 import axios from "axios";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 //контейнерная классовая компонента, которая делает запрос на сервер!
 
@@ -22,25 +23,22 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
     //componentDidMount - метод жизненного цикла!
     componentDidMount() {
         this.props.toggleIsFetching(true); //запрос пошел
-        //когда выполнишь запрос, выполни затем вот этот коллбек(response-ответ)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
-                this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
-                this.props.setUsers(response.data.items);
-                this.props.setUsersTotalCount(response.data.totalCount);
-            });
+
+        //когда пользователи получатся продолжим обрабатывать ответ в then
+        getUsers(this.props.currentPage, this.props.pageSize).then(response => {
+            this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
+            this.props.setUsers(response.data.items);
+            this.props.setUsersTotalCount(response.data.totalCount);
+        });
     }
 
     onPageChanged = (pageNumber: number) => {   //эту ф-цию я не передаю в mapDispatchToProps,передаю просто через пропсы
         this.props.setCurrentPage(pageNumber);
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-            {withCredentials: true})
-            .then(response => {
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(response.data.items)
-            });
+        getUsers(pageNumber, this.props.pageSize).then(response => {
+            this.props.toggleIsFetching(false);
+            this.props.setUsers(response.data.items)
+        });
     }
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
@@ -65,7 +63,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
     }
 }
 
-type MapStatePropsType = {
+export type MapStatePropsType = {
     usersPage: initialStateType,
     pageSize: number,
     totalUsersCount: number,
