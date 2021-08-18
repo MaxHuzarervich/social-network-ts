@@ -6,7 +6,7 @@ import {
     initialStateType,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount,
+    setUsersTotalCount, toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     userType
@@ -56,7 +56,8 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
                 isFetching={this.props.isFetching}
                 toggleIsFetching={this.props.toggleIsFetching}
                 onPageChanged={this.onPageChanged}
-
+                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -67,7 +68,8 @@ export type MapStatePropsType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: boolean
 }
 
 export type FunctionsForUsersComponentPropsType = {
@@ -77,7 +79,8 @@ export type FunctionsForUsersComponentPropsType = {
     setCurrentPage: (pageNumber: number) => void,
     setUsersTotalCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
-    onPageChanged: (pageNumber: number) => void
+    onPageChanged: (pageNumber: number) => void,
+    toggleFollowingProgress: (isFetching: boolean) => void
 }
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
@@ -88,7 +91,8 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,               //кол-во пользователей на странице
         totalUsersCount: state.usersPage.totalUsersCount, //общее кол-во пользователей
         currentPage: state.usersPage.currentPage,         //текущая страница
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
 // let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
@@ -123,7 +127,7 @@ export default connect(MapStateToProps,
         setUsers,
         setCurrentPage,
         setUsersTotalCount,
-        toggleIsFetching
-
+        toggleIsFetching,
+        toggleFollowingProgress
     }
 )(UsersContainer)

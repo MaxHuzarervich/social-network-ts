@@ -5,7 +5,7 @@ import {
     follow,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount,
+    setUsersTotalCount, toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     usersReducer
@@ -25,7 +25,8 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersTotalCount>
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfileAC>
-    | ReturnType<typeof setAuthUserData>;
+    | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleFollowingProgress>
 
 //rootReducers возвращает state всего нашего приложения
 export let rootReducer = combineReducers({ //воспринимаем это как наш state

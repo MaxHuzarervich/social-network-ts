@@ -22,6 +22,7 @@ const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IN_FOLLOWING_PROGRESS = 'TOGGLE_IN_FOLLOWING_PROGRESS'
 
 
 export type initialStateType = {
@@ -29,7 +30,8 @@ export type initialStateType = {
     pageSize: number,
     totalUsersCount: number,
     currentPage: number,
-    isFetching: boolean
+    isFetching: boolean,
+    followingInProgress: []
 };
 
 //инициализационный state,который будет инициализировать эту подветку
@@ -38,7 +40,8 @@ let initialState: initialStateType = {
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: false
+    isFetching: false,
+    followingInProgress: false
 }
 //если сюда не придёт state то state-ом будет initialState
 export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -79,6 +82,9 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
         case TOGGLE_IS_FETCHING: {
             return {...state, isFetching: action.isFetching} //теперь можно задеспатчить экшн создав экшнкреатор
         }
+        case TOGGLE_IN_FOLLOWING_PROGRESS: {
+            return {...state, followingInProgress: action.isFetching}
+        }
         default:                                       //default line
             return state;
     }
@@ -99,7 +105,10 @@ export const setCurrentPage = (currentPage: number) => {          //измени
 export const setUsersTotalCount = (totalUsersCount: number) => {   //установить общее кол-во пользователей
     return {type: SET_TOTAL_USERS_COUNT, count: totalUsersCount} as const
 }
-export const toggleIsFetching = (isFetching:boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const  //экшн-это объект у которго есть тип
-                                                        // и св-во которое нужно редьюсеру для для обработки этого экшена
+    // и св-во которое нужно редьюсеру для для обработки этого экшена
+}
+export const toggleFollowingProgress = (isFetching: boolean) => {
+    return {type: TOGGLE_IN_FOLLOWING_PROGRESS, isFetching} as const
 }
