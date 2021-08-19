@@ -31,7 +31,7 @@ export type initialStateType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress: []
+    followingInProgress: Array<number>
 };
 
 //инициализационный state,который будет инициализировать эту подветку
@@ -41,7 +41,7 @@ let initialState: initialStateType = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    followingInProgress: false
+    followingInProgress: []
 }
 //если сюда не придёт state то state-ом будет initialState
 export const usersReducer = (state: initialStateType = initialState, action: ActionsTypes): initialStateType => {
@@ -83,7 +83,12 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
             return {...state, isFetching: action.isFetching} //теперь можно задеспатчить экшн создав экшнкреатор
         }
         case TOGGLE_IN_FOLLOWING_PROGRESS: {
-            return {...state, followingInProgress: action.isFetching}
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId] //если идет подписка
+                    : state.followingInProgress.filter(id => id != action.userId) //
+            }
         }
         default:                                       //default line
             return state;
@@ -109,6 +114,6 @@ export const toggleIsFetching = (isFetching: boolean) => {
     return {type: TOGGLE_IS_FETCHING, isFetching} as const  //экшн-это объект у которго есть тип
     // и св-во которое нужно редьюсеру для для обработки этого экшена
 }
-export const toggleFollowingProgress = (isFetching: boolean) => {
-    return {type: TOGGLE_IN_FOLLOWING_PROGRESS, isFetching} as const
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => {
+    return {type: TOGGLE_IN_FOLLOWING_PROGRESS, isFetching, userId} as const
 }

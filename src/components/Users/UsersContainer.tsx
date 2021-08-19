@@ -69,7 +69,7 @@ export type MapStatePropsType = {
     totalUsersCount: number,
     currentPage: number,
     isFetching: boolean,
-    followingInProgress: boolean
+    followingInProgress: Array<number>
 }
 
 export type FunctionsForUsersComponentPropsType = {
@@ -80,7 +80,7 @@ export type FunctionsForUsersComponentPropsType = {
     setUsersTotalCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
     onPageChanged: (pageNumber: number) => void,
-    toggleFollowingProgress: (isFetching: boolean) => void
+    toggleFollowingProgress: (isFetching: boolean, id: number) => void
 }
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType

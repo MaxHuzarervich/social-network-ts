@@ -37,9 +37,11 @@ export let Users = (props: UsersContainerPropsType) => {
                         {/*<NavLink><img  src={u.photos.small != null ? u.photos.small : user}/></NavLink>*/}
                     </div>
                     <div className={s.follow}>
-                        {u.followed ? <Button disabled={props.followingInProgress} color={'default'} onClick={() => {
-                            debugger
-                                props.toggleFollowingProgress(true);
+                        {u.followed ?
+                            <Button disabled={props.followingInProgress.some(id => id === u.id)}//если кто-то из этого
+                                // массива равен id пользователя, то метод some вернет true
+                                    color={'default'} onClick={() => {
+                                props.toggleFollowingProgress(true, u.id);
                                 axios.delete(`https://social-network.samuraijs.com/api/1.0/unfollow/${u.id}`,
                                     {
                                         withCredentials: true,
@@ -51,25 +53,26 @@ export let Users = (props: UsersContainerPropsType) => {
                                         if (response.data.resultCode == 0) {
                                             props.unfollow(u.id)
                                         }
-                                        props.toggleFollowingProgress(false)
+                                        props.toggleFollowingProgress(false, u.id)
                                     });
                             }}>Unfollow</Button> :
-                            <Button disabled={props.followingInProgress} color={'default'} onClick={() => {
-                                props.toggleFollowingProgress(true);
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
-                                    {
-                                        withCredentials: true,
-                                        headers: {
-                                            'API-KEY': 'aa1f6061-8f98-4319-8eee-239786445cdc'
-                                        }
-                                    })
-                                    .then(response => {
-                                        if (response.data.resultCode == 0) {
-                                            props.follow(u.id)
-                                        }
-                                        props.toggleFollowingProgress(false);
-                                    });
-                            }}>Follow</Button>}
+                            <Button disabled={props.followingInProgress.some(id => id === u.id)} color={'default'}
+                                    onClick={() => {
+                                        props.toggleFollowingProgress(true, u.id);
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},
+                                            {
+                                                withCredentials: true,
+                                                headers: {
+                                                    'API-KEY': 'aa1f6061-8f98-4319-8eee-239786445cdc'
+                                                }
+                                            })
+                                            .then(response => {
+                                                if (response.data.resultCode == 0) {
+                                                    props.follow(u.id)
+                                                }
+                                                props.toggleFollowingProgress(false, u.id);
+                                            });
+                                    }}>Follow</Button>}
                     </div>
                 </div>
                 <span>
