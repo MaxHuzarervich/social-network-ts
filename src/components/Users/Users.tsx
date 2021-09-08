@@ -11,7 +11,7 @@ export let Users = (props: UsersContainerPropsType) => {
 
     //округляем кол-во страниц в большую сторону т.к. при делении может получиться нецелое число
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize) //кол-во страниц
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize) //кол-во страничек
 
     let pages = [];
 
