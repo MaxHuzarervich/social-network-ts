@@ -1,4 +1,4 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {addPostAC, newTextChangeHandlerAC, profileReducer, setUserProfileAC} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import {
@@ -28,6 +28,7 @@ export type ActionsTypes =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
 
+
 //rootReducers возвращает state всего нашего приложения
 export let rootReducer = combineReducers({ //воспринимаем это как наш state
     profilePage: profileReducer,      //создаем объекты у которых есть св-ва и значения
@@ -37,10 +38,10 @@ export let rootReducer = combineReducers({ //воспринимаем это к�
     auth: authReducer
 })
 
-export type AppStateType = ReturnType <typeof rootReducer>; //typeof типизирует автоматически ф-цию,
+export type AppStateType = ReturnType<typeof rootReducer>; //typeof типизирует автоматически ф-цию,
 // а ф-ция что-то возвращает. А мы говорим дай нам возвращаемый тип!
 
-export let store = createStore(rootReducer);
+export let store = createStore(rootReducer, applyMiddleware()); //стор прими промежуточный уровень
 
 // export type AppStateType = ReturnType<typeof reducers>
 

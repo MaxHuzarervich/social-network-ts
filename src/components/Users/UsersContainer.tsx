@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    follow,
+    follow, getUsersThunkCreator,
     initialStateType,
     setCurrentPage,
     setUsers,
@@ -21,14 +21,15 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
 
     //componentDidMount - метод жизненного цикла!
     componentDidMount() {
-        this.props.toggleIsFetching(true); //запрос пошел
-
-        //когда пользователи получатся продолжим обрабатывать ответ в then
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
-            this.props.setUsers(data.items);
-            this.props.setUsersTotalCount(data.totalCount);
-        });
+        this.props.getUsersThunkCreator();
+        // this.props.toggleIsFetching(true); //запрос пошел
+        //
+        // //когда пользователи получатся продолжим обрабатывать ответ в then
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //     this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
+        //     this.props.setUsers(data.items);
+        //     this.props.setUsersTotalCount(data.totalCount);
+        // });
     }
 
     onPageChanged = (pageNumber: number) => {   //эту ф-цию я не передаю в mapDispatchToProps,передаю просто через пропсы
@@ -128,6 +129,7 @@ export default connect(MapStateToProps,
         setCurrentPage,
         setUsersTotalCount,
         toggleIsFetching,
-        toggleFollowingProgress
+        toggleFollowingProgress,
+        getUsersThunkCreator
     }
 )(UsersContainer)

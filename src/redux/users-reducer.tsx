@@ -1,4 +1,5 @@
 import {ActionsTypes} from "./redux-store";
+import {usersAPI} from "../api/api";
 
 export type userType = {
     name: string,
@@ -15,6 +16,7 @@ export type userType = {
         city: string
     }
 }
+
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -116,4 +118,18 @@ export const toggleIsFetching = (isFetching: boolean) => {
 }
 export const toggleFollowingProgress = (isFetching: boolean, userId: number) => {
     return {type: TOGGLE_IN_FOLLOWING_PROGRESS, isFetching, userId} as const
+}
+
+//thunkCreator - возвращает санку
+export const getUsersThunkCreator = (currentPage:number, pageSize:number) => {
+    return (dispatch: any) => {
+        dispatch(toggleIsFetching(true)); //запрос пошел
+
+        //когда пользователи получатся, продолжим обрабатывать ответ в then
+        usersAPI.getUsers(currentPage, pageSize).then(data => {
+            dispatch(toggleIsFetching(false)); //запрос пришел, крутилка не нужна!
+            dispatch(setUsers(data.items));
+            dispatch(setUsersTotalCount(data.totalCount));
+        });
+    }
 }
