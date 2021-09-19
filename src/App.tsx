@@ -24,7 +24,11 @@ const App = () => {
                     <ProfileContainerS/>}/>
 
                 <Route path='/users' render={() =>
-                    <UserContainer  onPageChanged={pageNumber => {}}/>}/>
+                    <UserContainer
+                        toggleIsFetching={isFetching => {}}
+                        setUsersTotalCount={totalCount => {}}
+                        setUsers={users => {}}
+                        onPageChanged={pageNumber => {}}/>}/>
 
             </div>
         </div>

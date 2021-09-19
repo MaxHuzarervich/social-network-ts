@@ -2,24 +2,25 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {addPostAC, newTextChangeHandlerAC, profileReducer, setUserProfileAC} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import {
-    follow,
+    followSuccess,
     setCurrentPage,
     setUsers,
-    setUsersTotalCount, toggleFollowingProgress,
+    setUsersTotalCount,
+    toggleFollowingProgress,
     toggleIsFetching,
-    unfollow,
+    unfollowSuccess,
     usersReducer
 } from "./users-reducer";
 import {authReducer, setAuthUserData} from "./auth-reducer";
-
+import thunkMiddleware from 'redux-thunk'
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof updateNewMessageBodyCreator>
     | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof follow>
-    | ReturnType<typeof unfollow>
+    | ReturnType<typeof followSuccess>
+    | ReturnType<typeof unfollowSuccess>
     | ReturnType<typeof setUsers>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setUsersTotalCount>
@@ -41,7 +42,7 @@ export let rootReducer = combineReducers({ //воспринимаем это к�
 export type AppStateType = ReturnType<typeof rootReducer>; //typeof типизирует автоматически ф-цию,
 // а ф-ция что-то возвращает. А мы говорим дай нам возвращаемый тип!
 
-export let store = createStore(rootReducer, applyMiddleware()); //стор прими промежуточный уровень
+export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware)); //стор прими промежуточный уровень
 
 // export type AppStateType = ReturnType<typeof reducers>
 

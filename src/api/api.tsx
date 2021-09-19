@@ -11,11 +11,18 @@ const instance = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => {
-            return response.data
-        })
-}}
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
+                return response.data
+            })
+    },
+    follow(userID:number) {
+        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`)
+    },
+    unfollow(userID: number) {
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/unfollow/${userID}`)
+    }
+}
 
 
 //мы говорим что возвращается не тот промис который возвращается методом get, а мы берем именно data из response

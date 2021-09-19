@@ -2,18 +2,16 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    follow, getUsersThunkCreator,
+    followSuccess,
+    getUsers,
     initialStateType,
     setCurrentPage,
-    setUsers,
-    setUsersTotalCount, toggleFollowingProgress,
-    toggleIsFetching,
-    unfollow,
+    toggleFollowingProgress,
+    unfollowSuccess,
     userType
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
 
 //контейнерная классовая компонента, которая делает запрос на сервер!
 
@@ -21,24 +19,11 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
 
     //componentDidMount - метод жизненного цикла!
     componentDidMount() {
-        this.props.getUsersThunkCreator();
-        // this.props.toggleIsFetching(true); //запрос пошел
-        //
-        // //когда пользователи получатся продолжим обрабатывать ответ в then
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-        //     this.props.toggleIsFetching(false); //запрос пришел, крутилка не нужна!
-        //     this.props.setUsers(data.items);
-        //     this.props.setUsersTotalCount(data.totalCount);
-        // });
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
     onPageChanged = (pageNumber: number) => {   //эту ф-цию я не передаю в mapDispatchToProps,передаю просто через пропсы
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true); //крутилка
-        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.toggleIsFetching(false);
-            this.props.setUsers(data.items)
-        });
+        this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
@@ -57,8 +42,9 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
                 isFetching={this.props.isFetching}
                 toggleIsFetching={this.props.toggleIsFetching}
                 onPageChanged={this.onPageChanged}
-                toggleFollowingProgress={this.props.toggleFollowingProgress}
+                // toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
+                getUsers={this.props.getUsers}
             />
         </>
     }
@@ -81,7 +67,8 @@ export type FunctionsForUsersComponentPropsType = {
     setUsersTotalCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
     onPageChanged: (pageNumber: number) => void,
-    toggleFollowingProgress: (isFetching: boolean, id: number) => void
+    // toggleFollowingProgress: (isFetching: boolean, id: number) => void
+    getUsers: (currentPage: number, pageSize: number) => void
 }
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
@@ -123,13 +110,10 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
 //создаем контейнерную компоненту при помощи ф-ции connect
 export default connect(MapStateToProps,
     {
-        follow,                      //connect автоматически за нас создал эти коллбек ф-ции
-        unfollow,
-        setUsers,
+        follow: followSuccess,                      //connect автоматически за нас создал эти коллбек ф-ции
+        unfollow: unfollowSuccess,
         setCurrentPage,
-        setUsersTotalCount,
-        toggleIsFetching,
         toggleFollowingProgress,
-        getUsersThunkCreator
+        getUsers
     }
 )(UsersContainer)

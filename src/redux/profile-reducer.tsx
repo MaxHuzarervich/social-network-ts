@@ -55,7 +55,7 @@ export const profileReducer = (state: initialStateType = initialState, action: A
             const newPost: postType = {                                        //отправляем
                 id: new Date().getTime(),
                 message: action.postText,
-                likesCount: 0
+                likesCount: 3
             };
             return {
                 ...state,          //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
@@ -103,4 +103,4 @@ export const setUserProfileAC = (profile: ProfileType) => {
         profile: profile
     } as const
 }
-//экшн - объект у котрого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
+//экшн - объект у которого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
