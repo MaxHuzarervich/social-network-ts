@@ -2,7 +2,7 @@
     grid-area: h;
     background-color: #306eba;
 }
-.header img{width:10%}
+.header img{width:10%; border-radius: 50%}
 .loginBlock{
     float: right;
 }

@@ -5,7 +5,7 @@ import {PropsType} from "./ProfileContainer";
 
 function Profile(props: PropsType) {
     return <div>
-        <ProfileInfo setUserProfile={props.setUserProfile} profile = {props.profile} />
+        <ProfileInfo getUserProfile={props.getUserProfile} profile = {props.profile} />
         <MyPostsContainer />
     </div>
 }

@@ -6,7 +6,7 @@ import {headerContainerPropsType} from "./HeaderContainer";
 function Header(props: headerContainerPropsType) {
     return <header className={s.header}>
         <img
-            src='https://api.freelogodesign.org/files/3517eca19f13472a9e46639edd4344e3/thumb/logo_200x200.png?v=637573123420000000'/>
+            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmXY6_qN8rHTSRz2NBY71jb5iqt00Yw543HQ&usqp=CAU'/>
 
         <div className={s.loginBlock}>
             {props.isAuth ? props.login : <NavLink to={'/login'}> Login </NavLink>}

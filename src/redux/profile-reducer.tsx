@@ -1,4 +1,5 @@
 import {ActionsTypes} from "./redux-store";
+import {usersAPI} from "../api/api";
 
 export type postType = {
     id: number,
@@ -82,7 +83,7 @@ export const profileReducer = (state: initialStateType = initialState, action: A
     }
 }
 
-
+//экшн - объект у которого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
 export const addPostAC =
     (postText: string) => {
         return {
@@ -103,4 +104,9 @@ export const setUserProfileAC = (profile: ProfileType) => {
         profile: profile
     } as const
 }
-//экшн - объект у которого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
+//thunk
+export const getUserProfile = (userId:string) => (dispatch:any) => {
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
+    })  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
+}

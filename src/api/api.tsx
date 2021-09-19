@@ -16,12 +16,23 @@ export const usersAPI = {
                 return response.data
             })
     },
-    follow(userID:number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userID}`)
+    follow(userID: number) {
+        return instance.post(`follow/${userID}`)
     },
     unfollow(userID: number) {
-        return instance.delete(`https://social-network.samuraijs.com/api/1.0/unfollow/${userID}`)
+        return instance.delete(`unfollow/${userID}`)
+    },
+    getProfile(userId: string) {//get возвращает промис, мы на этот промис подписаны then-ом и этот
+        // промис после подписки возвращает нам другой промис
+        return instance.get(`profile/` + userId)
     }
+}
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
+    } //me возвращает результат отработки метода get, метод get возвращает промис
+    // и мы на этот промис then-ом подписываемся в HeaderContainer, когда запрос закончится, выполнится логика
+    // в скобках then
 }
 
 
