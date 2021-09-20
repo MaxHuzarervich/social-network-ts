@@ -12,6 +12,7 @@ import {
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 //контейнерная классовая компонента
 
@@ -107,8 +108,11 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
 //
 //     }
 // }
+
+// let withRedirect = withAuthRedirect(UsersContainer)
+
 //создаем контейнерную компоненту при помощи ф-ции connect
-export default connect(MapStateToProps,
+export default withAuthRedirect (connect(MapStateToProps,
     {
         follow: followSuccess,                      //connect автоматически за нас создал эти коллбек ф-ции
         unfollow: unfollowSuccess,
@@ -116,4 +120,4 @@ export default connect(MapStateToProps,
         toggleFollowingProgress,
         getUsers
     }
-)(UsersContainer)
+)(UsersContainer))

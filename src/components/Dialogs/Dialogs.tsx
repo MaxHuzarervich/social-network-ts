@@ -4,7 +4,7 @@ import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {Button, TextField} from "@material-ui/core";
 import {DialogsPropsType} from "./DialogsContainer";
-import { Redirect } from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 
 function Dialogs(props: DialogsPropsType) {
@@ -25,10 +25,6 @@ function Dialogs(props: DialogsPropsType) {
     const updateNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e)
     }
-
-     if (!props.isAuth) return <Redirect to={'/login'}/> //если я не залогинен то редирект
-
-
 
     return (
         <div className={s.dialogs}>

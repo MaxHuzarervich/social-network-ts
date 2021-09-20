@@ -3,7 +3,8 @@ import Profile from "./Profile";
 import {connect, ConnectedComponent} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getUserProfile, ProfileType} from "../../redux/profile-reducer";
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 export type PathParamsType = {             //типизация того что после params
@@ -12,12 +13,11 @@ export type PathParamsType = {             //типизация того что 
 
 export type MapStateToPropsType = {
     profile: ProfileType
-    isAuth: boolean
 }
 
 export type MapDispatchToPropsType = {
     // setUserProfile: (profile: ProfileType) => void
-    getUserProfile: (userId:string) => void
+    getUserProfile: (userId: string) => void
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -38,22 +38,26 @@ class ProfileContainer extends React.Component <PropsType> {
     }
 
     render() {
-        if(!this.props.isAuth) return <Redirect to={'/login'} /> //если я не залогинен то редирект
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
 
+export type MapStateToPropsForRedirectType = {
+    isAuth: boolean
+}
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+
 //--------------------------------------------------------------------------
 export let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    isAuth: state.auth.isAuth
 })
 //--------------------------------------------------------------------------
 
-const WithUrlDataContainerComponent = withRouter(ProfileContainer) //закинет данные в компоненту профайл из url
+const WithUrlDataContainerComponent = withRouter(AuthRedirectComponent) //закинет данные в компоненту профайл из url
 
 //--------------------------------------------------------------------------
-export const ProfileContainerS: ConnectedComponent<typeof ProfileContainer,
+export const ProfileContainerS: ConnectedComponent<typeof AuthRedirectComponent,
     any> = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(
     MapStateToProps, {getUserProfile}
 )(WithUrlDataContainerComponent)
