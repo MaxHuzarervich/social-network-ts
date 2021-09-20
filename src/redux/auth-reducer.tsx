@@ -38,10 +38,10 @@ export const setAuthUserData = (data: dataType) => {
     return {type: SET_USER_DATA, data: data} as const
 }
 //thunkCreator - ф-ция которая возвращает другую ф-цию
-export const getAuthUserData = () => (dispatch:any) => {
+export const getAuthUserData = () => (dispatch: any) => {
     authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
-            return  dispatch(setAuthUserData(response.data.data))
+            return dispatch(setAuthUserData(response.data.data))
         }
     });
 }

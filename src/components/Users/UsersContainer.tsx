@@ -13,7 +13,7 @@ import {
 import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 
-//контейнерная классовая компонента, которая делает запрос на сервер!
+//контейнерная классовая компонента
 
 export class UsersContainer extends React.Component<UsersContainerPropsType, any> {
 
@@ -67,8 +67,8 @@ export type FunctionsForUsersComponentPropsType = {
     setUsersTotalCount: (totalCount: number) => void,
     toggleIsFetching: (isFetching: boolean) => void,
     onPageChanged: (pageNumber: number) => void,
-    // toggleFollowingProgress: (isFetching: boolean, id: number) => void
     getUsers: (currentPage: number, pageSize: number) => void
+    // toggleFollowingProgress: (isFetching: boolean, id: number) => void
 }
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType

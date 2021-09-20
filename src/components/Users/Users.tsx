@@ -2,10 +2,7 @@ import React from "react";
 import {UsersContainerPropsType} from "./UsersContainer";
 import {Button} from "@material-ui/core";
 import s from "./Users.module.css";
-import user from '../../assets/images/user.jpg'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 
 
 export let Users = (props: UsersContainerPropsType) => {

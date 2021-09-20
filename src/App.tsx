@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
 import {ProfileContainerS} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import {setUsers, setUsersTotalCount, toggleIsFetching} from "./redux/users-reducer";
 
 
 const App = () => {
@@ -25,10 +25,13 @@ const App = () => {
 
                 <Route path='/users' render={() =>
                     <UserContainer
-                        toggleIsFetching={isFetching => {}}        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        setUsersTotalCount={totalCount => {}}
-                        setUsers={users => {}}
-                        onPageChanged={pageNumber => {}}/>}/>
+                        onPageChanged={pageNumber => {}}
+                        setUsers={setUsers}
+                        setUsersTotalCount={setUsersTotalCount}
+                        toggleIsFetching={toggleIsFetching}/>}/>
+                <Route path='/login' render={() => {
+                    <Login />
+                }}/>
 
             </div>
         </div>
