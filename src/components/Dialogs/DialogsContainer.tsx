@@ -9,6 +9,7 @@ import {Dispatch} from "redux";
 export type MapStateToPropsType = {
     dialogsPage:InitialStateDialogsType,
     newMessageBody:string
+    isAuth: boolean
 }
 export type MapDispatchToPropsType = {
     updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void,
@@ -20,7 +21,8 @@ export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {     //смысл ф-ции превратить часть стейта в пропсы
     return {
         dialogsPage: state.dialogsPage,
-        newMessageBody: state.dialogsPage.newMessageBody
+        newMessageBody: state.dialogsPage.newMessageBody,
+        isAuth: state.auth.isAuth
     }
 }
 //двумя ф-циями ниже мы настраиваем наш connect

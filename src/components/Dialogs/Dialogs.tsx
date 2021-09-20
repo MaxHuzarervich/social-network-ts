@@ -24,6 +24,9 @@ function Dialogs(props: DialogsPropsType) {
     const updateNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e)
     }
+
+     alert(props.isAuth);
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
