@@ -39,8 +39,8 @@ export const setAuthUserData = (data: dataType) => {
 }
 //thunkCreator - ф-ция которая возвращает другую ф-цию
 export const getAuthUserData = () => (dispatch: any) => {
-    authAPI.me().then(response => {
-        if (response.data.resultCode === 0) {
+    authAPI.me().then(response => {        //отправляем запрос на me и me нам сообщает залогинены мы или нет
+        if (response.data.resultCode === 0) { //если мы залогинены то возвращается resultCode = 0, и мы сетаем дату,логин,емаил в наш стейт
             return dispatch(setAuthUserData(response.data.data))
         }
     });

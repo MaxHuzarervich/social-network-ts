@@ -18,7 +18,7 @@ export type headerContainerPropsType = MapStateToPropsType & MapDispatchToPropsT
 
 class HeaderContainer extends React.Component <headerContainerPropsType, any> {
     componentDidMount() {                                                 //2-м параметром передаем объект с настройкам запроса
-        this.props.getAuthUserData()
+        this.props.getAuthUserData() //получает пользовательские авторизационные данные
     }
 
     render() {
