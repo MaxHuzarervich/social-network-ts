@@ -1,4 +1,5 @@
 import {ActionsTypes} from "./redux-store";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -35,4 +36,12 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
 
 export const setAuthUserData = (data: dataType) => {
     return {type: SET_USER_DATA, data: data} as const
+}
+//thunkCreator - ф-ция которая возвращает другую ф-цию
+export const getAuthUserData = () => (dispatch:any) => {
+    authAPI.me().then(response => {
+        if (response.data.resultCode === 0) {
+            return  dispatch(setAuthUserData(response.data.data))
+        }
+    });
 }

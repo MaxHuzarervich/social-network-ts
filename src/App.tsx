@@ -13,7 +13,7 @@ const App = () => {
 
     return (
         <div className='app-wrapper'>
-            <HeaderContainer />
+            <HeaderContainer getAuthUserData={() => {}}/>
             <Navbar/>
             <div className='app-wrapper-content'>
 
