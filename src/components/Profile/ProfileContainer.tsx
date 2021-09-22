@@ -45,7 +45,7 @@ export type MapStateToPropsForRedirectType = {
     isAuth: boolean
 }
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer) //снабдили ProfileContainer редиректом
 
 //--------------------------------------------------------------------------
 export let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
