@@ -5,6 +5,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {getUserProfile, ProfileType} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 export type PathParamsType = {             //типизация того что после params
@@ -40,14 +41,25 @@ export class ProfileContainer extends React.Component <PropsType> {
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
-//--------------------------------------------------------------------------
-export let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+
+let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile
 })
-//--------------------------------------------------------------------------
-const WithUrlDataContainerComponent = withRouter(ProfileContainer) //закинет данные в компоненту профайл из url
-//--------------------------------------------------------------------------
-export default withAuthRedirect(connect(MapStateToProps, {getUserProfile})(WithUrlDataContainerComponent))
+export default compose(
+    connect(MapStateToProps,{getUserProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
+
+
+
+
+
+// export default withAuthRedirect(withRouter(connect(MapStateToProps,{getUserProfile})
+// (ProfileContainer))) //сокращенный вариант того что ниже
+
+// const WithUrlDataContainerComponent = withRouter(ProfileContainer) //закинет данные в компоненту профайл из url
+// export default withAuthRedirect(connect(MapStateToProps, {getUserProfile})(WithUrlDataContainerComponent))
 
 // export const ProfileContainerS: ConnectedComponent<typeof AuthRedirectComponent,any>
 //     = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(

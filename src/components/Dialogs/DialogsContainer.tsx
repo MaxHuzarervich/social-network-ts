@@ -3,7 +3,7 @@ import {InitialStateDialogsType, sendMessageCreator, updateNewMessageBodyCreator
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {Dispatch} from "redux";
+import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
@@ -36,16 +36,39 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-const AuthRedirectComponent = withAuthRedirect(Dialogs)
+export default compose(
+    connect(mapStateToProps,mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const AuthRedirectComponent = withAuthRedirect(Dialogs)
 
 //Создаем контейнерную компоненту при помощи redux
 
 //Мы вызвали ф-цию connect, а она вернула нам другую ф-цию и мы вызываем ту ф-цию которую вернул нам предыдущий вызов
 //первым вызовом мы как бы настраиваем нашу контейнерную компоненту
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent); //как бы законектили
+// const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent); //как бы законектили
 // нашу презентационную компоненту Dialogs к store.
 // Отрисовывается компонента Dialogs и в нее засовываются данные из объектов которые возвращаются этими двумя ф-циями.
 // Connect возвращает нам новую контейнерную компоненту
-export default DialogsContainer;
+// export default DialogsContainer;
 
 //connect use subscribe!!!!!!!
