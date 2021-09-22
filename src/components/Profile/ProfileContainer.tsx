@@ -1,6 +1,6 @@
 import React from 'react';
 import Profile from "./Profile";
-import {connect, ConnectedComponent} from "react-redux";
+import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getUserProfile, ProfileType} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
@@ -25,7 +25,7 @@ export type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 //всё (пропсы), что приходит в контейнерную компоненту мы обязаны передать в презентационную
 
-class ProfileContainer extends React.Component <PropsType> {
+export class ProfileContainer extends React.Component <PropsType> {
     componentDidMount() {
 
         let userId = this.props.match.params.userId;
@@ -40,23 +40,18 @@ class ProfileContainer extends React.Component <PropsType> {
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
-
-export type MapStateToPropsForRedirectType = {
-    isAuth: boolean
-}
-
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer) //снабдили ProfileContainer редиректом
-
 //--------------------------------------------------------------------------
 export let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile
 })
 //--------------------------------------------------------------------------
-
-const WithUrlDataContainerComponent = withRouter(AuthRedirectComponent) //закинет данные в компоненту профайл из url
-
+const WithUrlDataContainerComponent = withRouter(ProfileContainer) //закинет данные в компоненту профайл из url
 //--------------------------------------------------------------------------
-export const ProfileContainerS: ConnectedComponent<typeof AuthRedirectComponent,
-    any> = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(
-    MapStateToProps, {getUserProfile}
-)(WithUrlDataContainerComponent)
+export default withAuthRedirect(connect(MapStateToProps, {getUserProfile})(WithUrlDataContainerComponent))
+
+// export const ProfileContainerS: ConnectedComponent<typeof AuthRedirectComponent,any>
+//     = connect<MapStateToPropsType, MapDispatchToPropsType, OwnPropsType, AppStateType>(
+//     MapStateToProps, {getUserProfile}
+// )(WithUrlDataContainerComponent)
+
+// let AuthRedirectComponent = withAuthRedirect(ProfileContainer) //снабдили ProfileContainer редиректом

@@ -4,7 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
-import {ProfileContainerS} from "./components/Profile/ProfileContainer";
+import WithUrlDataContainerComponent from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {Login} from './components/Login/Login';
 import {getAuthUserData} from "./redux/auth-reducer";
@@ -22,7 +22,7 @@ const App = () => {
                     <DialogsContainer />}/>
 
                 <Route path='/profile/:userId?' render={() =>
-                    <ProfileContainerS/>}/>
+                    <WithUrlDataContainerComponent/>}/>
 
                 <Route path='/users' render={() =>
                     <UserContainer />}/>

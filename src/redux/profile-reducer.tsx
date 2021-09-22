@@ -105,7 +105,7 @@ export const setUserProfileAC = (profile: ProfileType) => {
     } as const
 }
 //thunk
-export const getUserProfile = (userId:string) => (dispatch:any) => {
+export const getUserProfile = (userId: string) => (dispatch: any) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
     })  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
