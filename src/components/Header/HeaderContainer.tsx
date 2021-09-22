@@ -9,7 +9,6 @@ export type MapStateToPropsType = {
     isAuth: boolean
 }
 export type MapDispatchToPropsType = {
-    // setAuthUserData: (data: dataType) => void
     getAuthUserData: () => void
 }
 

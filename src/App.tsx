@@ -6,15 +6,15 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
 import {ProfileContainerS} from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {setUsers, setUsersTotalCount, toggleIsFetching} from "./redux/users-reducer";
-import { Login } from './components/Login/Login';
+import {Login} from './components/Login/Login';
+import {getAuthUserData} from "./redux/auth-reducer";
 
 
 const App = () => {
 
     return (
         <div className='app-wrapper'>
-            <HeaderContainer getAuthUserData={() => {}}/>
+            <HeaderContainer getAuthUserData={getAuthUserData}/>
             <Navbar/>
             <div className='app-wrapper-content'>
 

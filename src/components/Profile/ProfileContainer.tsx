@@ -16,7 +16,6 @@ export type MapStateToPropsType = {
 }
 
 export type MapDispatchToPropsType = {
-    // setUserProfile: (profile: ProfileType) => void
     getUserProfile: (userId: string) => void
 }
 
@@ -50,7 +49,7 @@ let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 //--------------------------------------------------------------------------
 export let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile,
+    profile: state.profilePage.profile
 })
 //--------------------------------------------------------------------------
 

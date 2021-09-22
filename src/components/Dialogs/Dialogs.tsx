@@ -48,7 +48,6 @@ function Dialogs(props: DialogsPropsType) {
                 </div>
                 <div>
                     <Button onClick={onSendMessageClick} variant="contained" color="primary">Send</Button>
-
                     <Button variant="contained" color="secondary">Delete</Button>
                 </div>
             </div>

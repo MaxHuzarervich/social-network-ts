@@ -8,12 +8,12 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 export type MapStateToPropsType = {
-    dialogsPage:InitialStateDialogsType,
-    newMessageBody:string
+    dialogsPage: InitialStateDialogsType,
+    newMessageBody: string
 }
 export type MapDispatchToPropsType = {
     updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void,
-    sendMessage: (newMessageBody:string) => void
+    sendMessage: (newMessageBody: string) => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -37,7 +37,6 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
 }
 
 const AuthRedirectComponent = withAuthRedirect(Dialogs)
-
 
 //Создаем контейнерную компоненту при помощи redux
 

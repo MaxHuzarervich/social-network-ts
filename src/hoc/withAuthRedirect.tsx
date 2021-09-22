@@ -4,6 +4,8 @@ import {AppStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
 import {MapStateToPropsForRedirectType} from "../components/Profile/ProfileContainer";
 
+//withAuthRedirect для того чтобы снабжать компоненты редиректом
+
 let MapStateToPropsForRedirect = (state: AppStateType): MapStateToPropsForRedirectType => ({
     isAuth: state.auth.isAuth
 });
