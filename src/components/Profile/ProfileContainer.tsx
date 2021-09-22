@@ -45,7 +45,7 @@ export class ProfileContainer extends React.Component <PropsType> {
 let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile
 })
-export default compose(
+export default compose<React.ComponentType>(
     connect(MapStateToProps,{getUserProfile}),
     withRouter,
     withAuthRedirect

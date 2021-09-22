@@ -24,7 +24,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType, any
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
 
-    onPageChanged = (pageNumber: number) => {   //эту ф-цию я не передаю в mapDispatchToProps,передаю просто через пропсы
+    onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize)
     }
 
@@ -85,6 +85,24 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
         followingInProgress: state.usersPage.followingInProgress
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
+
+export default compose<React.ComponentType>(
+    withAuthRedirect,
+    connect(MapStateToProps,
+        {
+            follow: followSuccess, unfollow: unfollowSuccess, setCurrentPage, toggleFollowingProgress, getUsers
+        }
+    )
+)(UsersContainer)
+
+
+
+
+
+
+
+
+
 // let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 //     return {
 //         follow: (userID: number) => {
@@ -122,12 +140,3 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
 //         getUsers
 //     }
 // )(UsersContainer))
-
-export default compose(
-    withAuthRedirect,
-    connect(MapStateToProps,
-        {
-            follow: followSuccess, unfollow: unfollowSuccess, setCurrentPage, toggleFollowingProgress, getUsers
-        }
-    )
-)(UsersContainer)
