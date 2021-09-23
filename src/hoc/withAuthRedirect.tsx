@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import {AppStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
 
-//withAuthRedirect для того чтобы снабжать компоненты редиректом
+//HOC!!! withAuthRedirect для того чтобы снабжать компоненты редиректом
 
 type MapStateToPropsForRedirectType = {
     isAuth: boolean

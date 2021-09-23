@@ -17,7 +17,7 @@ import {compose} from "redux";
 
 //контейнерная классовая компонента
 
-export class UsersContainer extends React.Component<UsersContainerPropsType, any> {
+export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     //componentDidMount - метод жизненного цикла!
     componentDidMount() {

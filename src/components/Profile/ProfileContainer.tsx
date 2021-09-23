@@ -22,11 +22,11 @@ export type MapDispatchToPropsType = {
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export type PropsType = RouteComponentProps<PathParamsType> & OwnPropsType
+export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 //всё (пропсы), что приходит в контейнерную компоненту мы обязаны передать в презентационную
 
-export class ProfileContainer extends React.Component <PropsType> {
+export class ProfileContainer extends React.Component <ProfileContainerPropsType> {
     componentDidMount() {
 
         let userId = this.props.match.params.userId;
