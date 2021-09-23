@@ -11,14 +11,13 @@ import {getAuthUserData} from "./redux/auth-reducer";
 
 
 const App = () => {
-
     return (
         <div className='app-wrapper'>
-            <HeaderContainer getAuthUserData={getAuthUserData}/>
+            <HeaderContainer />
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
+                <Route path='/profile/:userId?' render={() =>  <ProfileContainer />}/>
                 <Route path='/users' render={() => <UserContainer/>}/>
                 <Route path='/login' render={() => <Login/>}/>
             </div>
