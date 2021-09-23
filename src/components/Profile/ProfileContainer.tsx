@@ -19,7 +19,7 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType> {
     componentDidMount(): void {
         let userId = this.props.match.params.userId;
         if (!userId) {
-            userId = '21'
+            userId = '2323'
         }
         this.props.getUserProfile(userId);
     }
@@ -27,7 +27,7 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType> {
     render() {
         return (
             <div>
-                <Profile {...this.props}/>
+                <Profile {...this.props} profile={this.props.profile}/>
             </div>
         )
     }
