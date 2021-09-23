@@ -17,15 +17,9 @@ const App = () => {
             <HeaderContainer getAuthUserData={getAuthUserData}/>
             <Navbar/>
             <div className='app-wrapper-content'>
-
-                <Route path='/dialogs' render={() =>
-                    <DialogsContainer />}/>
-
-                <Route path='/profile/:userId?' render={() =>
-                    <ProfileContainer />}/>
-
-                <Route path='/users' render={() =>
-                    <UserContainer />}/>
+                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
+                <Route path='/users' render={() => <UserContainer/>}/>
                 <Route path='/login' render={() => <Login/>}/>
             </div>
         </div>

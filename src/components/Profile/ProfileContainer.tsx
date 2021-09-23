@@ -7,7 +7,6 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-
 export type PathParamsType = {             //типизация того что после params
     userId: string
 }
@@ -17,14 +16,18 @@ export type MapStateToPropsType = {
 }
 
 export type MapDispatchToPropsType = {
-    getUserProfile: (userId: string) => void
+    getUserProfile:(userId: string) => void
 }
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-//всё (пропсы), что приходит в контейнерную компоненту мы обязаны передать в презентационную
+let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    profile: state.profilePage.profile
+})
+
+//всё что приходит в контейнерную компоненту мы обязаны передать в презентационную
 
 export class ProfileContainer extends React.Component <ProfileContainerPropsType> {
     componentDidMount() {
@@ -41,18 +44,11 @@ export class ProfileContainer extends React.Component <ProfileContainerPropsType
         return <Profile {...this.props} profile={this.props.profile}/>
     }
 }
-
-let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    profile: state.profilePage.profile
-})
 export default compose<React.ComponentType>(
-    connect(MapStateToProps,{getUserProfile}),
+    connect(MapStateToProps, {getUserProfile}),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)
-
-
-
 
 
 // export default withAuthRedirect(withRouter(connect(MapStateToProps,{getUserProfile})

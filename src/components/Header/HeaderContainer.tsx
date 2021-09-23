@@ -11,11 +11,9 @@ export type MapStateToPropsType = {
 export type MapDispatchToPropsType = {
     getAuthUserData: () => void
 }
-
 export type headerContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-
- class HeaderContainer extends React.Component <headerContainerPropsType, any> {
+class HeaderContainer extends React.Component <headerContainerPropsType, any> {
     componentDidMount() {                                                 //2-м параметром передаем объект с настройкам запроса
         this.props.getAuthUserData() //получает пользовательские авторизационные данные
     }
