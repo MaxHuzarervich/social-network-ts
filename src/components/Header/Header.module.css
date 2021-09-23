@@ -1,8 +1,16 @@
 .header {
-    grid-area: h;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border:1px solid  #f3d73e;
+    width: 1350px;
     background-color: #306eba;
 }
-.header img{width:10%; border-radius: 50%}
+.header img{
+    display: flex;
+    width:50%;
+    border-radius: 50%}
 .loginBlock{
-    float: right;
+    display: flex;
 }

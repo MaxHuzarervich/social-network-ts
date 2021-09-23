@@ -15,8 +15,8 @@ function ProfileInfo(props: OwnPropsType) {
             {/*    alt={'photo'}/>*/}
         </div>
         <div className={s.descriptionBlock}>
-            <img src={props.profile.photos.large} alt={'photo'}/>
-            <ProfileStatus />
+            <img src={props.profile.photos.large}/>
+            <ProfileStatus status={'Hello!'}/>
         </div>
     </div>
 }

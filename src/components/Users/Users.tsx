@@ -31,8 +31,9 @@ export let Users = (props: UsersContainerPropsType) => {
             <div className={s.user}>
                 <div>
                     <div className={s.UserImg}>
-                        <NavLink to={'/profile/' + u.id}>Avatar should be here</NavLink>
-                        {/*<NavLink><img  src={u.photos.small != null ? u.photos.small : user}/></NavLink>*/}
+                        <NavLink to={'/profile/' + u.id}>
+                            <img src={u.photos.small != null ? u.photos.small : Users}/>
+                        </NavLink>
                     </div>
                     <div className={s.follow}>
                         {u.followed ?
@@ -53,8 +54,8 @@ export let Users = (props: UsersContainerPropsType) => {
                             <div>{u.status}</div>
                             </span>
                             <span>
-                            <div>{'u.location.country'}</div>
-                            <div>{'u.location.city'}</div>
+                            {/*<div>{u.location.country}</div>*/}
+                            {/*<div>{u.location.city}</div>*/}
                             </span>
                             </span>
             </div>

@@ -1,10 +1,10 @@
 .app-wrapper {
-    width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
     display: grid;
     grid-template-areas:
-'h h'
-'n c';
+      'h h'
+      'n c';
     grid-template-rows: 10% 1fr;
     grid-template-columns: 20% 10fr;
     background-color: #225b83;

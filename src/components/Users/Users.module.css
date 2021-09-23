@@ -1,6 +1,6 @@
 .UserImg {
-    width: 110%;
-    height: 110%;
+    width: 10%;
+    height: 10%;
     background-color: #f3d73e;
     border: 2px solid #271439;
     margin: 5px 0px 5px 0px;
@@ -11,14 +11,12 @@
 }
 
 .user {
-    border: 1px solid deeppink;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    justify-content: space-around;
     background: linear-gradient( 180deg, cadetblue, wheat );
     font-size: large;
     font-weight: bold;
-    margin: 5px 0px 5px 0px;
 }
 .follow {
     background: linear-gradient( 360deg, cadetblue, wheat );

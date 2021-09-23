@@ -6,8 +6,8 @@ export type userType = {
     id: number,
     photos:
         {
-            small: string,
-            large: string
+            small: any,
+            large: any
         },
     status: string,
     followed: boolean,
