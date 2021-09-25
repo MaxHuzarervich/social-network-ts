@@ -22,9 +22,21 @@ export const usersAPI = {
     unfollow(userID: number) {
         return instance.delete(`unfollow/${userID}`)
     },
+    getProfile(userId: string) {
+        console.warn('Obsolete method. Please use profileAPI.')
+        return profileAPI.getProfile(userId)
+    }
+}
+export const profileAPI = {
     getProfile(userId: string) {//get возвращает промис, мы на этот промис подписаны then-ом и этот
         // промис после подписки возвращает нам другой промис
         return instance.get(`profile/` + userId)
+    },
+    getStatus(userId:string){
+        return instance.get(`status/` + userId)
+    },
+    updateStatus(userId:string){
+        return instance.put(`status`, {status:status})
     }
 }
 export const authAPI = {

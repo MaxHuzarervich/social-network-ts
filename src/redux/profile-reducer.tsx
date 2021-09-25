@@ -11,6 +11,7 @@ export type initialStateType = {
     posts: Array<postType>
     messageForNewPost: string
     profile: ProfileType
+    status: string
 }
 
 export type ProfileType = {
@@ -46,7 +47,8 @@ let initialState: initialStateType = {
         {id: 2, message: 'My first post', likesCount: 20},
     ],
     messageForNewPost: 'Social Network',
-    profile: {} as ProfileType
+    profile: {} as ProfileType,
+    status: 'status'
 }
 //если сюда не придёт state то state-ом будет initialState
 
