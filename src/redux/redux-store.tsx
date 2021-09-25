@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {addPostAC, newTextChangeHandlerAC, profileReducer, setUserProfileAC} from "./profile-reducer";
+import {addPostAC, newTextChangeHandlerAC, profileReducer, getStatusAC, setUserProfileAC} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from "./dialogs-reducer";
 import {
     followSuccess,
@@ -28,6 +28,7 @@ export type ActionsTypes =
     | ReturnType<typeof setUserProfileAC>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof getStatusAC>
 
 
 //rootReducers возвращает state всего нашего приложения

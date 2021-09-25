@@ -1,5 +1,5 @@
 import {ActionsTypes} from "./redux-store";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 
 export type postType = {
     id: number,
@@ -38,7 +38,7 @@ export type ProfileType = {
 const ADD_POST = 'ADD-POST'
 const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
-
+const SET_STATUS = 'SET_STATUS'
 
 //инициализационный state,который будет инициализировать эту подветку
 let initialState: initialStateType = {
@@ -48,7 +48,7 @@ let initialState: initialStateType = {
     ],
     messageForNewPost: 'Social Network',
     profile: {} as ProfileType,
-    status: 'status'
+    status: ''
 }
 //если сюда не придёт state то state-ом будет initialState
 
@@ -59,17 +59,23 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 id: new Date().getTime(),
                 message: action.postText,
                 likesCount: 3
-            };
+            }
             return {
                 ...state,          //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
                 posts: [...state.posts, newPost], // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
                 messageForNewPost: ''
-            };
+            }
         }
         case CHANGE_NEW_TEXT: {//впечатываем
             return {
                 ...state,//делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
                 messageForNewPost: action.newText
+            }
+        }
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.status
             }
         }
         case SET_USER_PROFILE: {
@@ -78,7 +84,6 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 profile: action.profile   //копия стейта, в которой меняем профайл на профайл который сидит в экшн
             }
         }
-
         default: {                                      //default line
             return state;
         }
@@ -106,9 +111,26 @@ export const setUserProfileAC = (profile: ProfileType) => {
         profile: profile
     } as const
 }
+export const setStatusAC = (status:string) => {
+    return {
+        type: SET_STATUS,
+        status:status
+    }
+}
 //thunk
 export const getUserProfile = (userId: string) => (dispatch: any) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
     })  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
+}
+export const getStatus = (userId: string) => (dispatch: any) => {
+    profileAPI.getStatus(userId).then(response => {
+        dispatch(setStatusAC(response.data))
+    })
+}
+export const updateStatus = (status:string) => (dispatch: any) => {
+    profileAPI.updateStatus(status).then(response => {
+        if(response.data.resultCode === 0){
+        dispatch(setStatusAC(status))}
+    })
 }
