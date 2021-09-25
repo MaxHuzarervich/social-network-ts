@@ -2,7 +2,7 @@ import React from 'react';
 import s from './ProfileInfo.module.css';
 import {OwnPropsType} from "../ProfileContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
-import { ProfileStatus } from './ProfileStatus';
+import {ProfileStatus} from './ProfileStatus';
 
 function ProfileInfo(props: OwnPropsType) {
     if (!props.profile.userId) {
@@ -16,7 +16,9 @@ function ProfileInfo(props: OwnPropsType) {
         </div>
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large}/>
-            <ProfileStatus status={'Hello!'}/>
+            <ProfileStatus
+                status={props.status}
+                updateStatus={props.updateStatus}/>
         </div>
     </div>
 }

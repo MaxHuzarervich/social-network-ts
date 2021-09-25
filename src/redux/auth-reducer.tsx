@@ -17,7 +17,7 @@ export type InitialStateType = {
 };
 
 let initialState: InitialStateType = {
-    id: null,
+    id:  null,
     email: null,
     login: null,
     isAuth: false //незалогинен

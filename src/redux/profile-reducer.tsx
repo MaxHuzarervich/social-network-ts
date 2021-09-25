@@ -1,5 +1,6 @@
 import {ActionsTypes} from "./redux-store";
 import {profileAPI, usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type postType = {
     id: number,
@@ -115,20 +116,21 @@ export const setStatusAC = (status:string) => {
     return {
         type: SET_STATUS,
         status:status
-    }
+    } as const
 }
 //thunk
-export const getUserProfile = (userId: string) => (dispatch: any) => {
+export const getUserProfile = (userId: string) => (dispatch: Dispatch<ActionsTypes>) => {
     usersAPI.getProfile(userId).then(response => {
         dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
     })  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
 }
-export const getStatus = (userId: string) => (dispatch: any) => {
+export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsTypes>) => {
     profileAPI.getStatus(userId).then(response => {
+        debugger
         dispatch(setStatusAC(response.data))
     })
 }
-export const updateStatus = (status:string) => (dispatch: any) => {
+export const updateStatus = (status:string) => (dispatch: Dispatch<ActionsTypes>) => {
     profileAPI.updateStatus(status).then(response => {
         if(response.data.resultCode === 0){
         dispatch(setStatusAC(status))}

@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, ProfileType, updateStatus} from "../../redux/profile-reducer";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 export type OwnPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -15,7 +14,7 @@ export type PathParamsType = {             //типизация того что 
 
 export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnPropsType
 
-class ProfileContainer extends React.Component <ProfileContainerPropsType> {
+class ProfileContainer extends React.Component <ProfileContainerPropsType, any> {
     componentDidMount(): void {
         let userId = this.props.match.params.userId;
         if (!userId) {
@@ -28,7 +27,10 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType> {
     render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+                <Profile {...this.props}
+                         profile={this.props.profile}
+                         status={this.props.status}
+                         updateStatus={this.props.updateStatus}/>
             </div>
         )
     }
@@ -42,7 +44,7 @@ export type MapStateToPropsType = {
 export type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void,
     getStatus: (userId: string) => void,
-    updateStatus: (status:string) => void
+    updateStatus: (status: string) => void
 }
 
 let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
@@ -51,7 +53,7 @@ let MapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 export default compose<React.ComponentType>(
-    connect(MapStateToProps, {getUserProfile,getStatus,updateStatus}),
+    connect(MapStateToProps, {getUserProfile, getStatus, updateStatus}),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer)
