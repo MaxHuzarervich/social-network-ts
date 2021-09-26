@@ -23,13 +23,19 @@ export class ProfileStatus extends React.Component<any, any> {
             status: e.currentTarget.value
         });
     }
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
+        debugger
+        let a = this.state
+        let b = this.props
+    }
 
     render() {
+        console.log('rend')
         return (
             <>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status || '-------'}</span>
                 </div>}
                 {this.state.editMode &&
                 <div>
