@@ -1,7 +1,7 @@
 import React from "react";
 
 export class ProfileStatus extends React.Component<any, any> {
-
+    //локальный
     state = {
         editMode: false,
         status: this.props.status
@@ -23,6 +23,7 @@ export class ProfileStatus extends React.Component<any, any> {
             status: e.currentTarget.value
         });
     }
+    //Метод позволяет работать с DOM при обновлении компонента
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
         debugger
         let a = this.state
