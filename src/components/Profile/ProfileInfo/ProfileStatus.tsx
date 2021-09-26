@@ -25,9 +25,11 @@ export class ProfileStatus extends React.Component<any, any> {
     }
     //Метод позволяет работать с DOM при обновлении компонента
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any) {
-        debugger
-        let a = this.state
-        let b = this.props
+        if(prevProps.status !== this.state.status){  //статус в предыдущих пропсах не равен статусу в текущих пропсах
+        this.setState({
+            status:this.props.status
+        })}
+
     }
 
     render() {

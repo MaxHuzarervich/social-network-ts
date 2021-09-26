@@ -49,7 +49,7 @@ let initialState: initialStateType = {
     ],
     messageForNewPost: 'Social Network',
     profile: {} as ProfileType,
-    status: ''
+    status: 'status!'
 }
 //если сюда не придёт state то state-ом будет initialState
 
