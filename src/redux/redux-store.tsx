@@ -13,6 +13,7 @@ import {
 } from "./users-reducer";
 import {authReducer, setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
+import { reducer as formReducer } from 'redux-form';
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
@@ -37,7 +38,8 @@ export let rootReducer = combineReducers({ //воспринимаем это к�
     dialogsPage: dialogsReducer,
     //sideBar:sideBarReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 })
 
 export type AppStateType = ReturnType<typeof rootReducer>; //typeof типизирует автоматически ф-цию,
