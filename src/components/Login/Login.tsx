@@ -9,7 +9,8 @@ type FormDataType = {
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
-    return (
+    return ( //когда форма засабмитится, выполнится спец метод handleSubmit из контейнерной
+        // компоненты которая получается после оборачивания хоком
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field placeholder={'Login'} name={'login'} component={'input'}/>

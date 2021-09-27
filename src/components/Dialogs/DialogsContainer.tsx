@@ -6,7 +6,6 @@ import {AppStateType} from "../../redux/redux-store";
 import {compose, Dispatch} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
-
 export type MapStateToPropsType = {
     dialogsPage: InitialStateDialogsType,
     newMessageBody: string

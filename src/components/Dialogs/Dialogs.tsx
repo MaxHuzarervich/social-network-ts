@@ -4,7 +4,7 @@ import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
 import {Button, TextField} from "@material-ui/core";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Redirect} from 'react-router-dom';
+import Field, {Form, InjectedFormProps} from "redux-form";
 
 
 function Dialogs(props: DialogsPropsType) {
@@ -18,14 +18,6 @@ function Dialogs(props: DialogsPropsType) {
     let messageElements =
         props.dialogsPage.messages.map(messages => <Message message={messages.message} key={messages.id}
                                                             id={messages.id}/>)
-
-    const onSendMessageClick = () => {
-        props.sendMessage(props.newMessageBody)
-    }
-    const updateNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.updateNewMessageBody(e)
-    }
-
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -38,21 +30,34 @@ function Dialogs(props: DialogsPropsType) {
                 <div>{messageElements}</div>
 
                 <div className={s.textField}>
-                    <TextField
-                        value={props.newMessageBody}
-                        onChange={updateNewMessageBody}
-                        id="outlined-basic"
-                        variant="outlined"
-                        placeholder={'Enter your message'}
-                    />
-                </div>
-                <div>
-                    <Button onClick={onSendMessageClick} variant="contained" color="primary">Send</Button>
-                    <Button variant="contained" color="secondary">Delete</Button>
+
                 </div>
             </div>
         </div>
     )
+}
+
+const AddMessageForm: React.FC<InjectedFormProps<DialogsPropsType>> = (props:DialogsPropsType) => {
+
+    const onSendMessageClick = () => {
+        props.sendMessage(props.newMessageBody)
+    }
+    const updateNewMessageBody = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        props.updateNewMessageBody(e)
+    }
+
+    return (
+    <Form onSubmit={props.handleSubmit}>
+        <Field
+            value={props.newMessageBody}
+            onChange={updateNewMessageBody}
+            id="outlined-basic"
+            variant="outlined"
+            placeholder={'Enter your message'}
+        />
+        <Button onClick={onSendMessageClick} variant="contained" color="primary">Send</Button>
+        <Button variant="contained" color="secondary">Delete</Button>
+    </Form>)
 }
 
 export default Dialogs;
