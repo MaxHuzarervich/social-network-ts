@@ -1,5 +1,5 @@
-import React, {ChangeEvent} from 'react';
-import {InitialStateDialogsType, sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
+import React from 'react';
+import {InitialStateDialogsType, sendMessageCreator} from '../../redux/dialogs-reducer';
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
@@ -8,10 +8,8 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type MapStateToPropsType = {
     dialogsPage: InitialStateDialogsType,
-    newMessageBody: string
 }
 export type MapDispatchToPropsType = {
-    updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void,
     sendMessage: (newMessageBody: string) => void
 }
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -20,15 +18,11 @@ export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {     //смысл ф-ции превратить часть стейта в пропсы
     return {
         dialogsPage: state.dialogsPage,
-        newMessageBody: state.dialogsPage.newMessageBody,
     }
 }
 //двумя ф-циями ниже мы настраиваем наш connect
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch(updateNewMessageBodyCreator(e.currentTarget.value))
-        },
         sendMessage: (newMessageBody) => {
             dispatch(sendMessageCreator(newMessageBody))
         }

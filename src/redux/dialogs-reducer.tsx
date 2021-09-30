@@ -13,7 +13,6 @@ export type MessagesType = {
 export type InitialStateDialogsType = {
     messages: Array<MessagesType>
     dialogs: Array<NamesType>
-    newMessageBody: string
 }
 
 const initialState: InitialStateDialogsType = {
@@ -32,38 +31,26 @@ const initialState: InitialStateDialogsType = {
         {id: 5, name: 'Victor'},
         {id: 6, name: 'Valera'}
     ],
-    newMessageBody: ''
 }
 //если сюда не придёт state то state-ом будет initialState
 export const dialogsReducer = (state: InitialStateDialogsType = initialState, action: ActionsTypes): InitialStateDialogsType => {
 
     switch (action.type) {
         case 'SEND-MESSAGE':
-            let bodyMessage: MessagesType = {                                  //отправляем
+            let bodyMessage: MessagesType = {
                 id: new Date().getTime(),
                 message: action.bodyText
             }
             return  {...state,
-            newMessageBody:'',
             messages: [...state.messages, bodyMessage]} //все элементы из старого messages а справа еще один элемент
-        case 'UPDATE-NEW-MESSAGE-BODY': //впечатываем
-            return  {...state,
-                newMessageBody: action.body};   //newMessageBody перезатираем
         default:                                      //default line
             return state;
     }
 }
-export const updateNewMessageBodyCreator =
-    (body: string) => {
-        return {
-            type: 'UPDATE-NEW-MESSAGE-BODY',
-            body: body
-        } as const
-    }
 export const sendMessageCreator =
-    (bodyText: string) => {
+    (newMessageBody: string) => {
         return {
             type: 'SEND-MESSAGE',
-            bodyText: bodyText
+            bodyText: newMessageBody
         } as const
     }
