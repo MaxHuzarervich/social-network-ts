@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {addPostAC, newTextChangeHandlerAC, profileReducer, setStatusAC, setUserProfileAC} from "./profile-reducer";
+import {addPostAC, profileReducer, setStatusAC, setUserProfileAC} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator} from "./dialogs-reducer";
 import {
     followSuccess,
@@ -17,7 +17,6 @@ import {reducer as formReducer} from 'redux-form';
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof newTextChangeHandlerAC>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof followSuccess>
     | ReturnType<typeof unfollowSuccess>

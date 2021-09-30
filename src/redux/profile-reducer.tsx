@@ -10,7 +10,6 @@ export type postType = {
 
 export type initialStateType = {
     posts: Array<postType>
-    messageForNewPost: string
     profile: ProfileType
     status: string
 }
@@ -37,7 +36,6 @@ export type ProfileType = {
 }
 
 const ADD_POST = 'ADD-POST'
-const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -47,7 +45,6 @@ let initialState: initialStateType = {
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
         {id: 2, message: 'My first post', likesCount: 20},
     ],
-    messageForNewPost: 'Social Network',
     profile: {} as ProfileType,
     status: ''
 }
@@ -58,19 +55,12 @@ export const profileReducer = (state: initialStateType = initialState, action: A
         case ADD_POST: {//функция для создания нового поста
             const newPost: postType = {                                        //отправляем
                 id: new Date().getTime(),
-                message: action.postText,
+                message: action.messageForNewPost,    //берем его из action ниже
                 likesCount: 3
             }
             return {
                 ...state,          //делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
-                posts: [...state.posts, newPost], // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
-                messageForNewPost: ''
-            }
-        }
-        case CHANGE_NEW_TEXT: {//впечатываем
-            return {
-                ...state,//делаем копию по правилу иммутабильности!!! исходный объект не может быть изменен
-                messageForNewPost: action.newText
+                posts: [...state.posts, newPost] // и глубокую копию массива posts,потому-что поверхн.копия посты не копирует!
             }
         }
         case SET_STATUS: {
@@ -93,17 +83,10 @@ export const profileReducer = (state: initialStateType = initialState, action: A
 
 //экшн - объект у которого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
 export const addPostAC =
-    (postText: string) => {
+    (messageForNewPost: string) => {
         return {
             type: ADD_POST,
-            postText: postText
-        } as const
-    }
-export const newTextChangeHandlerAC =
-    (newText: string) => {
-        return {
-            type: CHANGE_NEW_TEXT,
-            newText: newText
+            messageForNewPost
         } as const
     }
 export const setUserProfileAC = (profile: ProfileType) => {
@@ -112,10 +95,10 @@ export const setUserProfileAC = (profile: ProfileType) => {
         profile: profile
     } as const
 }
-export const setStatusAC = (status:string) => {
+export const setStatusAC = (status: string) => {
     return {
         type: SET_STATUS,
-        status:status
+        status: status
     } as const
 }
 //thunk
@@ -130,9 +113,10 @@ export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsTypes>) 
         dispatch(setStatusAC(response.data))
     })
 }
-export const updateStatus = (status:string) => (dispatch: Dispatch<ActionsTypes>) => {
+export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsTypes>) => {
     profileAPI.updateStatus(status).then(response => {
-        if(response.data.resultCode === 0){
-        dispatch(setStatusAC(status))}
+        if (response.data.resultCode === 0) {
+            dispatch(setStatusAC(status))
+        }
     })
 }

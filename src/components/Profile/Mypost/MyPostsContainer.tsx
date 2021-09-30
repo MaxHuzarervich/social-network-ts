@@ -1,19 +1,16 @@
-import React, {ChangeEvent} from 'react';
-import {addPostAC, initialStateType, newTextChangeHandlerAC} from '../../../redux/profile-reducer';
+import React from 'react';
+import {addPostAC} from '../../../redux/profile-reducer';
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
 import {Dispatch} from "redux";
 
 
-
 export type MapDispatchToPropsType = {
-    addPost: (messageForNewPost:string) => void
-    updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => void
+    addPost: (messageForNewPost: string) => void
 }
 export type MapStateToProps = {
-    posts: any //
-    messageForNewPost: any //
+    posts: any
 }
 
 export type MyPostsPropsType = MapStateToProps & MapDispatchToPropsType
@@ -23,18 +20,13 @@ export type MyPostsPropsType = MapStateToProps & MapDispatchToPropsType
 let MapStateToProps = (state: AppStateType): MapStateToProps => {
     return {
         posts: state.profilePage.posts,
-        messageForNewPost: state.profilePage.messageForNewPost  //первый объект достает данные из стейта и передает их в пропсы
     }
 }
 let MapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         addPost: (messageForNewPost) => {
             dispatch(addPostAC(messageForNewPost))
-        },
-        updateNewPost: (e: ChangeEvent<HTMLTextAreaElement>) => {
-            dispatch(newTextChangeHandlerAC(e.currentTarget.value))
         }
-
     }
 }
 //создаем контейнерную компоненту для презентационной компоненты MyPosts.
