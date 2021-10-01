@@ -37,14 +37,12 @@ export const dialogsReducer = (state: InitialStateDialogsType = initialState, ac
 
     switch (action.type) {
         case 'SEND-MESSAGE':
-            // let bodyMessage: MessagesType = {
-                //     id: new Date().getTime(),
-                //     message: action.newMessageBody
-                // }
             let bodyMessage = action.newMessageBody
-            return  {...state,
-            messages: [...state.messages, {id:6, message:bodyMessage}]} //все элементы из старого messages а справа еще один элемент
-        default:                                      //default line
+            return {
+                ...state,
+                messages: [...state.messages, {id: 6, message: bodyMessage}]
+            }
+        default:
             return state;
     }
 }
@@ -52,6 +50,6 @@ export const sendMessageCreator =
     (newMessageBody: string) => {
         return {
             type: 'SEND-MESSAGE',
-            newMessageBody
+            newMessageBody: newMessageBody
         } as const
     }
