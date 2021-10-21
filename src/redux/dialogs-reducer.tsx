@@ -32,7 +32,7 @@ const initialState: InitialStateDialogsType = {
         {id: 6, name: 'Valera'}
     ],
 }
-//если сюда не придёт state то state-ом будет initialState
+//если сюда не придёт state то state-ом будет initialState выше
 export const dialogsReducer = (state: InitialStateDialogsType = initialState, action: ActionsTypes): InitialStateDialogsType => {
 
     switch (action.type) {
