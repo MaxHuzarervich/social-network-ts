@@ -9,11 +9,6 @@ function ProfileInfo(props: OwnPropsType) {
         return <Preloader/>
     }
     return <div>
-        <div>
-            {/*<img*/}
-            {/*    src='https://p4.wallpaperbetter.com/wallpaper/728/935/618/city-the-city-usa-los-angeles-wallpaper-preview.jpg'*/}
-            {/*    alt={'photo'}/>*/}
-        </div>
         <div className={s.descriptionBlock}>
             <img src={props.profile.photos.large}/>
             <ProfileStatus

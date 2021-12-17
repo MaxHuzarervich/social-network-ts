@@ -2,7 +2,7 @@ import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getAuthUserData, setAuthUserData} from "../../redux/auth-reducer";
+import {getAuthUserData} from "../../redux/auth-reducer";
 
 export type headerContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -10,6 +10,7 @@ class HeaderContainer extends React.Component <headerContainerPropsType, any> {
     componentDidMount() {                                                 //2-м параметром передаем объект с настройкам запроса
         this.props.getAuthUserData() //получает пользовательские авторизационные данные
     }
+
     render() {
         return <Header {...this.props}/>
     }

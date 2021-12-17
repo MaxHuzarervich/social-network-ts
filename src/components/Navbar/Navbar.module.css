@@ -1,16 +1,25 @@
 .nav {
-    grid-area: n;
-    background-color: #225b83;
+    background: linear-gradient(90deg, #271439, white);
+    color: white;
     padding: 20px;
     font-size: larger;
-    font-family: Aharoni;
+    font-family: Aharoni, serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    max-width: 100%;
 }
-.item a{
+
+.item {
     color: white;
     text-decoration: none;
-    padding: 3%;
+    margin: 1%;
+    -webkit-text-stroke: 1px black;
 }
-.item a.active {
-    color: #f3d73e;
+.item:hover {
+    color: #271439;
 }
+
+
+
 

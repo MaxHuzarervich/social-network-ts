@@ -1,0 +1,10 @@
+.app_wrapper {
+   background-color: #f3d73e;
+    height: 100vh;
+    max-width: 100%;
+}
+.block {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+}

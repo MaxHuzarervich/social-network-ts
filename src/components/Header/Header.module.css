@@ -2,15 +2,27 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    border:1px solid  #f3d73e;
-    width: 1350px;
-    background-color: #306eba;
+    max-width: 100%;
+    background: linear-gradient(90deg, #271439, white);
 }
-.header img{
-    display: flex;
-    width:50%;
-    border-radius: 50%}
-.loginBlock{
-    display: flex;
+
+.logo {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(90deg, white, #271439);
+    border-radius: 50%;
+    margin: 1%;
+}
+
+.logo:hover {
+    background: linear-gradient(90deg, #271439, white);
+}
+
+.login {
+    margin: 1%;
+}
+
+.item {
+    margin: 1%;
+    -webkit-text-stroke: 1px black;
 }

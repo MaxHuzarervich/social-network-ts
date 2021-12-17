@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
 import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -10,15 +10,18 @@ import {Login} from './components/Login/Login';
 
 
 const App = () => {
-    return (
-        <div className='app-wrapper'>
-            <HeaderContainer />
-            <Navbar/>
-            <div className='app-wrapper-content'>
-                <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                <Route path='/profile/:userId?' render={() => <ProfileContainer />}/>
-                <Route path='/users' render={() => <UserContainer/>}/>
-                <Route path='/login' render={() => <Login/>}/>
+    return (<div>
+            <HeaderContainer/>
+            <div className={s.navAndRightBlock}>
+                <Navbar/>
+            {/*<div className={s.block}>*/}
+                <div className={s.app_wrapper}>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/users' render={() => <UserContainer/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
+                </div>
+            {/*</div>*/}
             </div>
         </div>
     );

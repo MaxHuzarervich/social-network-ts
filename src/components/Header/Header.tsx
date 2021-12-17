@@ -2,15 +2,18 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Header.module.css';
 import {headerContainerPropsType} from "./HeaderContainer";
+import {Button} from "@material-ui/core";
 
 function Header(props: headerContainerPropsType) {
     return <header className={s.header}>
-        <div>
-            <img
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmXY6_qN8rHTSRz2NBY71jb5iqt00Yw543HQ&usqp=CAU'/>
+        <div className={s.logo}>
+
         </div>
-        <div className={s.loginBlock}>
-            {props.isAuth ? props.login : <NavLink to={'/login'}> Login </NavLink>}
+        <div className={s.login}>
+            <Button variant="outlined" className={s.item}>
+                {props.isAuth ? props.login :
+                    <NavLink to={'#/login'} style={{textDecoration: 'none'}}> Login </NavLink>}
+            </Button>
         </div>
 
     </header>
