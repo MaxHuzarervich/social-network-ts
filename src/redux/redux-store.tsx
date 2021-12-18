@@ -41,7 +41,7 @@ export let rootReducer = combineReducers({ //воспринимаем это к�
 })
 export type AppStateType = ReturnType<typeof rootReducer>; //typeof типизирует автоматически ф-цию,
 // а ф-ция что-то возвращает. А мы говорим дай нам возвращаемый тип!
-export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware)); //стор прими промежуточный уровень
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware)); //стор прими промежуточный уровень
 // export type AppStateType = ReturnType<typeof reducers>
 
 

@@ -9,7 +9,7 @@ import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 function Dialogs(props: DialogsPropsType) {
     const addNewMessage = (values: AddMessageFormType) => {
-        debugger
+
         props.sendMessage(values.newMessageBody)
     }
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
@@ -53,5 +53,5 @@ const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> =
     }
 //HOC
 const AddMessageFormRedux = reduxForm<AddMessageFormType>({form: 'dialogAddMessageForm'})(AddMessageForm)
-
+//оборачиваем AddMessageForm контейнерной компонентой
 export default Dialogs;
