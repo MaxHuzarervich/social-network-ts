@@ -14,14 +14,12 @@ const App = () => {
             <HeaderContainer/>
             <div className={s.navAndRightBlock}>
                 <Navbar/>
-            {/*<div className={s.block}>*/}
                 <div className={s.app_wrapper}>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/users' render={() => <UserContainer/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
-            {/*</div>*/}
             </div>
         </div>
     );

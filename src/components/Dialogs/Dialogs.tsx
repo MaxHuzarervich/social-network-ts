@@ -6,11 +6,16 @@ import {Button} from "@material-ui/core";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
+type AddMessageFormType = {
+    newMessageBody: string
+}
 
 function Dialogs(props: DialogsPropsType) {
-    const addNewMessage = (values: AddMessageFormType) => {
-
-        props.sendMessage(values.newMessageBody)
+    debugger
+    const addNewMessage = (formData:AddMessageFormType) => {
+        debugger
+        console.log(formData)
+        alert('rerererer')
     }
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
     let dialogsElements =                     //key id элемента из которого мы получаем jsx элемент!!!
@@ -34,19 +39,16 @@ function Dialogs(props: DialogsPropsType) {
     )
 }
 
-type AddMessageFormType = {
-    newMessageBody: string
-}
 //задача этой компоненты собирать данные и отправлять их в handleSubmit из reduxForm
 const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> =
     (props) => {
         return (
             <form onSubmit={props.handleSubmit}>
                 <div>
-                    <Field component='textarea' name='newMessageBody' placeholder='Enter your message'/>
+                    <Field component='textarea' name='newMessageBody' placeholder='Enter your message, please'/>
                 </div>
                 <div>
-                    <Button>Send</Button>
+                    <Button type='submit'>Send</Button>
                 </div>
             </form>
         )
