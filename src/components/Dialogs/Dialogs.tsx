@@ -7,15 +7,12 @@ import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 
 type AddMessageFormType = {
-    newMessageBody: string
+    newMessage: string
 }
 
 function Dialogs(props: DialogsPropsType) {
-    debugger
-    const addNewMessage = (formData:AddMessageFormType) => {
-        debugger
-        console.log(formData)
-        alert('rerererer')
+    const addNewMessage = (values:any) => {
+        props.sendMessage(values.newMessageBody)
     }
     //значение переменной dialogsElements будет равно промапленному массиву объектов dialogs
     let dialogsElements =                     //key id элемента из которого мы получаем jsx элемент!!!
@@ -24,6 +21,7 @@ function Dialogs(props: DialogsPropsType) {
     let messageElements =
         props.dialogsPage.messages.map(messages => <Message message={messages.message} key={messages.id}
                                                             id={messages.id}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>

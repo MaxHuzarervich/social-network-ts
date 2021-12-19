@@ -50,6 +50,6 @@ export const sendMessageCreator =
     (newMessageBody: string) => {
         return {
             type: 'SEND-MESSAGE',
-            newMessageBody: newMessageBody
+            newMessageBody
         } as const
     }

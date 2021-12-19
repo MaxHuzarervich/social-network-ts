@@ -5,6 +5,8 @@ export let Preloader = () => {
     return (
         <div style={{backgroundColor: 'white'}}>
             <img src={preloader} alt={'preload'}  />
+            {/*<CircularProgress />*/}
         </div>
+
     )
 }

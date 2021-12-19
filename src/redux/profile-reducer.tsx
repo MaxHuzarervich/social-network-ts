@@ -82,25 +82,9 @@ export const profileReducer = (state: initialStateType = initialState, action: A
 }
 
 //экшн - объект у которого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
-export const addPostAC =
-    (messageForNewPost: string) => {
-        return {
-            type: ADD_POST,
-            messageForNewPost
-        } as const
-    }
-export const setUserProfileAC = (profile: ProfileType) => {
-    return {
-        type: SET_USER_PROFILE,
-        profile: profile
-    } as const
-}
-export const setStatusAC = (status: string) => {
-    return {
-        type: SET_STATUS,
-        status: status
-    } as const
-}
+export const addPostAC = (messageForNewPost: string) => {return {type: ADD_POST, messageForNewPost} as const}
+export const setUserProfileAC = (profile: ProfileType) => {return {type: SET_USER_PROFILE,profile} as const}
+export const setStatusAC = (status: string) => {return {type: SET_STATUS, status} as const}
 //thunk
 export const getUserProfile = (userId: string) => (dispatch: Dispatch<ActionsTypes>) => {
     usersAPI.getProfile(userId).then(response => {

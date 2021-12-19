@@ -19,7 +19,6 @@ function MyPosts(props: MyPostsPropsType) {
         )
     })
     const AddNewPost = (values: AddPostFormType) => {
-        debugger
         props.addPost(values.messageForNewPost)
     }
     return <div className={s.content}>
@@ -39,21 +38,20 @@ function MyPosts(props: MyPostsPropsType) {
 type AddPostFormType = {
     messageForNewPost: string
 }
-const AddPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
+const AddNewPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
                 <Field component='textarea' name='messageForNewPost' placeholder='Enter your message'/>
             </div>
             <div>
-                <Button>Send</Button>
+                <Button type='submit'>Send</Button>
             </div>
         </form>
     )
 }
 //-------------------------------
 //HOC
-const AddPostFormRedux = reduxForm<AddPostFormType>({form: 'profileAddPostForm'})(AddPostForm)
-
-
+const AddPostFormRedux = reduxForm<AddPostFormType>({form: 'profileAddNewPostForm'})(AddNewPostForm)
+// оборачиваем AddNewPostForm компонентой высшего порядка
 export default MyPosts;
