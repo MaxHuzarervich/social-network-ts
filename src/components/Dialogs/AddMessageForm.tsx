@@ -9,7 +9,7 @@ export type AddMessageFormType = {
 }
 //задача этой компоненты собирать данные и отправлять их в handleSubmit из reduxForm
 
-export const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> =
+const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> =
     (props) => {
         return (
             <form onSubmit={props.handleSubmit}>
@@ -27,5 +27,5 @@ export const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> =
         )
     }
 //HOC
-export const AddMessageFormRedux = reduxForm<AddMessageFormType>({form: 'dialogAddMessageForm'})(AddMessageForm)
+export default reduxForm<AddMessageFormType>({form: 'dialogAddMessageForm'})(AddMessageForm)
 //оборачиваем AddMessageForm контейнерной компонентой

@@ -2,12 +2,8 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogsItem";
 import Message from "./Message/Message";
-import {Button} from "@material-ui/core";
 import {DialogsPropsType} from "./DialogsContainer";
-import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import {maxLength50, required} from "../../utils/validators/validators";
-import {TextArea} from "../common/FormControl/FormControls";
-import {AddMessageFormRedux} from "./AddMessageForm";
+import AddMessageForm from "./AddMessageForm";
 
 
 function Dialogs(props: DialogsPropsType) {
@@ -30,7 +26,7 @@ function Dialogs(props: DialogsPropsType) {
             <div className={s.messages}>
                 <div>{messageElements}</div>
                 <div className={s.textField}>
-                    <AddMessageFormRedux onSubmit={addNewMessage}/>
+                    <AddMessageForm onSubmit={addNewMessage}/>
                 </div>
             </div>
         </div>
