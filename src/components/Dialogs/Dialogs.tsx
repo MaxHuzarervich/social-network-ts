@@ -5,10 +5,10 @@ import Message from "./Message/Message";
 import {Button} from "@material-ui/core";
 import {DialogsPropsType} from "./DialogsContainer";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
+import {maxLength50, required} from "../../utils/validators/validators";
+import {TextArea} from "../common/FormControl/FormControls";
+import {AddMessageFormRedux} from "./AddMessageForm";
 
-type AddMessageFormType = {
-    newMessage: string
-}
 
 function Dialogs(props: DialogsPropsType) {
     const addNewMessage = (values:any) => {
@@ -36,22 +36,4 @@ function Dialogs(props: DialogsPropsType) {
         </div>
     )
 }
-
-//задача этой компоненты собирать данные и отправлять их в handleSubmit из reduxForm
-const AddMessageForm: React.FC<InjectedFormProps<AddMessageFormType>> =
-    (props) => {
-        return (
-            <form onSubmit={props.handleSubmit}>
-                <div>
-                    <Field component='textarea' name='newMessageBody' placeholder='Enter your message, please'/>
-                </div>
-                <div>
-                    <Button type='submit'>Send</Button>
-                </div>
-            </form>
-        )
-    }
-//HOC
-const AddMessageFormRedux = reduxForm<AddMessageFormType>({form: 'dialogAddMessageForm'})(AddMessageForm)
-//оборачиваем AddMessageForm контейнерной компонентой
 export default Dialogs;
