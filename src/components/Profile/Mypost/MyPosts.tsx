@@ -5,7 +5,6 @@ import {Button} from "@material-ui/core";
 import {MyPostsPropsType} from "./MyPostsContainer";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
-import {TextArea} from "../../common/FormControl/FormControls";
 
 
 const maxLength10 = maxLengthCreator(10)
@@ -23,7 +22,6 @@ function MyPosts(props: MyPostsPropsType) {
         )
     })
     const AddNewPost = (values: AddPostFormType) => {
-        debugger
         props.addPost(values.messageForNewPost)
     }
     return <div className={s.content}>
@@ -47,7 +45,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<AddPostFormType>> = (props) => 
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component={TextArea}
+                <Field component='textarea'
                        name='messageForNewPost'
                        placeholder='Enter your message'
                        validate={[required, maxLength10]}

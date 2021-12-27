@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TextArea = (props:any) => {
+export const TextArea = ({input, meta, ...props}:any) => {
     return (
         <div>
             <textarea {...props}/>

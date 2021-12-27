@@ -1,6 +1,6 @@
 import React from "react";
 
-export const required = (value: any) => {
+export const required = (value: object) => {
     if (value) {
         return undefined
     } else {
