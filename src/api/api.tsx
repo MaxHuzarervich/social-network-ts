@@ -32,19 +32,28 @@ export const profileAPI = {
         // промис после подписки возвращает нам другой промис
         return instance.get(`profile/` + userId)
     },
-    getStatus(userId:string){
+    getStatus(userId: string) {
         return instance.get(`profile/status/` + userId)
     },
-    updateStatus(status:string){
+    updateStatus(status: string) {
         return instance.put(`profile/status`, {status})
     }
 }
+
+//объект который хранит методы запроса связанные с авторизацией
+
 export const authAPI = {
     me() {
         return instance.get(`auth/me`)
-    } //me возвращает результат отработки метода get, метод get возвращает промис
+    }, //me возвращает результат отработки метода get, метод get возвращает промис
     // и мы на этот промис then-ом подписываемся в HeaderContainer, когда запрос закончится, выполнится логика
     // в скобках then
+    login(email:string, password:string, rememberMe = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete(`auth/login`)
+    }
 }
 
 
