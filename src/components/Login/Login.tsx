@@ -50,12 +50,12 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 }
 
 const LoginReduxForm = reduxForm<FormDataType>({ //a unique name for the form
-        form: 'login'
-    })
+    form: 'login'
+})
 (LoginForm) //передаем ту форму вокруг которой нужно создать эту reduxForm
 
-type LoginPropsType={
-    login:any
+type LoginPropsType = {
+    login: any
     isAuth: boolean
 }
 
@@ -64,16 +64,17 @@ const Login = (props: LoginPropsType) => {
         debugger
         props.login(formData.email, formData.password, formData.rememberMe)
     }
-    if(props.isAuth){
-        return <Redirect to={'/profile'} />
+    if (props.isAuth) {
+        return <Redirect to={'/profile'}/>
     }
     return <div>
         <h1>Login</h1>
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
+
 const mapStateToProps = (state: AppStateType) => ({
-  isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth
 })
-                                                         //в этой точке login является thunkCreator
-export default connect (mapStateToProps, {login}) (Login)
+//в этой точке login является thunkCreator
+export default connect(mapStateToProps, {login})(Login)

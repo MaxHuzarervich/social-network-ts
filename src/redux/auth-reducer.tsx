@@ -21,7 +21,7 @@ let initialState: InitialStateType = {
 export const authReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
-            return {...state, ...action.payload, isAuth: true} //если пришли пользовательские данные isAuth:true
+            return {...state, ...action.payload} //если пришли пользовательские данные isAuth:true
         default:
             return state;
 
@@ -44,11 +44,11 @@ export const getAuthUserData = () => (dispatch: any) => {
         });
 }
 
-export const login = (email:string, password:string, rememberMe:boolean) => (dispatch: any) => {
+export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: any) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
-                return dispatch(getAuthUserData())
+                return dispatch(getAuthUserData()) //санка уходит через dispatch в store
             }
         })
 }
