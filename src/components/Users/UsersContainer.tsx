@@ -30,7 +30,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
         return <>
-            {this.props.isFetching ? <Preloader/> : null}
+            {this.props.isFetching ? <Preloader/> :
             <Users
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
@@ -47,7 +47,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
                 // toggleFollowingProgress={this.props.toggleFollowingProgress}
                 followingInProgress={this.props.followingInProgress}
                 getUsers={this.props.getUsers}
-            />
+            />}
         </>
     }
 }
