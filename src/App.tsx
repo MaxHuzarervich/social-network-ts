@@ -10,9 +10,8 @@ import Login from './components/Login/Login';
 
 
 const App = () => {
-    return (<div>
+    return (<div style={{display:'flex', flexDirection:'column'}}>
             <HeaderContainer/>
-            <div className={s.navAndRightBlock}>
                 <Navbar/>
                 <div className={s.app_wrapper}>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
@@ -20,7 +19,6 @@ const App = () => {
                     <Route path='/users' render={() => <UserContainer/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
-            </div>
         </div>
     );
 }
