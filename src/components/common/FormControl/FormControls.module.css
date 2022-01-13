@@ -6,3 +6,12 @@
 .formControl.error span {
     color: red;
 }
+
+.form_summary_error {
+    border: red 1px solid;
+    padding: 5px;
+    margin: 5px;
+    color: darkred;
+    width: 10%;
+    text-align: center;
+}

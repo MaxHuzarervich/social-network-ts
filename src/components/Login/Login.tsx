@@ -1,11 +1,12 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
 import {Input} from "../common/FormControl/FormControls";
-import {maxLength50, required} from "../../utils/validators/validators";
+import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
+import s from '../common/FormControl/FormControls.module.css'
+import {LoginThunk} from "../../redux/auth-reducer";
 
 type FormDataType = {
     email: string,
@@ -42,6 +43,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
                     type={'checkbox'}/>
                 remember me
             </div>
+            {props.error && <div className={s.form_summary_error}>{props.error}</div>}
             <div>
                 <button type='submit'>Login</button>
             </div>
@@ -76,4 +78,4 @@ const mapStateToProps = (state: AppStateType) => ({
     isAuth: state.auth.isAuth
 })
 //в этой точке login является thunkCreator
-export default connect(mapStateToProps, {login})(Login)
+export default connect(mapStateToProps, {login: LoginThunk})(Login)
