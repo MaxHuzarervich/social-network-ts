@@ -10,11 +10,16 @@ import Login from './components/Login/Login';
 import {connect} from "react-redux";
 import {getAuthUserData} from "./redux/auth-reducer";
 
+type appPropsType = MapDispatchToPropsType
 
-export class App extends React.Component {
+type MapDispatchToPropsType = {
+    getAuthUserData: () => void
+}
+
+export class App extends React.Component<appPropsType, any> {
 
     componentDidMount() {
-        // this.props.getAuthUserData()
+        this.props.getAuthUserData()
     }
 
     render() {

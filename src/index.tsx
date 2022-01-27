@@ -5,12 +5,13 @@ import ReactDOM from "react-dom";
 import {App} from "./App";
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from 'react-redux';
+import {getAuthUserData} from "./redux/auth-reducer";
 
 //Provider использует ContextAPI для того чтобы засунуть в context этот store чтобы до него достучаться
 ReactDOM.render(
     <BrowserRouter>
         <Provider store={store}>
-            <App />
+            <App getAuthUserData={getAuthUserData}/>
         </Provider>
     </BrowserRouter>,
     document.getElementById('root'));
