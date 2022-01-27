@@ -10,8 +10,10 @@ function Profile(props: ProfileContainerPropsType) {
             status={props.status}
             getStatus={props.getStatus}
             getUserProfile={props.getUserProfile}
-            profile = {props.profile} />
-        <MyPostsContainer />
+            profile={props.profile}
+            isAuth={props.isAuth}
+            authorizedUserId={props.authorizedUserId}/>
+        <MyPostsContainer/>
     </div>
 }
 
