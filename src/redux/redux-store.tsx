@@ -14,6 +14,7 @@ import {
 import {authReducer, setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form';
+import {appReducer, setInitialized} from "./app-reducer";
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
@@ -28,6 +29,7 @@ export type ActionsTypes =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatusAC>
+    | ReturnType<typeof setInitialized>
 
 
 //rootReducers возвращает state всего нашего приложения
@@ -37,7 +39,8 @@ export let rootReducer = combineReducers({ //воспринимаем это к�
     //sideBar:sideBarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    initialized: appReducer
 })
 export type AppStateType = ReturnType<typeof rootReducer>; //typeof типизирует автоматически ф-цию,
 // а ф-ция что-то возвращает. А мы говорим дай нам возвращаемый тип!
