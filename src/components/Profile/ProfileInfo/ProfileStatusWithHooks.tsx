@@ -11,7 +11,7 @@ export const ProfileStatusWithHooks = (props: ProfileStatusType) => {
 
     let [status, setStatus] = useState(props.status)
 
-    useEffect( () => {
+    useEffect( () => {        //запускает ф-цию после того, когда все отрисуется и покажется на экране
         setStatus(props.status)
     },[props.status])
 
