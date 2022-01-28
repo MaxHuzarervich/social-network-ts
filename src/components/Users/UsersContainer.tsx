@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
     followSuccess,
-    getUsers,
+    requestUsers,
     initialStateType,
     setCurrentPage,
     toggleFollowingProgress,
@@ -19,7 +19,7 @@ import {
     getIsFetching,
     getPageSize,
     getTotalUsersCount,
-    getUsersPage
+    getUsers
 } from "../../redux/users-selectors";
 
 //контейнерная классовая компонента
@@ -95,7 +95,7 @@ export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersCompo
 
 let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        usersPage: getUsersPage(state),
+        usersPage: getUsers(state),
         pageSize: getPageSize(state),               //кол-во пользователей на странице
         totalUsersCount: getTotalUsersCount(state), //общее кол-во пользователей
         currentPage: getCurrentPage(state),         //текущая страница
@@ -108,7 +108,7 @@ export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(MapStateToProps,
         {
-            follow: followSuccess, unfollow: unfollowSuccess, setCurrentPage, toggleFollowingProgress, getUsers
+            follow: followSuccess, unfollow: unfollowSuccess, setCurrentPage, toggleFollowingProgress, getUsers: requestUsers
         }
     )
 )(UsersContainer)

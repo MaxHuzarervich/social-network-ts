@@ -89,7 +89,7 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
                 ...state,
                 followingInProgress: action.isFetching
                     ? [...state.followingInProgress, action.userId] //если идет подписка
-                    : state.followingInProgress.filter(id => id != action.userId) //
+                    : state.followingInProgress.filter(id => id !== action.userId) //
             }
         }
         default:                                       //default line
@@ -121,7 +121,7 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 }
 
 //thunkCreator - возвращает санку
-export const getUsers = (currentPage:number, pageSize:number) => {
+export const requestUsers = (currentPage:number, pageSize:number) => {
     return (dispatch: any) => {
         dispatch(toggleIsFetching(true)); //запрос пошел
 
@@ -138,7 +138,7 @@ export const follow = (userID: number) => {
         dispatch(toggleFollowingProgress(true, userID));
         usersAPI.follow(userID)
             .then(response => {
-                if (response.data.resultCode == 0) {
+                if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userID))
                 }
                 dispatch(toggleFollowingProgress(false, userID));
@@ -151,7 +151,7 @@ export const unfollow = (userID: number) => {
         dispatch.toggleFollowingProgress(true, userID);
         usersAPI.unfollow(userID)
             .then(response => {
-                if (response.data.resultCode == 0) {
+                if (response.data.resultCode === 0) {
                     dispatch(unfollowSuccess(userID))
                 }
                 dispatch(toggleFollowingProgress(false, userID))
