@@ -14,6 +14,13 @@ import {Users} from "./Users";
 import {Preloader} from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage, getFollowingInProgress,
+    getIsFetching,
+    getPageSize,
+    getTotalUsersCount,
+    getUsersPage
+} from "../../redux/users-selectors";
 
 //контейнерная классовая компонента
 
@@ -31,23 +38,23 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
         return <>
             {this.props.isFetching ? <Preloader/> :
-            <Users
-                totalUsersCount={this.props.totalUsersCount}
-                pageSize={this.props.pageSize}
-                currentPage={this.props.currentPage}
-                follow={this.props.follow}
-                unfollow={this.props.unfollow}
-                usersPage={this.props.usersPage}
-                setCurrentPage={this.props.setCurrentPage}
-                setUsers={this.props.setUsers}
-                setUsersTotalCount={this.props.setUsersTotalCount}
-                isFetching={this.props.isFetching}
-                toggleIsFetching={this.props.toggleIsFetching}
-                onPageChanged={this.onPageChanged}
-                // toggleFollowingProgress={this.props.toggleFollowingProgress}
-                followingInProgress={this.props.followingInProgress}
-                getUsers={this.props.getUsers}
-            />}
+                <Users
+                    totalUsersCount={this.props.totalUsersCount}
+                    pageSize={this.props.pageSize}
+                    currentPage={this.props.currentPage}
+                    follow={this.props.follow}
+                    unfollow={this.props.unfollow}
+                    usersPage={this.props.usersPage}
+                    setCurrentPage={this.props.setCurrentPage}
+                    setUsers={this.props.setUsers}
+                    setUsersTotalCount={this.props.setUsersTotalCount}
+                    isFetching={this.props.isFetching}
+                    toggleIsFetching={this.props.toggleIsFetching}
+                    onPageChanged={this.onPageChanged}
+                    // toggleFollowingProgress={this.props.toggleFollowingProgress}
+                    followingInProgress={this.props.followingInProgress}
+                    getUsers={this.props.getUsers}
+                />}
         </>
     }
 }
@@ -75,14 +82,25 @@ export type FunctionsForUsersComponentPropsType = {
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
 
+// let MapStateToProps = (state: AppStateType): MapStatePropsType => {
+//     return {
+//         usersPage: state.usersPage,
+//         pageSize: state.usersPage.pageSize,               //кол-во пользователей на странице
+//         totalUsersCount: state.usersPage.totalUsersCount, //общее кол-во пользователей
+//         currentPage: state.usersPage.currentPage,         //текущая страница
+//         isFetching: state.usersPage.isFetching,
+//         followingInProgress: state.usersPage.followingInProgress
+//     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
+// }
+
 let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        usersPage: state.usersPage,
-        pageSize: state.usersPage.pageSize,               //кол-во пользователей на странице
-        totalUsersCount: state.usersPage.totalUsersCount, //общее кол-во пользователей
-        currentPage: state.usersPage.currentPage,         //текущая страница
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        usersPage: getUsersPage(state),
+        pageSize: getPageSize(state),               //кол-во пользователей на странице
+        totalUsersCount: getTotalUsersCount(state), //общее кол-во пользователей
+        currentPage: getCurrentPage(state),         //текущая страница
+        isFetching: getIsFetching(state),
+        followingInProgress: getFollowingInProgress(state)
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
 
@@ -94,13 +112,6 @@ export default compose<React.ComponentType>(
         }
     )
 )(UsersContainer)
-
-
-
-
-
-
-
 
 
 // let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
