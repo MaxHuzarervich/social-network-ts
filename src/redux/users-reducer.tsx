@@ -121,12 +121,12 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 }
 
 //thunkCreator - возвращает санку
-export const requestUsers = (currentPage:number, pageSize:number) => {
+export const requestUsers = (page:number, pageSize:number) => {
     return (dispatch: any) => {
         dispatch(toggleIsFetching(true)); //запрос пошел
-
+        dispatch(setCurrentPage(page)) //выделить в пагинации текущую страницу
         //когда пользователи получатся, продолжим обрабатывать ответ в then
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
+        usersAPI.getUsers(page, pageSize).then(data => {
             dispatch(toggleIsFetching(false)); //запрос пришел, крутилка не нужна!
             dispatch(setUsers(data.items));
             dispatch(setUsersTotalCount(data.totalCount));

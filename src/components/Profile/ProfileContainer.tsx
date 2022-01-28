@@ -28,6 +28,7 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType, any> 
     }
 
     render() {
+        console.log('PROFILE RENDER')
         return (
             <div>
                 <Profile {...this.props}
