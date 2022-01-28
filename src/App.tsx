@@ -1,28 +1,43 @@
 import React from 'react';
 import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route, withRouter} from "react-router-dom";
+import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from './components/Login/Login';
+import {AppStateType} from "./redux/redux-store";
+import {initializeApp} from "./redux/app-reducer";
 import {connect} from "react-redux";
-import {getAuthUserData} from "./redux/auth-reducer";
+import {Preloader} from "./components/common/Preloader/Preloader";
 
-type appPropsType = MapDispatchToPropsType
+type appPropsType = MapDispatchToPropsType & MapStateToPropsType
 
 type MapDispatchToPropsType = {
-    getAuthUserData: () => void
+    initializeApp: () => void
 }
 
-export class App extends React.Component<appPropsType, any> {
+type MapStateToPropsType = {
+    initialized: boolean
+}
+
+const MapStateToProps = (state: AppStateType) => ({
+    initialized: state.app.initialized
+})
+
+class App extends React.Component<appPropsType, any> {
 
     componentDidMount() {
-        this.props.getAuthUserData()
+        this.props.initializeApp()
     }
 
     render() {
+
+        if(!this.props.initialized){
+            return <Preloader/>
+        }
+
         return (<div style={{display: 'flex', flexDirection: 'column'}}>
                 <HeaderContainer/>
                 <Navbar/>
@@ -37,8 +52,5 @@ export class App extends React.Component<appPropsType, any> {
     }
 }
 
-//route следит за url,если совпадает c path
-// то отрисовывает--->
-// export default compose(
-//     withRouter,
-//     connect(null, {getAuthUserData})(App));
+export default connect(MapStateToProps, {initializeApp})(App);
+

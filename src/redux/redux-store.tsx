@@ -40,7 +40,7 @@ export let rootReducer = combineReducers({ //воспринимаем это к�
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
-    initialized: appReducer
+    app: appReducer
 })
 export type AppStateType = ReturnType<typeof rootReducer>; //typeof типизирует автоматически ф-цию,
 // а ф-ция что-то возвращает. А мы говорим дай нам возвращаемый тип!
