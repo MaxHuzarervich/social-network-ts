@@ -7,35 +7,41 @@ import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {TextArea} from "../../common/FormControl/FormControls";
 
-
 const maxLength10 = maxLengthCreator(10)
 
-function MyPosts(props: MyPostsPropsType) {
-    //значение переменной postsElements будет равно промапленному массиву объектов posts
-    let postsElements = props.posts.map((posts: any) => {
-        return (
-            <Post
-                key={posts.id}
-                message={posts.message}
-                likesCount={posts.likesCount}
-                id={posts.id}
-            />
-        )
-    })
-    const AddNewPost = (values: AddPostFormType) => {
-        props.addPost(values.messageForNewPost)
-    }
-    return <div className={s.content}>
-        <div className={s.postBlock}>
-            <h3>My posts</h3>
-            <div>
-                <AddPostFormRedux onSubmit={AddNewPost}/>
-            </div>
-            <div className={s.posts}>
-                {postsElements}
+class MyPosts extends React.Component<MyPostsPropsType> {
+
+    // shouldComponentUpdate(nextProps: Readonly<MyPostsPropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+    //     return nextProps != this.props || nextState != this.state
+    // } //избегаем лишней перерисовки
+
+    render() {
+        //значение переменной postsElements будет равно промапленному массиву объектов posts
+        let postsElements = this.props.posts.map((posts: any) => {
+            return (
+                <Post
+                    key={posts.id}
+                    message={posts.message}
+                    likesCount={posts.likesCount}
+                    id={posts.id}
+                />
+            )
+        })
+        const AddNewPost = (values: AddPostFormType) => {
+            this.props.addPost(values.messageForNewPost)
+        }
+        return <div className={s.content}>
+            <div className={s.postBlock}>
+                <h3>My posts</h3>
+                <div>
+                    <AddPostFormRedux onSubmit={AddNewPost}/>
+                </div>
+                <div className={s.posts}>
+                    {postsElements}
+                </div>
             </div>
         </div>
-    </div>
+    }
 }
 
 //-------------------------------
