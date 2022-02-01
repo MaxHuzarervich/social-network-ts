@@ -14,11 +14,11 @@ type FormDataType = {
     rememberMe: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit,error}) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
     return ( //когда форма засабмитится, выполнится спец метод handleSubmit из контейнерной
         // компоненты которая получается после оборачивания хоком
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
             <div>
                 <Field
                     placeholder={'Email'}
@@ -43,7 +43,7 @@ export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubm
                     type={'checkbox'}/>
                 remember me
             </div>
-            {error && <div className={s.form_summary_error}>{error}</div>}
+            {props.error && <div className={s.form_summary_error}>{props.error}</div>}
             <div>
                 <button type='submit'>Login</button>
             </div>
