@@ -89,25 +89,32 @@ export const profileReducer = (state: initialStateType = initialState, action: A
 }
 
 //экшн - объект у которого инкапсулированы все данные чтобы редьюсер получил этот экшн и применил на свой стейт
-export const addPostAC = (messageForNewPost: string) => {return {type: ADD_POST, messageForNewPost} as const}
-export const setUserProfileAC = (profile: ProfileType) => {return {type: SET_USER_PROFILE,profile} as const}
-export const setStatusAC = (status: string) => {return {type: SET_STATUS, status} as const}
-export const deletePost = (id: number) => {return {type: DELETE_POST, id} as const}
+export const addPostAC = (messageForNewPost: string) => {
+    return {type: ADD_POST, messageForNewPost} as const
+}
+export const setUserProfileAC = (profile: ProfileType) => {
+    return {type: SET_USER_PROFILE, profile} as const
+}
+export const setStatusAC = (status: string) => {
+    return {type: SET_STATUS, status} as const
+}
+export const deletePost = (id: number) => {
+    return {type: DELETE_POST, id} as const
+}
 //thunk
-export const getUserProfile = (userId: string) => (dispatch: Dispatch<ActionsTypes>) => {
-    usersAPI.getProfile(userId).then(response => {
-        dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
-    })  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
+export const getUserProfile = (userId: string) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await usersAPI.getProfile(userId)
+    dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
+}  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
+
+export const getStatus = (userId: string) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatusAC(response.data))
 }
-export const getStatus = (userId: string) => (dispatch: Dispatch<ActionsTypes>) => {
-    profileAPI.getStatus(userId).then(response => {
-        dispatch(setStatusAC(response.data))
-    })
+export const updateStatus = (status: string) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusAC(status))
+    }
 }
-export const updateStatus = (status: string) => (dispatch: Dispatch<ActionsTypes>) => {
-    profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setStatusAC(status))
-        }
-    })
-}
+//в response результат - чем зарезолвится промис

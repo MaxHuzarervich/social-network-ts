@@ -1,5 +1,6 @@
-import {ActionsTypes} from "./redux-store";
+import {ActionsTypes, AppStateType} from "./redux-store";
 import {usersAPI} from "../api/api";
+import {Dispatch} from "redux";
 
 export type userType = {
     name: string,
@@ -121,41 +122,36 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 }
 
 //thunkCreator - возвращает санку
-export const requestUsers = (page:number, pageSize:number) => {
-    return (dispatch: any) => {
+export const requestUsers = (page: number, pageSize: number) => {
+    return async (dispatch: any) => {
         dispatch(toggleIsFetching(true)); //запрос пошел
         dispatch(setCurrentPage(page)) //выделить в пагинации текущую страницу
         //когда пользователи получатся, продолжим обрабатывать ответ в then
-        usersAPI.getUsers(page, pageSize).then(data => {
-            dispatch(toggleIsFetching(false)); //запрос пришел, крутилка не нужна!
-            dispatch(setUsers(data.items));
-            dispatch(setUsersTotalCount(data.totalCount));
-        });
+        let response = await usersAPI.getUsers(page, pageSize)
+        dispatch(toggleIsFetching(false)); //запрос пришел, крутилка не нужна!
+        dispatch(setUsers(response.items));
+        dispatch(setUsersTotalCount(response.totalCount));
     }
 }
-export const follow = (userID: number) => {
-    return (dispatch: any) => {
-        dispatch(toggleFollowingProgress(true, userID));
-        usersAPI.follow(userID)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(followSuccess(userID))
-                }
-                dispatch(toggleFollowingProgress(false, userID));
-            });
 
+type DispatchType = Dispatch<ActionsTypes>
+
+const followUnfollowFlow = async (dispatch: any, userID: number, apiMethod: any, actionCreator: any) => {
+    dispatch.toggleFollowingProgress(true, userID);
+    let response = await apiMethod(userID)
+    if (response.data.resultCode === 0) {
+        dispatch(actionCreator(userID))
+    }
+    dispatch(toggleFollowingProgress(false, userID))
+}
+
+export const follow = (userID: number) => {
+    return async (dispatch: DispatchType) => {
+        await followUnfollowFlow(dispatch, userID, usersAPI.follow.bind(usersAPI), followSuccess)
     }
 }
 export const unfollow = (userID: number) => {
-    return (dispatch: any) => {
-        dispatch.toggleFollowingProgress(true, userID);
-        usersAPI.unfollow(userID)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(unfollowSuccess(userID))
-                }
-                dispatch(toggleFollowingProgress(false, userID))
-            });
-
+    return async (dispatch: DispatchType) => {
+        await followUnfollowFlow(dispatch, userID, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
     }
 }

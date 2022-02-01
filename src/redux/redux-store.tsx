@@ -49,3 +49,4 @@ export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 // export type AppStateType = ReturnType<typeof reducers>console.log(store.getState().form)
 
 
+
