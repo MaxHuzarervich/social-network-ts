@@ -1,6 +1,7 @@
 import {ActionsTypes, AppStateType} from "./redux-store";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {updateObjectInArray} from "../utils/validators/object-helpers";
 
 export type userType = {
     name: string,
@@ -51,25 +52,28 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
     switch (action.type) {
         case FOLLOW:
             return {
-                ...state,  //пробегаемся по массиву users,map создает новый массив элементами которого будут все те же users
-                users: state.users.map(u => { //map возвращает новый массив на основе старого
-                    if (u.id === action.userID) {//если id этого пробегаемого user равен id который нужно follow,
-                        // а он сидит в action.userID
-                        return {...u, followed: true} //то нужно вернуть его копию,с противоположным followed
-                    }
-                    return u
-                })//если id не совпадают то возращаем тот же объект
+                ...state,
+                users: updateObjectInArray(state.users, action.userID, 'id', {followed:true})
+                //пробегаемся по массиву users,map создает новый массив элементами которого будут все те же users
+                // users: state.users.map(u => { //map возвращает новый массив на основе старого
+                //     if (u.id === action.userID) {//если id этого пробегаемого user равен id который нужно follow,
+                //         // а он сидит в action.userID
+                //         return {...u, followed: true} //то нужно вернуть его копию,с противоположным followed
+                //     }
+                //     return u
+                // })//если id не совпадают то возращаем тот же объект
             }               //раз меняем что-то в массиве, нужно сделать также его копию
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map(u => {
-                        if (u.id === action.userID) {
-                            return {...u, followed: false}
-                        }
-                        return u;
-                    }
-                )
+                users: updateObjectInArray(state.users, action.userID, 'id', {followed:false})
+                // users: state.users.map(u => {
+                //         if (u.id === action.userID) {
+                //             return {...u, followed: false}
+                //         }
+                //         return u;
+                //     }
+                // )
             }
         case SET_USERS: {
             return {...state, users: action.users}
