@@ -2,7 +2,7 @@ import {ActionsTypes} from "./redux-store";
 import {authAPI} from "../api/api";
 import {stopSubmit} from "redux-form";
 
-const SET_USER_DATA = 'SET_USER_DATA';
+const SET_USER_DATA = 'social-network/auth/SET_USER_DATA';
 
 export type InitialStateType = {
     id: number | null
