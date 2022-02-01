@@ -83,17 +83,6 @@ export type FunctionsForUsersComponentPropsType = {
 
 export type UsersContainerPropsType = MapStatePropsType & FunctionsForUsersComponentPropsType
 
-// let MapStateToProps = (state: AppStateType): MapStatePropsType => {
-//     return {
-//         usersPage: state.usersPage,
-//         pageSize: state.usersPage.pageSize,               //кол-во пользователей на странице
-//         totalUsersCount: state.usersPage.totalUsersCount, //общее кол-во пользователей
-//         currentPage: state.usersPage.currentPage,         //текущая страница
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress
-//     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
-// }
-
 let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: getUsers(state),
