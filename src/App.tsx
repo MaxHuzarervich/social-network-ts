@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
 import {BrowserRouter, Route} from "react-router-dom";
-const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+// import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from './components/Login/Login';
 import {AppStateType, store} from "./redux/redux-store";
 import {initializeApp} from "./redux/app-reducer";
 import {connect, Provider} from "react-redux";
 import {Preloader} from "./components/common/Preloader/Preloader";
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
 type appPropsType = MapDispatchToPropsType & MapStateToPropsType
 
@@ -43,8 +44,10 @@ class App extends React.Component<appPropsType, any> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className={s.app_wrapper}>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/dialogs'
+                           render={() => <Suspense fallback={<div>Loading...</div>}><DialogsContainer/></Suspense>}/>
+                    <Route path='/profile/:userId?'
+                           render={() => <Suspense fallback={<div>Loading...</div>}><ProfileContainer/></Suspense>}/>
                     <Route path='/users' render={() => <UserContainer/>}/>
                     <Route path='/login' render={() => <Login/>}/>
                 </div>
