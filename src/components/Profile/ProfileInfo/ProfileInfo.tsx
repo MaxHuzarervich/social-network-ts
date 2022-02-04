@@ -4,7 +4,7 @@ import {OwnPropsType} from "../ProfileContainer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
-function ProfileInfo({profile, status, updateStatus,  ...props}:OwnPropsType) {
+function ProfileInfo({profile, status, updateStatus}:OwnPropsType) {
     if (!profile.userId) {
         return <Preloader/>
     }
