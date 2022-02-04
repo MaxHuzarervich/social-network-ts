@@ -2,12 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    followSuccess,
+    follow,
     initialStateType,
     requestUsers,
     setCurrentPage,
     toggleFollowingProgress,
-    unfollowSuccess,
+    unfollow,
     userType
 } from "../../redux/users-reducer";
 import {Users} from "./Users";
@@ -29,11 +29,13 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
 
     //componentDidMount - метод жизненного цикла!
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        const {currentPage, pageSize} = this.props
+        this.props.getUsers(currentPage, pageSize);
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.getUsers(pageNumber, this.props.pageSize)
+        const{pageSize} = this.props
+        this.props.getUsers(pageNumber, pageSize)
     }
 
     render() {        //UsersContainer передает пропсы своему ребенку Users, а сама получает их из connect
@@ -98,46 +100,7 @@ export default compose<React.ComponentType>(
     withAuthRedirect,
     connect(MapStateToProps,
         {
-            follow: followSuccess, unfollow: unfollowSuccess, setCurrentPage, toggleFollowingProgress, getUsers: requestUsers
+            follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers: requestUsers
         }
     )
 )(UsersContainer)
-
-
-// let MapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-//     return {
-//         follow: (userID: number) => {
-//             dispatch(followAC(userID))             //мы диспатчим результат работы action creator-а
-//         },                                         //reducer этот action обрабатывает, стейт меняется и
-//                                                    // происходит перерисовка
-//         unfollow: (userID: number) => {
-//             dispatch(unfollowAC(userID))
-//         },
-//         setUser: (users: Array<userType>) => {
-//             dispatch(setUsersAC(users))
-//         },                                                //создаем здесь коллбеки которые попадут в пропсы
-//         setCurrentPage: (pageNumber: number) => {         //если компонента тебя вызовет просто задиспатч экшн
-//             dispatch(setCurrentPageAC(pageNumber))        //мы диспатчим вызов экшн креатора!!!
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setUsersTotalCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         }
-//
-//     }
-// }
-
-// let withRedirect = withAuthRedirect(UsersContainer)
-
-//создаем контейнерную компоненту при помощи ф-ции connect
-// export default withAuthRedirect (connect(MapStateToProps,
-//     {
-//         follow: followSuccess,                      //connect автоматически за нас создал эти коллбек ф-ции
-//         unfollow: unfollowSuccess,
-//         setCurrentPage,
-//         toggleFollowingProgress,
-//         getUsers
-//     }
-// )(UsersContainer))

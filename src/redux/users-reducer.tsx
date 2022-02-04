@@ -54,26 +54,11 @@ export const usersReducer = (state: initialStateType = initialState, action: Act
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userID, 'id', {followed:true})
-                //пробегаемся по массиву users,map создает новый массив элементами которого будут все те же users
-                // users: state.users.map(u => { //map возвращает новый массив на основе старого
-                //     if (u.id === action.userID) {//если id этого пробегаемого user равен id который нужно follow,
-                //         // а он сидит в action.userID
-                //         return {...u, followed: true} //то нужно вернуть его копию,с противоположным followed
-                //     }
-                //     return u
-                // })//если id не совпадают то возращаем тот же объект
             }               //раз меняем что-то в массиве, нужно сделать также его копию
         case UNFOLLOW:
             return {
                 ...state,
                 users: updateObjectInArray(state.users, action.userID, 'id', {followed:false})
-                // users: state.users.map(u => {
-                //         if (u.id === action.userID) {
-                //             return {...u, followed: false}
-                //         }
-                //         return u;
-                //     }
-                // )
             }
         case SET_USERS: {
             return {...state, users: action.users}
@@ -141,9 +126,9 @@ export const requestUsers = (page: number, pageSize: number) => {
 type DispatchType = Dispatch<ActionsTypes>
 
 const followUnfollowFlow = async (dispatch: any, userID: number, apiMethod: any, actionCreator: any) => {
-    dispatch.toggleFollowingProgress(true, userID);
+    dispatch(toggleFollowingProgress(true, userID))
     let response = await apiMethod(userID)
-    if (response.data.resultCode === 0) {
+    if (response.resultCode === 0) {
         dispatch(actionCreator(userID))
     }
     dispatch(toggleFollowingProgress(false, userID))

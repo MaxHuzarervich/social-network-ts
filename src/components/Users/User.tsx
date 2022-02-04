@@ -8,8 +8,8 @@ import {userType} from "../../redux/users-reducer";
 type UserPageType = {
     user: userType
     followingInProgress: Array<number>
-    unfollow: (userId: number) => void
-    follow: (userId: number) => void
+    unfollow: (userID: number) => void
+    follow: (userID: number) => void
 }
 
 export let User = ({user, followingInProgress, unfollow, follow}: UserPageType) => {

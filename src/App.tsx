@@ -1,15 +1,15 @@
 import React from 'react';
 import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from './components/Login/Login';
-import {AppStateType} from "./redux/redux-store";
+import {AppStateType, store} from "./redux/redux-store";
 import {initializeApp} from "./redux/app-reducer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {Preloader} from "./components/common/Preloader/Preloader";
 
 type appPropsType = MapDispatchToPropsType & MapStateToPropsType
@@ -52,5 +52,15 @@ class App extends React.Component<appPropsType, any> {
     }
 }
 
-export default connect(MapStateToProps, {initializeApp})(App);
+let AppContainer = connect(MapStateToProps, {initializeApp})(App);
+
+export let SamuraiJSApp = () => {
+return <BrowserRouter>
+    <Provider store={store}>
+        <AppContainer />
+    </Provider>
+</BrowserRouter>
+}
+
+
 
