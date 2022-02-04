@@ -42,7 +42,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
         return <>
             {this.props.isFetching ? <Preloader/> :
                 <Users
-                    totalUsersCount={this.props.totalUsersCount}
+                    totalItemsCount={this.props.totalItemsCount}
                     pageSize={this.props.pageSize}
                     currentPage={this.props.currentPage}
                     follow={this.props.follow}
@@ -65,7 +65,7 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
 export type MapStatePropsType = {
     usersPage: initialStateType,
     pageSize: number,
-    totalUsersCount: number,
+    totalItemsCount: number,
     currentPage: number,
     isFetching: boolean,
     followingInProgress: Array<number>
@@ -89,10 +89,10 @@ let MapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         usersPage: getUsers(state),
         pageSize: getPageSize(state),               //кол-во пользователей на странице
-        totalUsersCount: getTotalUsersCount(state), //общее кол-во пользователей
+        totalItemsCount: getTotalUsersCount(state), //общее кол-во пользователей
         currentPage: getCurrentPage(state),         //текущая страница
         isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state)
+        followingInProgress: getFollowingInProgress(state),
     } //connect смотрит, если эти компоненты не поменялись, то они не перерисовываются
 }
 

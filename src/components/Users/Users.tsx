@@ -4,11 +4,11 @@ import {Paginator} from "../common/Paginator/Paginator";
 import {User} from "./User";
 
 
-export let Users = ({currentPage, onPageChanged, totalUsersCount, pageSize, ...props}: UsersContainerPropsType) => {
+export let Users = ({currentPage, onPageChanged, totalItemsCount, pageSize, ...props}: UsersContainerPropsType) => {
     return (
         <div>
             <Paginator currentPage={currentPage} onPageChanged={onPageChanged}
-                       totalUsersCount={totalUsersCount} pageSize={pageSize} {...props}/>
+                       totalItemsCount={totalItemsCount} pageSize={pageSize} portionSize={10} {...props}/>
 
 
             <div>
