@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import s from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter, HashRouter, Route} from "react-router-dom";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UserContainer from "./components/Users/UsersContainer";
 // import ProfileContainer from "./components/Profile/ProfileContainer";
@@ -59,11 +59,11 @@ class App extends React.Component<appPropsType, any> {
 let AppContainer = connect(MapStateToProps, {initializeApp})(App);
 
 export let SamuraiJSApp = () => {
-return <BrowserRouter>
+return <HashRouter>
     <Provider store={store}>
         <AppContainer />
     </Provider>
-</BrowserRouter>
+</HashRouter>
 }
 
 

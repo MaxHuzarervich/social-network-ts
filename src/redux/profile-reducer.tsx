@@ -29,16 +29,18 @@ export type ProfileType = {
         youtube: string
         mainLink: string
     }
-    photos: {
-        small: string
-        large: string
-    }
+    photos: PhotoType
+}
+type PhotoType = {
+    small: string
+    large: string
 }
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
 const SET_STATUS = 'SET_STATUS'
 const DELETE_POST = 'DELETE_POST'
+const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
 
 //инициализационный state,который будет инициализировать эту подветку
 let initialState: initialStateType = {
@@ -82,6 +84,11 @@ export const profileReducer = (state: initialStateType = initialState, action: A
                 posts: state.posts.filter(p => p.id != action.id)
             }
         }
+        case SAVE_PHOTO_SUCCESS: {
+            return {...state,
+                profile: {...state.profile, photos: action.photos}
+            }
+        }
         default: {                                      //default line
             return state;
         }
@@ -101,6 +108,9 @@ export const setStatusAC = (status: string) => {
 export const deletePost = (id: number) => {
     return {type: DELETE_POST, id} as const
 }
+export const savePhotoSuccess = (photos: PhotoType) => {
+    return {type: SAVE_PHOTO_SUCCESS, photos} as const
+}
 //thunk
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch<ActionsTypes>) => {
     let response = await usersAPI.getProfile(userId)
@@ -118,3 +128,10 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch<Action
     }
 }
 //в response результат - чем зарезолвится промис
+export const savePhoto = (file: any) => async (dispatch: Dispatch<ActionsTypes>) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+

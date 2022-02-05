@@ -2,8 +2,8 @@ import React from "react";
 import {Button} from "@material-ui/core";
 import s from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import {Users} from "./Users";
 import {userType} from "../../redux/users-reducer";
+import userPhoto from '../../assets/images/ava.jpg'
 
 type UserPageType = {
     user: userType
@@ -18,7 +18,8 @@ export let User = ({user, followingInProgress, unfollow, follow}: UserPageType) 
                 <div>
                     <div className={s.UserImg}>
                         <NavLink to={'/profile/' + user.id}>
-                            <img src={user.photos.small != null ? user.photos.small : Users}/>
+                            <img src={user.photos.small != null ? user.photos.small : userPhoto}
+                            className={s.userPhoto} alt={'avatar'}/>
                         </NavLink>
                     </div>
                     <div className={s.follow}>

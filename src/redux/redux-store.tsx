@@ -1,5 +1,12 @@
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import {addPostAC, deletePost, profileReducer, setStatusAC, setUserProfileAC} from "./profile-reducer";
+import {
+    addPostAC,
+    deletePost,
+    profileReducer,
+    savePhotoSuccess,
+    setStatusAC,
+    setUserProfileAC
+} from "./profile-reducer";
 import {dialogsReducer, sendMessageCreator} from "./dialogs-reducer";
 import {
     followSuccess,
@@ -31,6 +38,7 @@ export type ActionsTypes =
     | ReturnType<typeof setStatusAC>
     | ReturnType<typeof setInitialized>
     | ReturnType<typeof deletePost>
+    | ReturnType<typeof savePhotoSuccess>
 
 
 //rootReducers возвращает state всего нашего приложения
