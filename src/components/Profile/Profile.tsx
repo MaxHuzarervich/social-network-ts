@@ -12,12 +12,14 @@ type ProfilePropsType = {
     profile: ProfileType,
     isAuth: boolean,
     authorizedUserId: number | null,
-    savePhoto: (photo: string) => void
+    savePhoto: (photo: string) => void,
+    goToEditMode: () => void
 }
 
 function Profile(props: ProfilePropsType) {
     return <div>
         <ProfileInfo
+            goToEditMode={props.goToEditMode}
             savePhoto={props.savePhoto}
             isOwner={props.isOwner}
             updateStatus={props.updateStatus}
