@@ -1,6 +1,7 @@
 import {ActionsTypes} from "./redux-store";
 import {profileAPI, usersAPI} from "../api/api";
 import {Dispatch} from "redux";
+import {setAppError} from "./app-reducer";
 
 export type postType = {
     id: number,
@@ -30,6 +31,7 @@ export type ProfileType = {
         mainLink: string
     }
     photos: PhotoType
+    aboutMe: string
 }
 type PhotoType = {
     small: string
@@ -112,7 +114,7 @@ export const savePhotoSuccess = (photos: PhotoType) => {
     return {type: SAVE_PHOTO_SUCCESS, photos} as const
 }
 //thunk
-export const getUserProfile = (userId: string) => async (dispatch: Dispatch<ActionsTypes>) => {
+export const getUserProfile = (userId: number) => async (dispatch: Dispatch<ActionsTypes>) => {
     let response = await usersAPI.getProfile(userId)
     dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
 }  //диспатчим экшн, что приводит к изменениям в редьюсере стейта
@@ -128,10 +130,21 @@ export const updateStatus = (status: string) => async (dispatch: Dispatch<Action
     }
 }
 //в response результат - чем зарезолвится промис
-export const savePhoto = (file: any) => async (dispatch: Dispatch<ActionsTypes>) => {
+
+export const savePhoto = (file: File) => async (dispatch: Dispatch<ActionsTypes>) => {
     let response = await profileAPI.savePhoto(file)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
+}
+export const saveProfile = (profile: ProfileType) => async (dispatch:any, getState:any) => {
+    let userID = getState().auth.id
+    let data = await profileAPI.saveProfile(profile);
+    if (data.resultCode === 0) {
+        dispatch(getUserProfile(userID as number))
+    } else {
+        dispatch(setAppError(data.messages[0]))
+    }
+    return
 }
 

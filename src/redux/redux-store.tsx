@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import {
     addPostAC,
     deletePost,
@@ -21,7 +21,7 @@ import {
 import {authReducer, setAuthUserData} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form';
-import {appReducer, setInitialized} from "./app-reducer";
+import {appReducer, setAppError, setInitialized} from "./app-reducer";
 
 export type ActionsTypes =
     ReturnType<typeof addPostAC>
@@ -39,6 +39,7 @@ export type ActionsTypes =
     | ReturnType<typeof setInitialized>
     | ReturnType<typeof deletePost>
     | ReturnType<typeof savePhotoSuccess>
+    | ReturnType<typeof setAppError>
 
 
 //rootReducers возвращает state всего нашего приложения
