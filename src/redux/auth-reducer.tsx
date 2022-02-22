@@ -15,7 +15,7 @@ let initialState: InitialStateType = {
     id: null,
     email: null,
     login: null,
-    isAuth: false //незалогинен
+    isAuth: false, //незалогинен
 }
 
 //все данные которые нужны редьюсеру для преобразования стейта приходят в экшене

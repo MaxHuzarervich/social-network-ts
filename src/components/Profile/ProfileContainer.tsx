@@ -79,6 +79,5 @@ class ProfileContainer extends React.Component <ProfileContainerPropsType, any> 
 export default compose<React.ComponentType>(
     connect(MapStateToProps, {getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter,
-    // withAuthRedirect
 )(ProfileContainer)
 

@@ -67,12 +67,5 @@ export const authAPI = {
         return instance.delete(`auth/login`)
     }
 }
-
-export const securityAPI = {
-    getCaptchaUrl() {
-        return instance.get(`/security/get-captcha-url`)
-    }
-}
-
 //мы говорим что возвращается не тот промис который возвращается методом get, а мы берем именно data из response
 // then возвращает нам промис и в нем сидит не весь response а только data

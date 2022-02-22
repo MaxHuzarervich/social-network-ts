@@ -11,6 +11,7 @@ import {AppStateType, store} from "./redux/redux-store";
 import {initializeApp} from "./redux/app-reducer";
 import {connect, Provider} from "react-redux";
 import {Preloader} from "./components/common/Preloader/Preloader";
+import ReactDOM from "react-dom";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
@@ -37,7 +38,7 @@ class App extends React.Component<appPropsType, any> {
 
     render() {
 
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
             return <Preloader/>
         }
 
@@ -60,12 +61,14 @@ class App extends React.Component<appPropsType, any> {
 let AppContainer = connect(MapStateToProps, {initializeApp})(App);
 
 export let SamuraiJSApp = () => {
-return <HashRouter>
-    <Provider store={store}>
-        <AppContainer />
-    </Provider>
-</HashRouter>
+    return <HashRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </HashRouter>
 }
+//Provider использует ContextAPI для того чтобы засунуть в context этот store чтобы до него достучаться
+
 
 
 
