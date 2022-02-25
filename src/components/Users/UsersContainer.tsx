@@ -54,7 +54,6 @@ export class UsersContainer extends React.Component<UsersContainerPropsType> {
                     isFetching={this.props.isFetching}
                     toggleIsFetching={this.props.toggleIsFetching}
                     onPageChanged={this.onPageChanged}
-                    // toggleFollowingProgress={this.props.toggleFollowingProgress}
                     followingInProgress={this.props.followingInProgress}
                     getUsers={this.props.getUsers}
                 />}
