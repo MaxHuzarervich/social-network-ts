@@ -1,4 +1,4 @@
-import {ActionsTypes, AppStateType} from "./redux-store";
+import {ActionsTypes} from "./redux-store";
 import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 import {updateObjectInArray} from "../utils/validators/object-helpers";
@@ -112,7 +112,8 @@ export const toggleFollowingProgress = (isFetching: boolean, userId: number) => 
 
 //thunkCreator - возвращает санку
 export const requestUsers = (page: number, pageSize: number) => {
-    return async (dispatch: any) => {
+    return async (dispatch: Dispatch) => {
+        debugger
         dispatch(toggleIsFetching(true)); //запрос пошел
         dispatch(setCurrentPage(page)) //выделить в пагинации текущую страницу
         //когда пользователи получатся, продолжим обрабатывать ответ в then

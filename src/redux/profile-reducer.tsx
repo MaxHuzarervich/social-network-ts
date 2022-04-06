@@ -115,6 +115,7 @@ export const savePhotoSuccess = (photos: PhotoType) => {
 }
 //thunk
 export const getUserProfile = (userId: number) => async (dispatch: Dispatch<ActionsTypes>) => {
+    debugger
     let response = await usersAPI.getProfile(userId)
     dispatch(setUserProfileAC(response.data)); //берем наш объект profile и сетаем его в редьюсер
 }  //диспатчим экшн, что приводит к изменениям в редьюсере стейта

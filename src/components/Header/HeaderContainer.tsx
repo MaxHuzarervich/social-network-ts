@@ -21,7 +21,6 @@ export type MapStateToPropsType = {
     isAuth: boolean
 }
 export type MapDispatchToPropsType = {
-    // getAuthUserData: () => void,
     Logout: () => void
 }
 
